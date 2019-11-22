@@ -71,7 +71,8 @@ void main()
             printf_tiny("\n\rEnter the character\n\r");
             uint8_t inputWrite = getchar();
             putchar(inputWrite);
-            lcdPutCh(48);
+            goToAddr(ad);
+            lcdPutCh(inputWrite);
         }
 
         if (ch == 'm')

@@ -73,102 +73,30 @@ void goToXY(uint8_t x, uint8_t y)
 
 void customCharacter()
 {
-    int temp;
-    int decimal;
-    char x[8];
+    unsigned char temp;
+    uint8_t i;
+    unsigned char x[8];
+    for(i = 0; i < 8; i++)
+    {
+        busyWait();
+        volatile __xdata __at (0xF000) unsigned int temp8;
+        temp8 = 0x40 | (0x28 + i);
+        printf("%x %x\n\r",temp8, (0x40 | (0x28 + i)));
+        busyWait();
+        do{
+            printf_tiny("\n\rEnter value for Row %d\n\r", (i+1));
+            gets(x);
+            //printf_tiny("%s\n\r",x);
+            temp = atoh(x);
+        }while(temp < 0 || temp > 0x1F);
+        //printf("%x",temp);
+        writeCharacter = temp;
+        busyWait();
+        memset(x,'\0',8 * sizeof(char));
+    }
+    lcdGeneral = 0x80 | 0x11;
     busyWait();
-    lcdGeneral = 0x40 | 0x10;
-    busyWait();
-    do{
-        printf_tiny("\n\rEnter value for Row 1\n\r");
-        gets(x);
-        temp = atoh(x);
-    }while(temp < 0 || temp > 0x1F);
-
-    memset(x,'\0',8 * sizeof(char));
-    writeCharacter = temp & 0xFF;
-    busyWait();
-    lcdGeneral = 0x40 | 0x11;
-    busyWait();
-    do{
-        printf_tiny("\n\rEnter value for Row 2\n\r");
-        gets(x);
-        temp = atoh(x);
-    }while(temp < 0 || temp > 0x1F);
-    gets(x);
-    decimal = atoi(x);
-    printBinary(decimal);
-    temp = atoh(x);
-    memset(x,'\0',8 * sizeof(char));
-    writeCharacter = temp & 0xFF;
-    busyWait();
-    lcdGeneral = 0x40 | 0x12;
-    busyWait();
-    do{
-        printf_tiny("\n\rEnter value for Row 3\n\r");
-        gets(x);
-        temp = atoh(x);
-    }while(temp < 0 || temp > 0x1F);
-    printBinary(decimal);
-    temp = atoh(x);
-    memset(x,'\0',8 * sizeof(char));
-    writeCharacter = temp & 0xFF;
-    busyWait();
-    lcdGeneral = 0x40 | 0x13;
-    busyWait();
-    do{
-        printf_tiny("\n\rEnter value for Row 4\n\r");
-        gets(x);
-        temp = atoh(x);
-    }while(temp < 0 || temp > 0x1F);
-    memset(x,'\0',8 * sizeof(char));
-    writeCharacter = temp & 0xFF;
-    busyWait();
-    lcdGeneral = 0x40 | 0x14;
-    busyWait();
-    do{
-        printf_tiny("\n\rEnter value for Row 5\n\r");
-        gets(x);
-        temp = atoh(x);
-    }while(temp < 0 || temp > 0x1F);
-    memset(x,'\0',8 * sizeof(char));
-    writeCharacter = temp & 0xFF;
-    busyWait();
-    lcdGeneral = 0x40 | 0x15;
-    busyWait();
-    do{
-        printf_tiny("\n\rEnter value for Row 6\n\r");
-        gets(x);
-        temp = atoh(x);
-    }while(temp < 0 || temp > 0x1F);
-    memset(x,'\0',8 * sizeof(char));
-    writeCharacter = temp & 0xFF;
-    busyWait();
-    lcdGeneral = 0x40 | 0x16;
-    busyWait();
-    do{
-        printf_tiny("\n\rEnter value for Row 7\n\r");
-        gets(x);
-        temp = atoh(x);
-    }while(temp < 0 || temp > 0x1F);
-    memset(x,'\0',8 * sizeof(char));
-    writeCharacter = temp & 0xFF;
-    busyWait();
-    lcdGeneral = 0x40 | 0x17;
-    busyWait();
-    do{
-        printf_tiny("\n\rEnter value for Row 8\n\r");
-        gets(x);
-        temp = atoh(x);
-    }while(temp < 0 || temp > 0x1F);
-    memset(x,'\0',8 * sizeof(char));
-    writeCharacter = temp & 0xFF;
-    busyWait();
-    goToXY(3,1);
-    busyWait();
-    lcdGeneral = 0x80 | 0x01;
-    busyWait();
-    writeCharacter = 0x01;
+    writeCharacter = 0x05;
 }
 
 uint8_t readLCD()
@@ -191,7 +119,6 @@ void putsLCD(char* y)
             //k += 16;
         }
         goToAddr(lookUpTable[j][i]);
-        printf_tiny("%d\n\r", lookUpTable[j][i]);
         lcdPutCh(y[i + (j * 16)]);
         i++;
     }
@@ -271,8 +198,10 @@ void ramDump()
 
 void gamePacman()
 {
+    lcdClear();
     char ch;
     int i = 1;
+    int count = 0;
     makePacmanRight();
     makePacmanLeft();
     goToAddr(lookUpTable[0][4]);
@@ -301,13 +230,28 @@ void gamePacman()
     lcdPutCh('*');
     printf_tiny("\n\rEnter w to go up, s to go down, a to go left and d to go right and q to quit\n\r");
     do{
+        if(count == 12)
+        {
+            lcdClear();
+            putsLCD("GAME OVER! PRESS p to restart");
+            printMenu();
+            break;
+        }
         ch = getchar();
         if(ch == 'd')
         {
-            putchar(7);
             goToAddr(lookUpTable[0][i-1]);
             busyWait();
             lcdPutCh(' ');
+            busyWait();
+            goToAddr(lookUpTable[0][i]);
+            busyWait();
+            char checkEnter = readLCD();
+            if(checkEnter == '*')
+            {
+                count++;
+                putchar(7);
+            }
             busyWait();
             lcdGeneral = 0x80 | (lookUpTable[0][i]);
             busyWait();
@@ -327,14 +271,22 @@ void gamePacman()
 
         if(ch == 'a')
         {
-            putchar(7);
             goToAddr(lookUpTable[0][i+1]);
             busyWait();
             lcdPutCh(' ');
             busyWait();
+            goToAddr(lookUpTable[0][i]);
+            busyWait();
+            char checkEnter1 = readLCD();
+            if(checkEnter1 == '*')
+            {
+                count++;
+                putchar(7);
+            }
+            busyWait();
             lcdGeneral = 0x80 | (lookUpTable[0][i]);
             busyWait();
-            writeCharacter = 0x00;
+            writeCharacter = 0x03;
             busyWait();
             if( i <= 0)
             {
@@ -394,42 +346,40 @@ void makePacmanRight()
 void makePacmanLeft()
 {
     busyWait();
-    lcdGeneral = 0x40 | 0x30;
+    lcdGeneral = 0x40 | 0x18;
     busyWait();
     writeCharacter = 0x0C;
     busyWait();
-    lcdGeneral = 0x40 | 0x31;
+    lcdGeneral = 0x40 | 0x19;
     busyWait();
     writeCharacter = 0x12;
     busyWait();
-    lcdGeneral = 0x40 | 0x32;
+    lcdGeneral = 0x40 | 0x1A;
     busyWait();
     writeCharacter = 0x09;
     busyWait();
-    lcdGeneral = 0x40 | 0x33;
+    lcdGeneral = 0x40 | 0x1B;
     busyWait();
     writeCharacter = 0x05;
     busyWait();
-    lcdGeneral = 0x40 | 0x34;
+    lcdGeneral = 0x40 | 0x1C;
     busyWait();
     writeCharacter = 0x05;
     busyWait();
-    lcdGeneral = 0x40 | 0x35;
+    lcdGeneral = 0x40 | 0x1D;
     busyWait();
     writeCharacter = 0x09;
     busyWait();
-    lcdGeneral = 0x40 | 0x36;
+    lcdGeneral = 0x40 | 0x1E;
     busyWait();
     writeCharacter = 0x12;
     busyWait();
-    lcdGeneral = 0x40 | 0x37;
+    lcdGeneral = 0x40 | 0x1F;
     busyWait();
     writeCharacter = 0x0C;
-    busyWait();
-    goToXY(3,1);
     busyWait();
     //lcdGeneral = 0x80 | 0x03;
-    busyWait();
+    //busyWait();
     //writeCharacter = 0x03;
 }
 
@@ -444,14 +394,13 @@ void printBinary(int x)
     }
 }
 
-int atoh(char *ap)
+unsigned char atoh(char *ap)
 {
 	char *p;
-	int n;
 	int digit,lcase;
 
 	p = ap;
-	n = 0;
+	unsigned char n = 0;
 	while(*p == ' ' || *p == '	')
 		p++;
 

@@ -439,7 +439,7 @@ Symbol Table
   B _check                                                         000005 GR
     _customCharacter                                               ****** GX
     _gamePacman                                                    ****** GX
- 17 _getchar                                                       0002B2 GR
+ 17 _getchar                                                       0002C8 GR
     _gets                                                          ****** GX
     _goToAddr                                                      ****** GX
   B _hour                                                          000003 GR
@@ -458,16 +458,16 @@ Symbol Table
   B _min                                                           000002 GR
   B _partSec                                                       000000 GR
     _printMenu                                                     ****** GX
- 17 _printTimeStamp                                                0002D4 GR
+ 17 _printTimeStamp                                                0002EA GR
     _printf                                                        ****** GX
     _printf_tiny                                                   ****** GX
- 17 _putchar                                                       000281 GR
+ 17 _putchar                                                       000297 GR
   B _putchar_c_65536_96                                            00007D R
     _putsLCD                                                       ****** GX
     _ramDump                                                       ****** GX
     _readCharacter                                              =  00F300 G
   B _sec                                                           000001 GR
- 17 _timer0_isr                                                    000203 GR
+ 17 _timer0_isr                                                    000219 GR
     _timerInit                                                     ****** GX
     _writeCharacter                                             =  00F100 G
   B _x2                                                            000004 GR
@@ -705,7 +705,7 @@ Area Table
   14 GSINIT5                                    size      0   flags   20
   15 GSINIT                                     size      0   flags   20
   16 GSFINAL                                    size      3   flags   20
-  17 CSEG                                       size    386   flags   20
+  17 CSEG                                       size    39C   flags   20
   18 CONST                                      size    101   flags   20
   19 XINIT                                      size      0   flags   20
   1A CABS                                       size      0   flags   28

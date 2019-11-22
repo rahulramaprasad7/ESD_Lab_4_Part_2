@@ -66,23 +66,23 @@ CABS                                00000000    00000000 =           0. bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   000000FB  l_XSEG                          
-C:   000000FC  s_XISEG                         
+C:   000000FC  l_XSEG                          
+C:   000000FD  s_XISEG                         
 C:   00000100  l_IRAM                          
-C:   000004C9  l_CONST                         
+C:   00000435  l_CONST                         
 C:   00002000  s_HOME                          
 C:   00002011  s_GSINIT0                       
 C:   00002014  s_GSINIT1                       
 C:   00002014  s_GSINIT2                       
+C:   0000201E  l_CSEG                          
 C:   0000201E  s_GSINIT3                       
 C:   00002040  s_GSINIT4                       
 C:   0000206A  s_GSFINAL                       
 C:   0000206A  s_GSINIT                        
 C:   0000206A  s_GSINIT5                       
 C:   0000206D  s_CSEG                          
-C:   00002300  l_CSEG                          
-C:   0000436D  s_CONST                         
-C:   00004836  s_XINIT                         
+C:   0000408B  s_CONST                         
+C:   000044C0  s_XINIT                         
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
@@ -380,30 +380,30 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-XSEG                                00000001    000000FB =         251. bytes (REL,CON,XDATA)
+XSEG                                00000001    000000FC =         252. bytes (REL,CON,XDATA)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
 D:   00000003  _goToXY_PARM_2                     lcdCommands
-D:   00000026  _partSec                           main
-D:   00000027  _sec                               main
-D:   00000028  _min                               main
-D:   00000029  _hour                              main
-D:   0000002A  _x2                                main
-D:   0000002B  _check                             main
-D:   0000002C  _ch                                main
-D:   000000A5  _memset_PARM_2                     _memset
-D:   000000A6  _memset_PARM_3                     _memset
-D:   000000AE  __gptrput_PARM_2                   _gptrput
-D:   000000AF  __mulint_PARM_2                    _mulint
-D:   000000B1  __modsint_PARM_2                   _modsint
-D:   000000B5  __moduint_PARM_2                   _moduint
-D:   000000BA  __divsint_PARM_2                   _divsint
-D:   000000BE  __divuint_PARM_2                   _divuint
-D:   000000C5  _vprintf_PARM_2                    vprintf
-D:   000000DA  __print_format_PARM_2              printf_large
-D:   000000DD  __print_format_PARM_3              printf_large
-D:   000000E0  __print_format_PARM_4              printf_large
+D:   00000027  _partSec                           main
+D:   00000028  _sec                               main
+D:   00000029  _min                               main
+D:   0000002A  _hour                              main
+D:   0000002B  _x2                                main
+D:   0000002C  _check                             main
+D:   0000002D  _ch                                main
+D:   000000A6  _memset_PARM_2                     _memset
+D:   000000A7  _memset_PARM_3                     _memset
+D:   000000AF  __gptrput_PARM_2                   _gptrput
+D:   000000B0  __mulint_PARM_2                    _mulint
+D:   000000B2  __modsint_PARM_2                   _modsint
+D:   000000B6  __moduint_PARM_2                   _moduint
+D:   000000BB  __divsint_PARM_2                   _divsint
+D:   000000BF  __divuint_PARM_2                   _divuint
+D:   000000C6  _vprintf_PARM_2                    vprintf
+D:   000000DB  __print_format_PARM_2              printf_large
+D:   000000DE  __print_format_PARM_3              printf_large
+D:   000000E1  __print_format_PARM_4              printf_large
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
 Hexadecimal  [32-Bits]
@@ -473,7 +473,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                0000206D    00002300 =        8960. bytes (REL,CON,CODE)
+CSEG                                0000206D    0000201E =        8222. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -486,49 +486,49 @@ C:   0000210D  _lcdClear                          lcdCommands
 C:   0000211A  _goToAddr                          lcdCommands
 C:   00002135  _goToXY                            lcdCommands
 C:   00002160  _customCharacter                   lcdCommands
-C:   00002542  _readLCD                           lcdCommands
-C:   0000254F  _putsLCD                           lcdCommands
-C:   000026BA  _gets                              lcdCommands
-C:   000027CD  _ramDump                           lcdCommands
-C:   00002978  _gamePacman                        lcdCommands
-C:   00002BE4  _makePacmanRight                   lcdCommands
-C:   00002CCA  _makePacmanLeft                    lcdCommands
-C:   00002D9F  _printBinary                       lcdCommands
-C:   00002DF0  _atoh                              lcdCommands
-C:   00002FEA  _printMenu                         lcdCommands
-C:   000030B8  _main                              main
-C:   000032BB  _timer0_isr                        main
-C:   00003339  _putchar                           main
-C:   0000336A  _getchar                           main
-C:   0000338C  _printTimeStamp                    main
-C:   0000343E  _memset                            _memset
-C:   00003466  _atoi                              atoi
-C:   00003586  __gptrput                          _gptrput
-C:   000035A1  _printf_tiny                       printf_tiny
-C:   000036AA  __mulint                           _mulint
-C:   000036CA  __modsint                          _modsint
-C:   00003732  __moduint                          _moduint
-C:   000037DE  __divsint                          _divsint
-C:   00003850  __divuint                          _divuint
-C:   000038EC  _vprintf                           vprintf
-C:   0000392B  _printf                            vprintf
-C:   00003A34  __print_format                     printf_large
-C:   00004335  _strlen                            _strlen
-C:   0000434D  __gptrget                          _gptrget
-C:   00004369  __sdcc_external_startup            _startup
+C:   0000222F  _readLCD                           lcdCommands
+C:   0000223C  _putsLCD                           lcdCommands
+C:   00002375  _gets                              lcdCommands
+C:   00002488  _ramDump                           lcdCommands
+C:   00002633  _gamePacman                        lcdCommands
+C:   0000294C  _makePacmanRight                   lcdCommands
+C:   00002A32  _makePacmanLeft                    lcdCommands
+C:   00002AF5  _printBinary                       lcdCommands
+C:   00002B46  _atoh                              lcdCommands
+C:   00002CF2  _printMenu                         lcdCommands
+C:   00002DC0  _main                              main
+C:   00002FD9  _timer0_isr                        main
+C:   00003057  _putchar                           main
+C:   00003088  _getchar                           main
+C:   000030AA  _printTimeStamp                    main
+C:   0000315C  _memset                            _memset
+C:   00003184  _atoi                              atoi
+C:   000032A4  __gptrput                          _gptrput
+C:   000032BF  _printf_tiny                       printf_tiny
+C:   000033C8  __mulint                           _mulint
+C:   000033E8  __modsint                          _modsint
+C:   00003450  __moduint                          _moduint
+C:   000034FC  __divsint                          _divsint
+C:   0000356E  __divuint                          _divuint
+C:   0000360A  _vprintf                           vprintf
+C:   00003649  _printf                            vprintf
+C:   00003752  __print_format                     printf_large
+C:   00004053  _strlen                            _strlen
+C:   0000406B  __gptrget                          _gptrget
+C:   00004087  __sdcc_external_startup            _startup
 ASxxxx Linker V03.00 + NoICE + sdld,  page 20.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CONST                               0000436D    000004C9 =        1225. bytes (REL,CON,CODE)
+CONST                               0000408B    00000435 =        1077. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   0000436D  _uiLines                           lcdCommands
-C:   000043A9  _messages                          lcdCommands
-C:   00004561  _lookUpTable                       lcdCommands
-C:   0000472A  _lookUpTable1                      main
+C:   0000408B  _uiLines                           lcdCommands
+C:   000040C7  _messages                          lcdCommands
+C:   0000427F  _lookUpTable                       lcdCommands
+C:   000043B4  _lookUpTable1                      main
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 21.
 
@@ -544,10 +544,10 @@ C:\Program Files\SDCC\bin\..\lib\large/mcs51.lib
                                           [ crtclear.rel ]
 C:\Program Files\SDCC\bin\..\lib\large/libsdcc.lib
                                           [ _memset.rel ]
-C:\Program Files\SDCC\bin\..\lib\large/mcs51.lib
-                                          [ crtxinit.rel ]
 C:\Program Files\SDCC\bin\..\lib\large/libsdcc.lib
                                           [ atoi.rel ]
+C:\Program Files\SDCC\bin\..\lib\large/mcs51.lib
+                                          [ crtxinit.rel ]
 C:\Program Files\SDCC\bin\..\lib\large/libsdcc.lib
                                           [ _gptrput.rel ]
 C:\Program Files\SDCC\bin\..\lib\large/libsdcc.lib

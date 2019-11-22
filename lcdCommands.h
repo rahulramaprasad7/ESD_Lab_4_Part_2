@@ -27,7 +27,7 @@ void putsLCD(char *);
 void timerInit();
 void goToXY(uint8_t , uint8_t);
 void customCharacter();
-int atoh(char *ap);
+unsigned char atoh(char *ap);
 void gamePacman();
 void makePacmanRight();
 void makePacmanLeft();
