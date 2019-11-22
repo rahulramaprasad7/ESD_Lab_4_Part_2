@@ -426,8 +426,8 @@ Symbol Table
   E __sdcc_program_startup                                         00000E GR
   6 __start__stack                                                 000000 GR
     _busyPoll                                                   =  00F200 G
+    _busyWait                                                      ****** GX
   B _check                                                         000005 GR
-    _gamePacman                                                    ****** GX
     _goToAddr                                                      ****** GX
   B _hour                                                          000003 GR
     _lcdClear                                                      ****** GX
@@ -435,15 +435,17 @@ Symbol Table
     _lcdInit                                                       ****** GX
     _lcdPutCh                                                      ****** GX
  17 _main                                                          000000 GR
-  B _main_input_65537_42                                           000006 R
+  B _main_input_65537_71                                           000006 R
     _memset                                                        ****** GX
     _memset_PARM_2                                                 ****** GX
     _memset_PARM_3                                                 ****** GX
   B _min                                                           000002 GR
   B _partSec                                                       000000 GR
- 17 _printTimeStamp                                                0000CB GR
+ 17 _printTimeStamp                                                0000E6 GR
+    _readCharacter                                              =  00F300 G
+    _readLCD                                                       ****** GX
   B _sec                                                           000001 GR
- 17 _timer0_isr                                                    00004D GR
+ 17 _timer0_isr                                                    000068 GR
     _timerInit                                                     ****** GX
     _writeCharacter                                             =  00F100 G
   B _x2                                                            000004 GR
@@ -476,13 +478,13 @@ Symbol Table
     ar7                                                         =  000007 
     b                                                           =  0000F0 L
     b.0                                                         =  0000F0 L
-    b.1                                                         =  0000F1 L
-    b.2                                                         =  0000F2 L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 9.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
+    b.1                                                         =  0000F1 L
+    b.2                                                         =  0000F2 L
     b.3                                                         =  0000F3 L
     b.4                                                         =  0000F4 L
     b.5                                                         =  0000F5 L
@@ -536,13 +538,13 @@ Symbol Table
     p0.6                                                        =  000086 L
     p0.7                                                        =  000087 L
     p1                                                          =  000090 L
-    p1.0                                                        =  000090 L
-    p1.1                                                        =  000091 L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 10.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
+    p1.0                                                        =  000090 L
+    p1.1                                                        =  000091 L
     p1.2                                                        =  000092 L
     p1.3                                                        =  000093 L
     p1.4                                                        =  000094 L
@@ -596,13 +598,13 @@ Symbol Table
     scon                                                        =  000098 L
     scon.0                                                      =  000098 L
     scon.1                                                      =  000099 L
-    scon.2                                                      =  00009A L
-    scon.3                                                      =  00009B L
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 11.
 Hexadecimal [24-Bits]
 
 Symbol Table
 
+    scon.2                                                      =  00009A L
+    scon.3                                                      =  00009B L
     scon.4                                                      =  00009C L
     scon.5                                                      =  00009D L
     scon.6                                                      =  00009E L
@@ -676,7 +678,7 @@ Area Table
   14 GSINIT5                                    size      0   flags   20
   15 GSINIT                                     size      0   flags   20
   16 GSFINAL                                    size      3   flags   20
-  17 CSEG                                       size    17D   flags   20
+  17 CSEG                                       size    198   flags   20
   18 CONST                                      size      0   flags   20
   19 XINIT                                      size      0   flags   20
   1A CABS                                       size      0   flags   28

@@ -22,7 +22,15 @@ void main()
     lcdInit();
     lcdClear();
     //customCharacter();
-    gamePacman();
+    //gamePacman();
+    busyWait();
+    goToAddr(0x04);
+    lcdPutCh('a');
+    busyWait();
+    goToAddr(0x04);
+    busyWait();
+    uint8_t y = readLCD();
+    //putchar(y);
 //    printf_tiny("Enter String\n\r");
 //    gets(input);
 //    putsLCD(input);

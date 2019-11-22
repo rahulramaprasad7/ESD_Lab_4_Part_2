@@ -424,50 +424,65 @@ Hexadecimal [24-Bits]
 Symbol Table
 
  17 ___str_9                                                       0000F8 R
+    __divsint                                                      ****** GX
+    __divsint_PARM_2                                               ****** GX
     __gptrget                                                      ****** GX
     __gptrput                                                      ****** GX
+    __modsint                                                      ****** GX
+    __modsint_PARM_2                                               ****** GX
  18 __xinit__lookUpTable                                           000000 R
- 16 _atoh                                                          00066A GR
-  A _atoh_ap_65536_67                                              000018 R
-  A _atoh_lcase_65536_68                                           000020 R
-  A _atoh_n_65536_68                                               00001E R
-  A _atoh_p_65536_68                                               00001B R
+ 16 _atoh                                                          0006F4 GR
+  A _atoh_ap_65536_97                                              000019 R
+  A _atoh_lcase_65536_98                                           000021 R
+  A _atoh_n_65536_98                                               00001F R
+  A _atoh_p_65536_98                                               00001C R
+    _atoi                                                          ****** GX
     _busyPoll                                                   =  00F200 G
  16 _busyWait                                                      00001E GR
  16 _customCharacter                                               0000F2 GR
-  A _customCharacter_x_65536_53                                    000004 R
+  A _customCharacter_x_65536_82                                    000005 R
  16 _delay                                                         000000 GR
- 16 _gamePacman                                                    000864 GR
-  A _gamePacman_i_65536_70                                         000022 R
- 16 _getchar                                                       000528 GR
- 16 _gets                                                          000557 GR
-  A _gets_count_65536_62                                           000016 R
-  A _gets_s_65536_61                                               000013 R
+ 16 _gamePacman                                                    0008EE GR
+  A _gamePacman_i_65536_100                                        000023 R
+ 16 _getchar                                                       0005B2 GR
+ 16 _gets                                                          0005E1 GR
+  A _gets_count_65536_92                                           000017 R
+  A _gets_s_65536_91                                               000014 R
  16 _goToAddr                                                      0000AD GR
-  A _goToAddr_x_65536_49                                           000001 R
+  A _goToAddr_x_65536_78                                           000002 R
  16 _goToXY                                                        0000C8 GR
-  A _goToXY_PARM_2                                                 000002 GR
-  A _goToXY_x_65536_51                                             000003 R
+  A _goToXY_PARM_2                                                 000003 GR
+  A _goToXY_x_65536_80                                             000004 R
  16 _lcdClear                                                      0000A0 GR
     _lcdGeneral                                                 =  00F000 G
  16 _lcdInit                                                       00002A GR
  16 _lcdPutCh                                                      00008B GR
-  A _lcdPutCh_x_65536_46                                           000000 R
+  A _lcdPutCh_x_65536_75                                           000001 R
   C _lookUpTable                                                   000000 GR
- 16 _makePacmanLeft                                                000BB2 GR
- 16 _makePacmanRight                                               000ACC GR
+ 16 _makePacmanLeft                                                000C3C GR
+ 16 _makePacmanRight                                               000B56 GR
     _memset                                                        ****** GX
     _memset_PARM_2                                                 ****** GX
     _memset_PARM_3                                                 ****** GX
+ 16 _printBinary                                                   000D11 GR
+  A _printBinary_x_65536_108                                       000025 R
     _printf                                                        ****** GX
     _printf_tiny                                                   ****** GX
- 16 _putchar                                                       000538 GR
-  A _putchar_c_65536_59                                            000011 R
- 16 _putsLCD                                                       0003F0 GR
-  A _putsLCD_i_65536_55                                            00000F R
+ 16 _putchar                                                       0005C2 GR
+  A _putchar_c_65536_89                                            000012 R
+ 16 _putsLCD                                                       00047A GR
+  A _putsLCD_i_65536_85                                            000010 R
   5 _putsLCD_sloc0_1_0                                             000000 R
   5 _putsLCD_sloc1_1_0                                             000002 R
-  A _putsLCD_y_65536_54                                            00000C R
+  A _putsLCD_y_65536_84                                            00000D R
+    _readCharacter                                              =  00F300 G
+ 16 _readLCD                                                       00045B GR
+  A _temp                                                          000000 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 9.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
  16 _timerInit                                                     00000E GR
     _writeCharacter                                             =  00F100 G
     a                                                           =  0000E0 L
@@ -478,11 +493,6 @@ Symbol Table
     a.4                                                         =  0000E4 L
     a.5                                                         =  0000E5 L
     a.6                                                         =  0000E6 L
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 9.
-Hexadecimal [24-Bits]
-
-Symbol Table
-
     a.7                                                         =  0000E7 L
     ac                                                          =  0000D6 L
     acc                                                         =  0000E0 L
@@ -528,6 +538,11 @@ Symbol Table
     f0                                                          =  0000D5 L
     ie                                                          =  0000A8 L
     ie.0                                                        =  0000A8 L
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 10.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
     ie.1                                                        =  0000A9 L
     ie.2                                                        =  0000AA L
     ie.3                                                        =  0000AB L
@@ -538,11 +553,6 @@ Symbol Table
     ie1                                                         =  00008B L
     int0                                                        =  0000B2 L
     int1                                                        =  0000B3 L
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 10.
-Hexadecimal [24-Bits]
-
-Symbol Table
-
     ip                                                          =  0000B8 L
     ip.0                                                        =  0000B8 L
     ip.1                                                        =  0000B9 L
@@ -588,6 +598,11 @@ Symbol Table
     p3.3                                                        =  0000B3 L
     p3.4                                                        =  0000B4 L
     p3.5                                                        =  0000B5 L
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 11.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
     p3.6                                                        =  0000B6 L
     p3.7                                                        =  0000B7 L
     pcon                                                        =  000087 L
@@ -598,11 +613,6 @@ Symbol Table
     psw.2                                                       =  0000D2 L
     psw.3                                                       =  0000D3 L
     psw.4                                                       =  0000D4 L
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 11.
-Hexadecimal [24-Bits]
-
-Symbol Table
-
     psw.5                                                       =  0000D5 L
     psw.6                                                       =  0000D6 L
     psw.7                                                       =  0000D7 L
@@ -648,6 +658,11 @@ Symbol Table
     tcon                                                        =  000088 L
     tcon.0                                                      =  000088 L
     tcon.1                                                      =  000089 L
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 12.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
     tcon.2                                                      =  00008A L
     tcon.3                                                      =  00008B L
     tcon.4                                                      =  00008C L
@@ -658,11 +673,6 @@ Symbol Table
     tf1                                                         =  00008F L
     tf2                                                         =  0000CF L
     th0                                                         =  00008C L
-ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 12.
-Hexadecimal [24-Bits]
-
-Symbol Table
-
     th1                                                         =  00008D L
     th2                                                         =  0000CD L
     ti                                                          =  000099 L
@@ -691,7 +701,7 @@ Area Table
    7 IABS                                       size      0   flags    8
    8 BSEG                                       size      0   flags   80
    9 PSEG                                       size      0   flags   50
-   A XSEG                                       size     24   flags   40
+   A XSEG                                       size     27   flags   40
    B XABS                                       size      0   flags   48
    C XISEG                                      size     40   flags   40
    D HOME                                       size      0   flags   20
@@ -703,7 +713,7 @@ Area Table
   13 GSINIT5                                    size      0   flags   20
   14 GSINIT                                     size      0   flags   20
   15 GSFINAL                                    size      0   flags   20
-  16 CSEG                                       size    C87   flags   20
+  16 CSEG                                       size    D62   flags   20
   17 CONST                                      size    149   flags   20
   18 XINIT                                      size     40   flags   20
   19 CABS                                       size      0   flags   28

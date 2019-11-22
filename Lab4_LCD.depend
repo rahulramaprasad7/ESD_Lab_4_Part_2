@@ -1,14 +1,15 @@
 # depslib dependency file v1.0
-1574408061 source:c:\users\rahul\desktop\cu\esd\lab 4\lab4_lcd\main.c
+1574414462 source:c:\users\rahul\desktop\cu\esd\lab 4\lab4_lcd\main.c
 	"lcdCommands.h"
 
-1574411102 c:\users\rahul\desktop\cu\esd\lab 4\lab4_lcd\lcdcommands.h
+1574415905 c:\users\rahul\desktop\cu\esd\lab 4\lab4_lcd\lcdcommands.h
 	<mcs51/8051.h>
 	"at89c51ed2.h"
 	<stdio.h>
 	<string.h>
+	<stdlib.h>
 	<stdint.h>
 
-1574398714 source:c:\users\rahul\desktop\cu\esd\lab 4\lab4_lcd\lcdcommands.c
+1574415887 source:c:\users\rahul\desktop\cu\esd\lab 4\lab4_lcd\lcdcommands.c
 	"lcdCommands.h"
 

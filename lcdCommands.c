@@ -1,4 +1,5 @@
 #include "lcdCommands.h"
+uint8_t temp;
 uint8_t lookUpTable[4][16] = {{0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F},
                                      {0x40,0x41,0x42,0x43,0x44,0x45,0x46,0x47,0x48,0x49,0x4A,0x4B,0x4C,0x4D,0x4E,0x4F},
                                      {0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x1C,0x1D,0x1E,0x1F},
@@ -71,6 +72,7 @@ void goToXY(uint8_t x, uint8_t y)
 void customCharacter()
 {
     int temp;
+    int decimal;
     char x[8];
     busyWait();
     lcdGeneral = 0x40 | 0x00;
@@ -78,13 +80,18 @@ void customCharacter()
     printf_tiny("\n\rEnter value for Row 1\n\r");
     gets(x);
     temp = atoh(x);
+    decimal = ((temp / 10) * 16) + (temp % 10);
+    printBinary(decimal);
     memset(x,'\0',8 * sizeof(char));
     writeCharacter = temp & 0xFF;
     busyWait();
     lcdGeneral = 0x40 | 0x01;
     busyWait();
+
     printf_tiny("\n\rEnter value for Row 2\n\r");
     gets(x);
+    decimal = atoi(x);
+    printBinary(decimal);
     temp = atoh(x);
     memset(x,'\0',8 * sizeof(char));
     writeCharacter = temp & 0xFF;
@@ -93,6 +100,8 @@ void customCharacter()
     busyWait();
     printf_tiny("\n\rEnter value for Row 3\n\r");
     gets(x);
+    decimal = atoi(x);
+    printBinary(decimal);
     temp = atoh(x);
     memset(x,'\0',8 * sizeof(char));
     writeCharacter = temp & 0xFF;
@@ -142,6 +151,14 @@ void customCharacter()
     lcdGeneral = 0x80 | 0x00;
     busyWait();
     writeCharacter = 0x00;
+}
+
+uint8_t readLCD()
+{
+    busyWait();
+    temp = readCharacter;
+    putchar(temp);
+    return temp;
 }
 
 void putsLCD(char* y)
@@ -406,4 +423,15 @@ void makePacmanLeft()
     //lcdGeneral = 0x80 | 0x03;
     busyWait();
     //writeCharacter = 0x03;
+}
+
+void printBinary(int x)
+{
+    int temp;
+    while(x != 0)
+    {
+        temp = x % 2;
+        putchar(temp);
+        x = x / 2;
+    }
 }

@@ -5,6 +5,7 @@
 #include "at89c51ed2.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <stdint.h>
 //RS = A8
 //R/W = A9
@@ -16,6 +17,7 @@ volatile __xdata __at(0xF300) unsigned int readCharacter;
 
 void lcdInit();
 void delay();
+void printBinary(int );
 void busyWait();
 void lcdPutCh(uint8_t x);
 void lcdClear();
@@ -28,4 +30,5 @@ int atoh(char *ap);
 void gamePacman();
 void makePacmanRight();
 void makePacmanLeft();
+uint8_t readLCD();
 #endif // LCDCOMMANDS_H_INCLUDED
