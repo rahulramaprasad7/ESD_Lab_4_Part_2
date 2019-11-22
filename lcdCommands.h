@@ -15,6 +15,7 @@ volatile __xdata __at(0xF200) unsigned int busyPoll;
 volatile __xdata __at(0xF100) unsigned int writeCharacter;
 volatile __xdata __at(0xF300) unsigned int readCharacter;
 
+
 void lcdInit();
 void delay();
 void printBinary(int );
@@ -31,4 +32,8 @@ void gamePacman();
 void makePacmanRight();
 void makePacmanLeft();
 uint8_t readLCD();
+void printMenu();
+int puts(char *x);
+void ramDump();
+
 #endif // LCDCOMMANDS_H_INCLUDED
