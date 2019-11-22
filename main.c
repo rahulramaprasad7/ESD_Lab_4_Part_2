@@ -84,12 +84,12 @@ void main()
 
         if(ch == 'x')
         {
-                check = 0;
-                partSec = 0;
-                sec = 0;
-                min = 0;
-                hour = 0;
-                x2 = 0;
+            check = 0;
+            partSec = 0;
+            sec = 0;
+            min = 0;
+            hour = 0;
+            x2 = 0;
         }
 
         if(ch == 'y')

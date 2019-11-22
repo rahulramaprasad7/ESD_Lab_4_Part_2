@@ -80,9 +80,9 @@ C:   0000206A  s_GSFINAL
 C:   0000206A  s_GSINIT                        
 C:   0000206A  s_GSINIT5                       
 C:   0000206D  s_CSEG                          
-C:   00002236  l_CSEG                          
-C:   000042A3  s_CONST                         
-C:   0000476C  s_XINIT                         
+C:   00002300  l_CSEG                          
+C:   0000436D  s_CONST                         
+C:   00004836  s_XINIT                         
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
@@ -473,7 +473,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                0000206D    00002236 =        8758. bytes (REL,CON,CODE)
+CSEG                                0000206D    00002300 =        8960. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -486,49 +486,49 @@ C:   0000210D  _lcdClear                          lcdCommands
 C:   0000211A  _goToAddr                          lcdCommands
 C:   00002135  _goToXY                            lcdCommands
 C:   00002160  _customCharacter                   lcdCommands
-C:   00002478  _readLCD                           lcdCommands
-C:   00002485  _putsLCD                           lcdCommands
-C:   000025F0  _gets                              lcdCommands
-C:   00002703  _ramDump                           lcdCommands
-C:   000028AE  _gamePacman                        lcdCommands
-C:   00002B1A  _makePacmanRight                   lcdCommands
-C:   00002C00  _makePacmanLeft                    lcdCommands
-C:   00002CD5  _printBinary                       lcdCommands
-C:   00002D26  _atoh                              lcdCommands
-C:   00002F20  _printMenu                         lcdCommands
-C:   00002FEE  _main                              main
-C:   000031F1  _timer0_isr                        main
-C:   0000326F  _putchar                           main
-C:   000032A0  _getchar                           main
-C:   000032C2  _printTimeStamp                    main
-C:   00003374  _memset                            _memset
-C:   0000339C  _atoi                              atoi
-C:   000034BC  __gptrput                          _gptrput
-C:   000034D7  _printf_tiny                       printf_tiny
-C:   000035E0  __mulint                           _mulint
-C:   00003600  __modsint                          _modsint
-C:   00003668  __moduint                          _moduint
-C:   00003714  __divsint                          _divsint
-C:   00003786  __divuint                          _divuint
-C:   00003822  _vprintf                           vprintf
-C:   00003861  _printf                            vprintf
-C:   0000396A  __print_format                     printf_large
-C:   0000426B  _strlen                            _strlen
-C:   00004283  __gptrget                          _gptrget
-C:   0000429F  __sdcc_external_startup            _startup
+C:   00002542  _readLCD                           lcdCommands
+C:   0000254F  _putsLCD                           lcdCommands
+C:   000026BA  _gets                              lcdCommands
+C:   000027CD  _ramDump                           lcdCommands
+C:   00002978  _gamePacman                        lcdCommands
+C:   00002BE4  _makePacmanRight                   lcdCommands
+C:   00002CCA  _makePacmanLeft                    lcdCommands
+C:   00002D9F  _printBinary                       lcdCommands
+C:   00002DF0  _atoh                              lcdCommands
+C:   00002FEA  _printMenu                         lcdCommands
+C:   000030B8  _main                              main
+C:   000032BB  _timer0_isr                        main
+C:   00003339  _putchar                           main
+C:   0000336A  _getchar                           main
+C:   0000338C  _printTimeStamp                    main
+C:   0000343E  _memset                            _memset
+C:   00003466  _atoi                              atoi
+C:   00003586  __gptrput                          _gptrput
+C:   000035A1  _printf_tiny                       printf_tiny
+C:   000036AA  __mulint                           _mulint
+C:   000036CA  __modsint                          _modsint
+C:   00003732  __moduint                          _moduint
+C:   000037DE  __divsint                          _divsint
+C:   00003850  __divuint                          _divuint
+C:   000038EC  _vprintf                           vprintf
+C:   0000392B  _printf                            vprintf
+C:   00003A34  __print_format                     printf_large
+C:   00004335  _strlen                            _strlen
+C:   0000434D  __gptrget                          _gptrget
+C:   00004369  __sdcc_external_startup            _startup
 ASxxxx Linker V03.00 + NoICE + sdld,  page 20.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CONST                               000042A3    000004C9 =        1225. bytes (REL,CON,CODE)
+CONST                               0000436D    000004C9 =        1225. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   000042A3  _uiLines                           lcdCommands
-C:   000042DF  _messages                          lcdCommands
-C:   00004497  _lookUpTable                       lcdCommands
-C:   00004660  _lookUpTable1                      main
+C:   0000436D  _uiLines                           lcdCommands
+C:   000043A9  _messages                          lcdCommands
+C:   00004561  _lookUpTable                       lcdCommands
+C:   0000472A  _lookUpTable1                      main
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 21.
 

@@ -79,18 +79,22 @@ void customCharacter()
     busyWait();
     lcdGeneral = 0x40 | 0x10;
     busyWait();
-    printf_tiny("\n\rEnter value for Row 1\n\r");
-    gets(x);
-    temp = atoh(x);
-//    decimal = ((temp / 10) * 16) + (temp % 10);
-//    printBinary(decimal);
+    do{
+        printf_tiny("\n\rEnter value for Row 1\n\r");
+        gets(x);
+        temp = atoh(x);
+    }while(temp < 0 || temp > 0x1F);
+
     memset(x,'\0',8 * sizeof(char));
     writeCharacter = temp & 0xFF;
     busyWait();
     lcdGeneral = 0x40 | 0x11;
     busyWait();
-
-    printf_tiny("\n\rEnter value for Row 2\n\r");
+    do{
+        printf_tiny("\n\rEnter value for Row 2\n\r");
+        gets(x);
+        temp = atoh(x);
+    }while(temp < 0 || temp > 0x1F);
     gets(x);
     decimal = atoi(x);
     printBinary(decimal);
@@ -100,9 +104,11 @@ void customCharacter()
     busyWait();
     lcdGeneral = 0x40 | 0x12;
     busyWait();
-    printf_tiny("\n\rEnter value for Row 3\n\r");
-    gets(x);
-    decimal = atoi(x);
+    do{
+        printf_tiny("\n\rEnter value for Row 3\n\r");
+        gets(x);
+        temp = atoh(x);
+    }while(temp < 0 || temp > 0x1F);
     printBinary(decimal);
     temp = atoh(x);
     memset(x,'\0',8 * sizeof(char));
@@ -110,41 +116,51 @@ void customCharacter()
     busyWait();
     lcdGeneral = 0x40 | 0x13;
     busyWait();
-    printf_tiny("\n\rEnter value for Row 4\n\r");
-    gets(x);
-    temp = atoh(x);
+    do{
+        printf_tiny("\n\rEnter value for Row 4\n\r");
+        gets(x);
+        temp = atoh(x);
+    }while(temp < 0 || temp > 0x1F);
     memset(x,'\0',8 * sizeof(char));
     writeCharacter = temp & 0xFF;
     busyWait();
     lcdGeneral = 0x40 | 0x14;
     busyWait();
-    printf_tiny("\n\rEnter value for Row 5\n\r");
-    gets(x);
-    temp = atoh(x);
+    do{
+        printf_tiny("\n\rEnter value for Row 5\n\r");
+        gets(x);
+        temp = atoh(x);
+    }while(temp < 0 || temp > 0x1F);
     memset(x,'\0',8 * sizeof(char));
     writeCharacter = temp & 0xFF;
     busyWait();
     lcdGeneral = 0x40 | 0x15;
     busyWait();
-    printf_tiny("\n\rEnter value for Row 6\n\r");
-    gets(x);
-    temp = atoh(x);
+    do{
+        printf_tiny("\n\rEnter value for Row 6\n\r");
+        gets(x);
+        temp = atoh(x);
+    }while(temp < 0 || temp > 0x1F);
     memset(x,'\0',8 * sizeof(char));
     writeCharacter = temp & 0xFF;
     busyWait();
     lcdGeneral = 0x40 | 0x16;
     busyWait();
-    printf_tiny("\n\rEnter value for Row 7\n\r");
-    gets(x);
-    temp = atoh(x);
+    do{
+        printf_tiny("\n\rEnter value for Row 7\n\r");
+        gets(x);
+        temp = atoh(x);
+    }while(temp < 0 || temp > 0x1F);
     memset(x,'\0',8 * sizeof(char));
     writeCharacter = temp & 0xFF;
     busyWait();
     lcdGeneral = 0x40 | 0x17;
     busyWait();
-    printf_tiny("\n\rEnter value for Row 8\n\r");
-    gets(x);
-    temp = atoh(x);
+    do{
+        printf_tiny("\n\rEnter value for Row 8\n\r");
+        gets(x);
+        temp = atoh(x);
+    }while(temp < 0 || temp > 0x1F);
     memset(x,'\0',8 * sizeof(char));
     writeCharacter = temp & 0xFF;
     busyWait();
@@ -419,11 +435,11 @@ void makePacmanLeft()
 
 void printBinary(int x)
 {
-    int temp;
+    int temp2;
     while(x != 0)
     {
-        temp = x % 2;
-        putchar(temp);
+        temp2 = x % 2;
+        putchar(temp2);
         x = x / 2;
     }
 }

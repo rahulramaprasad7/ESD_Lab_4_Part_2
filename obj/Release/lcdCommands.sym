@@ -439,23 +439,23 @@ Symbol Table
     __modsint_PARM_2                                               ****** GX
     __mulint                                                       ****** GX
     __mulint_PARM_2                                                ****** GX
- 16 _atoh                                                          000CB9 GR
-  A _atoh_ap_65536_118                                             00001B R
-  A _atoh_lcase_65536_119                                          000023 R
-  A _atoh_n_65536_119                                              000021 R
-  A _atoh_p_65536_119                                              00001E R
+ 16 _atoh                                                          000D83 GR
+  A _atoh_ap_65536_126                                             00001B R
+  A _atoh_lcase_65536_127                                          000023 R
+  A _atoh_n_65536_127                                              000021 R
+  A _atoh_p_65536_127                                              00001E R
     _atoi                                                          ****** GX
     _busyPoll                                                   =  00F200 G
  16 _busyWait                                                      00001E GR
  16 _customCharacter                                               0000F3 GR
   A _customCharacter_x_65536_83                                    000004 R
  16 _delay                                                         000000 GR
- 16 _gamePacman                                                    000841 GR
-  A _gamePacman_i_65536_107                                        000017 R
+ 16 _gamePacman                                                    00090B GR
+  A _gamePacman_i_65536_115                                        000017 R
     _getchar                                                       ****** GX
- 16 _gets                                                          000583 GR
-  A _gets_count_65536_91                                           000014 R
-  A _gets_s_65536_90                                               000011 R
+ 16 _gets                                                          00064D GR
+  A _gets_count_65536_99                                           000014 R
+  A _gets_s_65536_98                                               000011 R
  16 _goToAddr                                                      0000AD GR
   A _goToAddr_x_65536_79                                           000001 R
  16 _goToXY                                                        0000C8 GR
@@ -467,15 +467,15 @@ Symbol Table
  16 _lcdPutCh                                                      00008B GR
   A _lcdPutCh_x_65536_76                                           000000 R
  17 _lookUpTable                                                   0001F4 GR
- 16 _makePacmanLeft                                                000B93 GR
- 16 _makePacmanRight                                               000AAD GR
+ 16 _makePacmanLeft                                                000C5D GR
+ 16 _makePacmanRight                                               000B77 GR
     _memset                                                        ****** GX
     _memset_PARM_2                                                 ****** GX
     _memset_PARM_3                                                 ****** GX
  17 _messages                                                      00003C GR
- 16 _printBinary                                                   000C68 GR
-  A _printBinary_x_65536_115                                       000019 R
- 16 _printMenu                                                     000EB3 GR
+ 16 _printBinary                                                   000D32 GR
+  A _printBinary_x_65536_123                                       000019 R
+ 16 _printMenu                                                     000F7D GR
     _printf                                                        ****** GX
     _printf_tiny                                                   ****** GX
 ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Intel 8051), page 9.
@@ -484,15 +484,15 @@ Hexadecimal [24-Bits]
 Symbol Table
 
     _putchar                                                       ****** GX
- 16 _putsLCD                                                       000418 GR
-  A _putsLCD_i_65536_87                                            00000F R
+ 16 _putsLCD                                                       0004E2 GR
+  A _putsLCD_i_65536_95                                            00000F R
   5 _putsLCD_sloc0_1_0                                             000000 R
   5 _putsLCD_sloc1_1_0                                             000002 R
-  A _putsLCD_y_65536_86                                            00000C R
- 16 _ramDump                                                       000696 GR
-  A _ramDump_i_65536_96                                            000016 R
+  A _putsLCD_y_65536_94                                            00000C R
+ 16 _ramDump                                                       000760 GR
+  A _ramDump_i_65536_104                                           000016 R
     _readCharacter                                              =  00F300 G
- 16 _readLCD                                                       00040B GR
+ 16 _readLCD                                                       0004D5 GR
  16 _timerInit                                                     00000E GR
  17 _uiLines                                                       000000 GR
     _writeCharacter                                             =  00F100 G
@@ -724,7 +724,7 @@ Area Table
   13 GSINIT5                                    size      0   flags   20
   14 GSINIT                                     size      0   flags   20
   15 GSFINAL                                    size      0   flags   20
-  16 CSEG                                       size    F81   flags   20
+  16 CSEG                                       size   104B   flags   20
   17 CONST                                      size    3BD   flags   20
   18 XINIT                                      size      0   flags   20
   19 CABS                                       size      0   flags   28
