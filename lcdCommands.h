@@ -23,5 +23,5 @@ void lcdClear();
 void goToAddr(uint8_t y);
 void putsLCD(char *);
 void timerInit();
-
+void goToXY(uint8_t , uint8_t);
 #endif // LCDCOMMANDS_H_INCLUDED

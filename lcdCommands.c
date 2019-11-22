@@ -62,6 +62,12 @@ void goToAddr(uint8_t x)
     lcdGeneral = 0x80 | x;
 }
 
+void goToXY(uint8_t x, uint8_t y)
+{
+    busyWait();
+    goToAddr(lookUpTable[x][y]);
+}
+
 void putsLCD(char* y)
 {
     int i = 0,j = 0, k =0;
