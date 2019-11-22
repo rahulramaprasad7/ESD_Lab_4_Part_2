@@ -10,12 +10,11 @@
 ;--------------------------------------------------------
 	.globl _timer0_isr
 	.globl _main
-	.globl _goToXY
+	.globl _gamePacman
 	.globl _timerInit
 	.globl _goToAddr
 	.globl _lcdClear
 	.globl _lcdPutCh
-	.globl _busyWait
 	.globl _lcdInit
 	.globl _memset
 	.globl _P5_7
@@ -485,7 +484,7 @@ _x2::
 	.ds 1
 _check::
 	.ds 1
-_main_input_65537_41:
+_main_input_65537_42:
 	.ds 60
 ;--------------------------------------------------------
 ; absolute external ram data
@@ -544,7 +543,7 @@ __sdcc_program_startup:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
-;input                     Allocated with name '_main_input_65537_41'
+;input                     Allocated with name '_main_input_65537_42'
 ;------------------------------------------------------------
 ;	main.c:12: void main()
 ;	-----------------------------------------
@@ -578,7 +577,7 @@ _main:
 ;	main.c:19: x2 = 0;
 	mov	dptr,#_x2
 	movx	@dptr,a
-;	main.c:21: memset(input, '\0',60);
+;	main.c:21: memset(input, '\0',60 * sizeof(char));
 	mov	dptr,#_memset_PARM_2
 	movx	@dptr,a
 	mov	dptr,#_memset_PARM_3
@@ -587,202 +586,37 @@ _main:
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-	mov	dptr,#_main_input_65537_41
+	mov	dptr,#_main_input_65537_42
 	mov	b,#0x00
 	lcall	_memset
 ;	main.c:22: lcdInit();
 	lcall	_lcdInit
 ;	main.c:23: lcdClear();
 	lcall	_lcdClear
-;	main.c:24: busyWait();
-	lcall	_busyWait
-;	main.c:25: lcdGeneral = 0x40 | 0x00;
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x40
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:26: busyWait();
-	lcall	_busyWait
-;	main.c:27: writeCharacter = 0x1B;
-	mov	dptr,#_writeCharacter
-	mov	a,#0x1b
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:28: busyWait();
-	lcall	_busyWait
-;	main.c:29: lcdGeneral = 0x40 | 0x01;
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x41
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:30: busyWait();
-	lcall	_busyWait
-;	main.c:31: writeCharacter = 0x1B;
-	mov	dptr,#_writeCharacter
-	mov	a,#0x1b
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:32: busyWait();
-	lcall	_busyWait
-;	main.c:33: lcdGeneral = 0x40 | 0x02;
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x42
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:34: busyWait();
-	lcall	_busyWait
-;	main.c:35: writeCharacter = 0x00;
-	mov	dptr,#_writeCharacter
-	clr	a
-	movx	@dptr,a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:36: busyWait();
-	lcall	_busyWait
-;	main.c:37: lcdGeneral = 0x40 | 0x03;
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x43
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:38: busyWait();
-	lcall	_busyWait
-;	main.c:39: writeCharacter = 0x04;
-	mov	dptr,#_writeCharacter
-	mov	a,#0x04
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:40: busyWait();
-	lcall	_busyWait
-;	main.c:41: lcdGeneral = 0x40 | 0x04;
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x44
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:42: busyWait();
-	lcall	_busyWait
-;	main.c:43: writeCharacter = 0x04;
-	mov	dptr,#_writeCharacter
-	mov	a,#0x04
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:44: busyWait();
-	lcall	_busyWait
-;	main.c:45: lcdGeneral = 0x40 | 0x05;
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x45
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:46: busyWait();
-	lcall	_busyWait
-;	main.c:47: writeCharacter = 0x11;
-	mov	dptr,#_writeCharacter
-	mov	a,#0x11
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:48: busyWait();
-	lcall	_busyWait
-;	main.c:49: lcdGeneral = 0x40 | 0x06;
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x46
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:50: busyWait();
-	lcall	_busyWait
-;	main.c:51: writeCharacter = 0x0E;
-	mov	dptr,#_writeCharacter
-	mov	a,#0x0e
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:52: busyWait();
-	lcall	_busyWait
-;	main.c:53: lcdGeneral = 0x40 | 0x07;
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x47
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:54: busyWait();
-	lcall	_busyWait
-;	main.c:55: writeCharacter = 0x00;
-	mov	dptr,#_writeCharacter
-	clr	a
-	movx	@dptr,a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:56: busyWait();
-	lcall	_busyWait
-;	main.c:57: goToXY(3,1);
-	mov	dptr,#_goToXY_PARM_2
-	mov	a,#0x01
-	movx	@dptr,a
-	mov	dpl,#0x03
-	lcall	_goToXY
-;	main.c:58: busyWait();
-	lcall	_busyWait
-;	main.c:59: lcdGeneral = 0x80 | 0x00;
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x80
-	movx	@dptr,a
-	clr	a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:60: busyWait();
-	lcall	_busyWait
-;	main.c:61: writeCharacter = 0x00;
-	mov	dptr,#_writeCharacter
-	clr	a
-	movx	@dptr,a
-	inc	dptr
-	movx	@dptr,a
-;	main.c:65: timerInit();
+;	main.c:25: gamePacman();
+	lcall	_gamePacman
+;	main.c:29: timerInit();
 	lcall	_timerInit
-;	main.c:66: while(1)
+;	main.c:30: while(1)
 00105$:
-;	main.c:68: if(check == 1)
+;	main.c:32: if(check == 1)
 	mov	dptr,#_check
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x01,00105$
-;	main.c:70: check = 0;
+;	main.c:34: check = 0;
 	mov	dptr,#_check
 	clr	a
 	movx	@dptr,a
-;	main.c:71: printTimeStamp();
+;	main.c:35: printTimeStamp();
 	lcall	_printTimeStamp
-;	main.c:74: continue;
-;	main.c:76: }
+;	main.c:38: continue;
+;	main.c:40: }
 	sjmp	00105$
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'timer0_isr'
 ;------------------------------------------------------------
-;	main.c:78: void timer0_isr() __interrupt (1)
+;	main.c:42: void timer0_isr() __interrupt (1)
 ;	-----------------------------------------
 ;	 function timer0_isr
 ;	-----------------------------------------
@@ -793,89 +627,89 @@ _timer0_isr:
 	push	ar7
 	push	psw
 	mov	psw,#0x00
-;	main.c:80: TH0 = 0x4B;
+;	main.c:44: TH0 = 0x4B;
 	mov	_TH0,#0x4b
-;	main.c:81: TL0 = 0xFC;
+;	main.c:45: TL0 = 0xFC;
 	mov	_TL0,#0xfc
-;	main.c:82: x2++;
+;	main.c:46: x2++;
 	mov	dptr,#_x2
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-;	main.c:83: if(x2 == 2)
+;	main.c:47: if(x2 == 2)
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x02,00111$
-;	main.c:85: if(partSec > 9)
+;	main.c:49: if(partSec > 9)
 	mov	dptr,#_partSec
 	movx	a,@dptr
 	mov  r7,a
 	add	a,#0xff - 0x09
 	jnc	00108$
-;	main.c:87: sec++;
+;	main.c:51: sec++;
 	mov	dptr,#_sec
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-;	main.c:88: if( sec > 59)
+;	main.c:52: if( sec > 59)
 	movx	a,@dptr
 	mov  r7,a
 	add	a,#0xff - 0x3b
 	jnc	00106$
-;	main.c:90: min++;
+;	main.c:54: min++;
 	mov	dptr,#_min
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-;	main.c:91: if( min == 59)
+;	main.c:55: if( min == 59)
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x3b,00104$
-;	main.c:93: hour++;
+;	main.c:57: hour++;
 	mov	dptr,#_hour
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-;	main.c:94: if(hour > 23)
+;	main.c:58: if(hour > 23)
 	movx	a,@dptr
 	mov  r7,a
 	add	a,#0xff - 0x17
 	jnc	00102$
-;	main.c:96: hour = 0;
+;	main.c:60: hour = 0;
 	mov	dptr,#_hour
 	clr	a
 	movx	@dptr,a
 00102$:
-;	main.c:98: min = 0;
+;	main.c:62: min = 0;
 	mov	dptr,#_min
 	clr	a
 	movx	@dptr,a
 00104$:
-;	main.c:100: sec = 0;
+;	main.c:64: sec = 0;
 	mov	dptr,#_sec
 	clr	a
 	movx	@dptr,a
 00106$:
-;	main.c:102: partSec = 0;
+;	main.c:66: partSec = 0;
 	mov	dptr,#_partSec
 	clr	a
 	movx	@dptr,a
 00108$:
-;	main.c:104: partSec++;
+;	main.c:68: partSec++;
 	mov	dptr,#_partSec
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-;	main.c:105: x2 = 0;
+;	main.c:69: x2 = 0;
 	mov	dptr,#_x2
 	clr	a
 	movx	@dptr,a
-;	main.c:106: check = 1;
+;	main.c:70: check = 1;
 	mov	dptr,#_check
 	inc	a
 	movx	@dptr,a
 00111$:
-;	main.c:108: }
+;	main.c:72: }
 	pop	psw
 	pop	ar7
 	pop	dph
@@ -886,24 +720,24 @@ _timer0_isr:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'printTimeStamp'
 ;------------------------------------------------------------
-;	main.c:109: void printTimeStamp()
+;	main.c:73: void printTimeStamp()
 ;	-----------------------------------------
 ;	 function printTimeStamp
 ;	-----------------------------------------
 _printTimeStamp:
-;	main.c:111: goToAddr(0x57);
+;	main.c:75: goToAddr(0x57);
 	mov	dpl,#0x57
 	lcall	_goToAddr
-;	main.c:112: lcdPutCh(hour + '0');
+;	main.c:76: lcdPutCh(hour + '0');
 	mov	dptr,#_hour
 	movx	a,@dptr
 	add	a,#0x30
 	mov	dpl,a
 	lcall	_lcdPutCh
-;	main.c:113: lcdPutCh(':');
+;	main.c:77: lcdPutCh(':');
 	mov	dpl,#0x3a
 	lcall	_lcdPutCh
-;	main.c:114: lcdPutCh(min / 10 + '0');
+;	main.c:78: lcdPutCh(min / 10 + '0');
 	mov	dptr,#_min
 	movx	a,@dptr
 	mov	r7,a
@@ -922,7 +756,7 @@ _printTimeStamp:
 	add	a,r6
 	mov	dpl,a
 	lcall	_lcdPutCh
-;	main.c:115: lcdPutCh(min % 10 + '0');
+;	main.c:79: lcdPutCh(min % 10 + '0');
 	mov	dptr,#_min
 	movx	a,@dptr
 	mov	r7,a
@@ -941,10 +775,10 @@ _printTimeStamp:
 	add	a,r6
 	mov	dpl,a
 	lcall	_lcdPutCh
-;	main.c:116: lcdPutCh(':');
+;	main.c:80: lcdPutCh(':');
 	mov	dpl,#0x3a
 	lcall	_lcdPutCh
-;	main.c:117: lcdPutCh(sec / 10 + '0');
+;	main.c:81: lcdPutCh(sec / 10 + '0');
 	mov	dptr,#_sec
 	movx	a,@dptr
 	mov	r7,a
@@ -963,7 +797,7 @@ _printTimeStamp:
 	add	a,r6
 	mov	dpl,a
 	lcall	_lcdPutCh
-;	main.c:118: lcdPutCh(sec % 10 + '0');
+;	main.c:82: lcdPutCh(sec % 10 + '0');
 	mov	dptr,#_sec
 	movx	a,@dptr
 	mov	r7,a
@@ -982,15 +816,15 @@ _printTimeStamp:
 	add	a,r6
 	mov	dpl,a
 	lcall	_lcdPutCh
-;	main.c:119: lcdPutCh('.');
+;	main.c:83: lcdPutCh('.');
 	mov	dpl,#0x2e
 	lcall	_lcdPutCh
-;	main.c:120: lcdPutCh(partSec + '0');
+;	main.c:84: lcdPutCh(partSec + '0');
 	mov	dptr,#_partSec
 	movx	a,@dptr
 	add	a,#0x30
 	mov	dpl,a
-;	main.c:121: }
+;	main.c:85: }
 	ljmp	_lcdPutCh
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

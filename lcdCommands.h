@@ -12,8 +12,7 @@ volatile __xdata __at (0xF000) unsigned int lcdGeneral;
 //volatile __xdata __at (0xF)
 volatile __xdata __at(0xF200) unsigned int busyPoll;
 volatile __xdata __at(0xF100) unsigned int writeCharacter;
-
-
+volatile __xdata __at(0xF300) unsigned int readCharacter;
 
 void lcdInit();
 void delay();
@@ -24,4 +23,9 @@ void goToAddr(uint8_t y);
 void putsLCD(char *);
 void timerInit();
 void goToXY(uint8_t , uint8_t);
+void customCharacter();
+int atoh(char *ap);
+void gamePacman();
+void makePacmanRight();
+void makePacmanLeft();
 #endif // LCDCOMMANDS_H_INCLUDED

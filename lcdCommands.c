@@ -68,6 +68,82 @@ void goToXY(uint8_t x, uint8_t y)
     goToAddr(lookUpTable[x][y]);
 }
 
+void customCharacter()
+{
+    int temp;
+    char x[8];
+    busyWait();
+    lcdGeneral = 0x40 | 0x00;
+    busyWait();
+    printf_tiny("\n\rEnter value for Row 1\n\r");
+    gets(x);
+    temp = atoh(x);
+    memset(x,'\0',8 * sizeof(char));
+    writeCharacter = temp & 0xFF;
+    busyWait();
+    lcdGeneral = 0x40 | 0x01;
+    busyWait();
+    printf_tiny("\n\rEnter value for Row 2\n\r");
+    gets(x);
+    temp = atoh(x);
+    memset(x,'\0',8 * sizeof(char));
+    writeCharacter = temp & 0xFF;
+    busyWait();
+    lcdGeneral = 0x40 | 0x02;
+    busyWait();
+    printf_tiny("\n\rEnter value for Row 3\n\r");
+    gets(x);
+    temp = atoh(x);
+    memset(x,'\0',8 * sizeof(char));
+    writeCharacter = temp & 0xFF;
+    busyWait();
+    lcdGeneral = 0x40 | 0x03;
+    busyWait();
+    printf_tiny("\n\rEnter value for Row 4\n\r");
+    gets(x);
+    temp = atoh(x);
+    memset(x,'\0',8 * sizeof(char));
+    writeCharacter = temp & 0xFF;
+    busyWait();
+    lcdGeneral = 0x40 | 0x04;
+    busyWait();
+    printf_tiny("\n\rEnter value for Row 5\n\r");
+    gets(x);
+    temp = atoh(x);
+    memset(x,'\0',8 * sizeof(char));
+    writeCharacter = temp & 0xFF;
+    busyWait();
+    lcdGeneral = 0x40 | 0x05;
+    busyWait();
+    printf_tiny("\n\rEnter value for Row 6\n\r");
+    gets(x);
+    temp = atoh(x);
+    memset(x,'\0',8 * sizeof(char));
+    writeCharacter = temp & 0xFF;
+    busyWait();
+    lcdGeneral = 0x40 | 0x06;
+    busyWait();
+    printf_tiny("\n\rEnter value for Row 7\n\r");
+    gets(x);
+    temp = atoh(x);
+    memset(x,'\0',8 * sizeof(char));
+    writeCharacter = temp & 0xFF;
+    busyWait();
+    lcdGeneral = 0x40 | 0x07;
+    busyWait();
+    printf_tiny("\n\rEnter value for Row 8\n\r");
+    gets(x);
+    temp = atoh(x);
+    memset(x,'\0',8 * sizeof(char));
+    writeCharacter = temp & 0xFF;
+    busyWait();
+    goToXY(3,1);
+    busyWait();
+    lcdGeneral = 0x80 | 0x00;
+    busyWait();
+    writeCharacter = 0x00;
+}
+
 void putsLCD(char* y)
 {
     int i = 0,j = 0, k =0;
@@ -142,4 +218,192 @@ char *gets (char *s)
 			break;
 		}
     }
+}
+int atoh(char *ap)
+{
+	char *p;
+	int n;
+	int digit,lcase;
+
+	p = ap;
+	n = 0;
+	while(*p == ' ' || *p == '	')
+		p++;
+
+	if(*p == '0' && ((*(p+1) == 'x') || (*(p+1) == 'X')))
+		p+=2;
+
+	while ((digit = (*p >= '0' && *p <= '9')) ||
+		(lcase = (*p >= 'a' && *p <= 'f')) ||
+		(*p >= 'A' && *p <= 'F')) {
+		n *= 16;
+		if (digit)	n += *p++ - '0';
+		else if (lcase)	n += 10 + (*p++ - 'a');
+		else		n += 10 + (*p++ - 'A');
+	}
+	return(n);
+}
+
+void gamePacman()
+{
+    char ch;
+    int i = 1;
+    makePacmanRight();
+    makePacmanLeft();
+    goToAddr(lookUpTable[0][4]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[0][5]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[0][8]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[0][9]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[0][12]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[0][13]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[0][14]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[1][1]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[1][2]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[1][3]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[1][12]);
+    lcdPutCh('*');
+    goToAddr(lookUpTable[1][13]);
+    lcdPutCh('*');
+    printf_tiny("\n\rEnter w to go up, s to go down, a to go left and d to go right and q to quit\n\r");
+    do{
+        ch = getchar();
+        if(ch == 'd')
+        {
+            putchar(7);
+            goToAddr(lookUpTable[0][i-1]);
+            busyWait();
+            lcdPutCh(' ');
+            busyWait();
+            lcdGeneral = 0x80 | (lookUpTable[0][i]);
+            busyWait();
+            writeCharacter = 0x00;
+            busyWait();
+            if(i >= 47)
+            {
+                goToAddr(lookUpTable[2][15]);
+                busyWait();
+                lcdPutCh(' ');
+                busyWait();
+                i = 0;
+            }
+            i++;
+        }
+        i--;
+
+        if(ch == 'a')
+        {
+            putchar(7);
+            goToAddr(lookUpTable[0][i+1]);
+            busyWait();
+            lcdPutCh(' ');
+            busyWait();
+            lcdGeneral = 0x80 | (lookUpTable[0][i]);
+            busyWait();
+            writeCharacter = 0x00;
+            busyWait();
+            if( i <= 0)
+            {
+                goToAddr(lookUpTable[0][0]);
+                busyWait();
+                lcdPutCh(' ');
+                busyWait();
+                i = 47;
+            }
+            i--;
+        }
+        i++;
+    }while(ch != 'q');
+}
+
+void makePacmanRight()
+{
+    busyWait();
+    lcdGeneral = 0x40 | 0x00;
+    busyWait();
+    writeCharacter = 0x06;
+    busyWait();
+    lcdGeneral = 0x40 | 0x01;
+    busyWait();
+    writeCharacter = 0x09;
+    busyWait();
+    lcdGeneral = 0x40 | 0x02;
+    busyWait();
+    writeCharacter = 0x12;
+    busyWait();
+    lcdGeneral = 0x40 | 0x03;
+    busyWait();
+    writeCharacter = 0x14;
+    busyWait();
+    lcdGeneral = 0x40 | 0x04;
+    busyWait();
+    writeCharacter = 0x14;
+    busyWait();
+    lcdGeneral = 0x40 | 0x05;
+    busyWait();
+    writeCharacter = 0x12;
+    busyWait();
+    lcdGeneral = 0x40 | 0x06;
+    busyWait();
+    writeCharacter = 0x09;
+    busyWait();
+    lcdGeneral = 0x40 | 0x07;
+    busyWait();
+    writeCharacter = 0x06;
+    busyWait();
+    goToXY(3,1);
+    busyWait();
+    lcdGeneral = 0x80 | 0x00;
+    busyWait();
+    writeCharacter = 0x00;
+}
+void makePacmanLeft()
+{
+    busyWait();
+    lcdGeneral = 0x40 | 0x30;
+    busyWait();
+    writeCharacter = 0x0C;
+    busyWait();
+    lcdGeneral = 0x40 | 0x31;
+    busyWait();
+    writeCharacter = 0x12;
+    busyWait();
+    lcdGeneral = 0x40 | 0x32;
+    busyWait();
+    writeCharacter = 0x09;
+    busyWait();
+    lcdGeneral = 0x40 | 0x33;
+    busyWait();
+    writeCharacter = 0x05;
+    busyWait();
+    lcdGeneral = 0x40 | 0x34;
+    busyWait();
+    writeCharacter = 0x05;
+    busyWait();
+    lcdGeneral = 0x40 | 0x35;
+    busyWait();
+    writeCharacter = 0x09;
+    busyWait();
+    lcdGeneral = 0x40 | 0x36;
+    busyWait();
+    writeCharacter = 0x12;
+    busyWait();
+    lcdGeneral = 0x40 | 0x37;
+    busyWait();
+    writeCharacter = 0x0C;
+    busyWait();
+    goToXY(3,1);
+    busyWait();
+    //lcdGeneral = 0x80 | 0x03;
+    busyWait();
+    //writeCharacter = 0x03;
 }
