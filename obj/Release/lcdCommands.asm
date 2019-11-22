@@ -1250,14 +1250,14 @@ _gets:
 	lcall	_putchar
 ;	lcdCommands.c:138: }
 00107$:
-;	lcdCommands.c:139: if (count == 60)
+;	lcdCommands.c:139: if (count == 48)
 	mov	dptr,#_gets_count_65536_60
 	movx	a,@dptr
 	mov	r6,a
 	inc	dptr
 	movx	a,@dptr
 	mov	r7,a
-	cjne	r6,#0x3c,00144$
+	cjne	r6,#0x30,00144$
 	cjne	r7,#0x00,00144$
 	sjmp	00145$
 00144$:

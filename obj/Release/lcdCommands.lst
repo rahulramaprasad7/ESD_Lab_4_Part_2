@@ -1250,14 +1250,14 @@
       000340 12r02r3A         [24] 1250 	lcall	_putchar
                                    1251 ;	lcdCommands.c:138: }
       000343                       1252 00107$:
-                                   1253 ;	lcdCommands.c:139: if (count == 60)
+                                   1253 ;	lcdCommands.c:139: if (count == 48)
       000343 90r00r0E         [24] 1254 	mov	dptr,#_gets_count_65536_60
       000346 E0               [24] 1255 	movx	a,@dptr
       000347 FE               [12] 1256 	mov	r6,a
       000348 A3               [24] 1257 	inc	dptr
       000349 E0               [24] 1258 	movx	a,@dptr
       00034A FF               [12] 1259 	mov	r7,a
-      00034B BE 3C 05         [24] 1260 	cjne	r6,#0x3c,00144$
+      00034B BE 30 05         [24] 1260 	cjne	r6,#0x30,00144$
       00034E BF 00 02         [24] 1261 	cjne	r7,#0x00,00144$
       000351 80 03            [24] 1262 	sjmp	00145$
       000353                       1263 00144$:

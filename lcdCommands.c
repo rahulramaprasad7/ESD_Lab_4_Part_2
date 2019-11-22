@@ -136,7 +136,7 @@ char *gets (char *s)
           putchar (c);
           break;
         }
-		if (count == 60)
+		if (count == 48)
 		{
 			printf("\n\rPlease Input a maximum of 64 digits\n\r");
 			break;
