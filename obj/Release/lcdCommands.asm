@@ -502,21 +502,21 @@ _gets_s_65536_94:
 	.ds 3
 _gets_count_65536_95:
 	.ds 2
-_ramDump_i_65536_100:
+_ramDump_i_65537_101:
 	.ds 1
-_gamePacman_i_65537_112:
+_gamePacman_i_65538_115:
 	.ds 2
-_gamePacman_count_65537_112:
+_gamePacman_count_65538_115:
+	.ds 1
+_printBinary_x_65536_128:
 	.ds 2
-_printBinary_x_65536_125:
-	.ds 2
-_atoh_ap_65536_128:
+_atoh_ap_65536_131:
 	.ds 3
-_atoh_p_65536_129:
+_atoh_p_65536_132:
 	.ds 3
-_atoh_lcase_65536_129:
+_atoh_lcase_65536_132:
 	.ds 2
-_atoh_n_65537_130:
+_atoh_n_65537_133:
 	.ds 1
 ;--------------------------------------------------------
 ; absolute external ram data
@@ -845,18 +845,25 @@ _customCharacter:
 	mov	r6,#0x00
 	mov	a,#0x28
 	add	a,r5
+	mov	r3,a
+	clr	a
+	addc	a,r6
+	mov	r4,a
+	mov	dptr,#_customCharacter_temp8_196609_86
+	mov	a,#0x40
+	orl	a,r3
+	movx	@dptr,a
+	mov	a,r4
+	inc	dptr
+	movx	@dptr,a
+;	lcdCommands.c:84: printf("%x %x\n\r",temp8, (0x40 | (0x30 + i)));
+	mov	a,#0x30
+	add	a,r5
 	mov	r5,a
 	clr	a
 	addc	a,r6
 	mov	r6,a
 	orl	ar5,#0x40
-	mov	dptr,#_customCharacter_temp8_196609_86
-	mov	a,r5
-	movx	@dptr,a
-	mov	a,r6
-	inc	dptr
-	movx	@dptr,a
-;	lcdCommands.c:84: printf("%x %x\n\r",temp8, (0x40 | (0x28 + i)));
 	mov	dptr,#_customCharacter_temp8_196609_86
 	movx	a,@dptr
 	mov	r3,a
@@ -958,9 +965,9 @@ _customCharacter:
 	movx	@dptr,a
 ;	lcdCommands.c:98: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:99: writeCharacter = 0x05;
+;	lcdCommands.c:99: writeCharacter = 0x06;
 	mov	dptr,#_writeCharacter
-	mov	a,#0x05
+	mov	a,#0x06
 	movx	@dptr,a
 	clr	a
 	inc	dptr
@@ -985,9 +992,13 @@ _readLCD:
 	mov	r6,a
 	inc	dptr
 	movx	a,@dptr
-;	lcdCommands.c:106: return temp1;
+;	lcdCommands.c:106: busyWait();
+	push	ar6
+	lcall	_busyWait
+	pop	ar6
+;	lcdCommands.c:107: return temp1;
 	mov	dpl,r6
-;	lcdCommands.c:107: }
+;	lcdCommands.c:108: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'putsLCD'
@@ -999,7 +1010,7 @@ _readLCD:
 ;j                         Allocated with name '_putsLCD_j_65536_91'
 ;k                         Allocated with name '_putsLCD_k_65536_91'
 ;------------------------------------------------------------
-;	lcdCommands.c:109: void putsLCD(char* y)
+;	lcdCommands.c:110: void putsLCD(char* y)
 ;	-----------------------------------------
 ;	 function putsLCD
 ;	-----------------------------------------
@@ -1015,13 +1026,13 @@ _putsLCD:
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:111: int i = 0,j = 0, k =0;
+;	lcdCommands.c:112: int i = 0,j = 0, k =0;
 	mov	dptr,#_putsLCD_i_65536_91
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:112: while(y[i + (j * 16)] != '\0')
+;	lcdCommands.c:113: while(y[i + (j * 16)] != '\0')
 	mov	dptr,#_putsLCD_y_65536_90
 	movx	a,@dptr
 	mov	_putsLCD_sloc1_1_0,a
@@ -1076,7 +1087,7 @@ _putsLCD:
 	jnz	00121$
 	ret
 00121$:
-;	lcdCommands.c:114: busyWait();
+;	lcdCommands.c:115: busyWait();
 	push	ar4
 	push	ar3
 	push	ar2
@@ -1088,7 +1099,7 @@ _putsLCD:
 	pop	ar2
 	pop	ar3
 	pop	ar4
-;	lcdCommands.c:115: if( i > 15)
+;	lcdCommands.c:116: if( i > 15)
 	clr	c
 	mov	a,#0x0f
 	subb	a,_putsLCD_sloc0_1_0
@@ -1097,19 +1108,19 @@ _putsLCD:
 	xrl	b,#0x80
 	subb	a,b
 	jnc	00102$
-;	lcdCommands.c:117: j++;
+;	lcdCommands.c:118: j++;
 	inc	r0
 	cjne	r0,#0x00,00123$
 	inc	r1
 00123$:
-;	lcdCommands.c:118: i = 0;
+;	lcdCommands.c:119: i = 0;
 	mov	dptr,#_putsLCD_i_65536_91
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
 00102$:
-;	lcdCommands.c:121: goToAddr(lookUpTable[j][i]);
+;	lcdCommands.c:122: goToAddr(lookUpTable[j][i]);
 	push	ar2
 	push	ar3
 	push	ar4
@@ -1162,7 +1173,7 @@ _putsLCD:
 	pop	ar4
 	pop	ar5
 	pop	ar6
-;	lcdCommands.c:122: lcdPutCh(y[i + (j * 16)]);
+;	lcdCommands.c:123: lcdPutCh(y[i + (j * 16)]);
 	mov	a,r3
 	add	a,r5
 	mov	r3,a
@@ -1197,7 +1208,7 @@ _putsLCD:
 	pop	ar4
 	pop	ar5
 	pop	ar6
-;	lcdCommands.c:123: i++;
+;	lcdCommands.c:124: i++;
 	mov	dptr,#_putsLCD_i_65536_91
 	mov	a,#0x01
 	add	a,r5
@@ -1209,7 +1220,7 @@ _putsLCD:
 	pop	ar4
 	pop	ar3
 	pop	ar2
-;	lcdCommands.c:125: }
+;	lcdCommands.c:126: }
 	ljmp	00103$
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'gets'
@@ -1218,7 +1229,7 @@ _putsLCD:
 ;c                         Allocated with name '_gets_c_65536_95'
 ;count                     Allocated with name '_gets_count_65536_95'
 ;------------------------------------------------------------
-;	lcdCommands.c:127: char *gets (char *s)
+;	lcdCommands.c:128: char *gets (char *s)
 ;	-----------------------------------------
 ;	 function gets
 ;	-----------------------------------------
@@ -1234,19 +1245,19 @@ _gets:
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:130: unsigned int count = 0;
+;	lcdCommands.c:131: unsigned int count = 0;
 	mov	dptr,#_gets_count_65536_95
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:132: while (1)
+;	lcdCommands.c:133: while (1)
 00111$:
-;	lcdCommands.c:134: c = getchar ();
+;	lcdCommands.c:135: c = getchar ();
 	lcall	_getchar
 	mov	r6,dpl
 	mov	r7,dph
-;	lcdCommands.c:135: switch(c)
+;	lcdCommands.c:136: switch(c)
 	cjne	r6,#0x08,00139$
 	sjmp	00101$
 00139$:
@@ -1257,9 +1268,9 @@ _gets:
 	sjmp	00105$
 00141$:
 	ljmp	00106$
-;	lcdCommands.c:137: case '\b': /* backspace */
+;	lcdCommands.c:138: case '\b': /* backspace */
 00101$:
-;	lcdCommands.c:138: if (count)
+;	lcdCommands.c:139: if (count)
 	mov	dptr,#_gets_count_65536_95
 	movx	a,@dptr
 	mov	r5,a
@@ -1275,20 +1286,20 @@ _gets:
 	jnz	00142$
 	ljmp	00107$
 00142$:
-;	lcdCommands.c:140: putchar ('\b');
+;	lcdCommands.c:141: putchar ('\b');
 	mov	dptr,#0x0008
 	push	ar7
 	push	ar5
 	lcall	_putchar
-;	lcdCommands.c:141: putchar (' ');
+;	lcdCommands.c:142: putchar (' ');
 	mov	dptr,#0x0020
 	lcall	_putchar
-;	lcdCommands.c:142: putchar ('\b');
+;	lcdCommands.c:143: putchar ('\b');
 	mov	dptr,#0x0008
 	lcall	_putchar
 	pop	ar5
 	pop	ar7
-;	lcdCommands.c:143: --s;
+;	lcdCommands.c:144: --s;
 	mov	dptr,#_gets_s_65536_94
 	movx	a,@dptr
 	add	a,#0xff
@@ -1309,7 +1320,7 @@ _gets:
 	mov	a,r4
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:144: --count;
+;	lcdCommands.c:145: --count;
 	dec	r5
 	cjne	r5,#0xff,00143$
 	dec	r7
@@ -1320,17 +1331,17 @@ _gets:
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:146: break;
-;	lcdCommands.c:149: case '\r': /* CR or LF */
+;	lcdCommands.c:147: break;
+;	lcdCommands.c:150: case '\r': /* CR or LF */
 	sjmp	00107$
 00105$:
-;	lcdCommands.c:150: putchar ('\r');
+;	lcdCommands.c:151: putchar ('\r');
 	mov	dptr,#0x000d
 	lcall	_putchar
-;	lcdCommands.c:151: putchar ('\n');
+;	lcdCommands.c:152: putchar ('\n');
 	mov	dptr,#0x000a
 	lcall	_putchar
-;	lcdCommands.c:152: *s = 0;
+;	lcdCommands.c:153: *s = 0;
 	mov	dptr,#_gets_s_65536_94
 	movx	a,@dptr
 	mov	r4,a
@@ -1345,14 +1356,14 @@ _gets:
 	mov	b,r7
 	clr	a
 	lcall	__gptrput
-;	lcdCommands.c:153: return s;
+;	lcdCommands.c:154: return s;
 	mov	dpl,r4
 	mov	dph,r5
 	mov	b,r7
-;	lcdCommands.c:155: default:
+;	lcdCommands.c:156: default:
 	ret
 00106$:
-;	lcdCommands.c:156: *s++ = c;
+;	lcdCommands.c:157: *s++ = c;
 	mov	dptr,#_gets_s_65536_94
 	movx	a,@dptr
 	mov	r4,a
@@ -1378,7 +1389,7 @@ _gets:
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:157: ++count;
+;	lcdCommands.c:158: ++count;
 	mov	dptr,#_gets_count_65536_95
 	movx	a,@dptr
 	add	a,#0x01
@@ -1387,14 +1398,14 @@ _gets:
 	movx	a,@dptr
 	addc	a,#0x00
 	movx	@dptr,a
-;	lcdCommands.c:158: putchar (c);
+;	lcdCommands.c:159: putchar (c);
 	mov	r7,#0x00
 	mov	dpl,r6
 	mov	dph,r7
 	lcall	_putchar
-;	lcdCommands.c:160: }
+;	lcdCommands.c:161: }
 00107$:
-;	lcdCommands.c:161: if (count == 48)
+;	lcdCommands.c:162: if (count == 48)
 	mov	dptr,#_gets_count_65536_95
 	movx	a,@dptr
 	mov	r6,a
@@ -1407,7 +1418,7 @@ _gets:
 00144$:
 	ljmp	00111$
 00145$:
-;	lcdCommands.c:163: printf("\n\rPlease Input a maximum of 48 characters\n\r");
+;	lcdCommands.c:164: printf("\n\rPlease Input a maximum of 48 characters\n\r");
 	mov	a,#___str_2
 	push	acc
 	mov	a,#(___str_2 >> 8)
@@ -1418,23 +1429,25 @@ _gets:
 	dec	sp
 	dec	sp
 	dec	sp
-;	lcdCommands.c:164: break;
-;	lcdCommands.c:167: }
+;	lcdCommands.c:165: break;
+;	lcdCommands.c:168: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'ramDump'
 ;------------------------------------------------------------
-;i                         Allocated with name '_ramDump_i_65536_100'
-;j                         Allocated with name '_ramDump_j_65536_100'
-;x                         Allocated with name '_ramDump_x_196609_103'
-;x                         Allocated with name '_ramDump_x_196609_108'
+;i                         Allocated with name '_ramDump_i_65537_101'
+;j                         Allocated with name '_ramDump_j_65537_101'
+;x                         Allocated with name '_ramDump_x_327682_106'
+;x                         Allocated with name '_ramDump_x_327682_111'
 ;------------------------------------------------------------
-;	lcdCommands.c:169: void ramDump()
+;	lcdCommands.c:170: void ramDump()
 ;	-----------------------------------------
 ;	 function ramDump
 ;	-----------------------------------------
 _ramDump:
-;	lcdCommands.c:173: printf_tiny("\n\rDDRAM Contents\n\r");
+;	lcdCommands.c:172: lcdClear();
+	lcall	_lcdClear
+;	lcdCommands.c:175: printf_tiny("\n\rDDRAM Contents\n\r");
 	mov	a,#___str_3
 	push	acc
 	mov	a,#(___str_3 >> 8)
@@ -1442,36 +1455,18 @@ _ramDump:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	lcdCommands.c:174: for (i = 0; i < 128; i += 16)      //Print 64 ASCII characters in each line
-	mov	dptr,#_ramDump_i_65536_100
+;	lcdCommands.c:176: for (i = 0; i <= 0x5F; i += 16)      //Print 64 ASCII characters in each line
+	mov	dptr,#_ramDump_i_65537_101
 	clr	a
 	movx	@dptr,a
 00109$:
-;	lcdCommands.c:176: lcdGeneral = 0x80 | i;
-	mov	dptr,#_ramDump_i_65536_100
+;	lcdCommands.c:178: printf("%2x: ",i);
+	mov	dptr,#_ramDump_i_65537_101
 	movx	a,@dptr
 	mov	r7,a
 	mov	r5,a
 	mov	r6,#0x00
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x80
-	orl	a,r5
-	movx	@dptr,a
-	mov	a,r6
-	inc	dptr
-	movx	@dptr,a
-;	lcdCommands.c:177: uint8_t x = readLCD();
 	push	ar7
-	push	ar6
-	push	ar5
-	lcall	_readLCD
-	mov	r4,dpl
-	pop	ar5
-	pop	ar6
-;	lcdCommands.c:178: printf("%2x: ",i);
-	push	ar6
-	push	ar5
-	push	ar4
 	push	ar5
 	push	ar6
 	mov	a,#___str_4
@@ -1484,45 +1479,49 @@ _ramDump:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-	pop	ar4
-	pop	ar5
-	pop	ar6
 	pop	ar7
-;	lcdCommands.c:179: for (j = i; j < (i+16) && j < 128; j++)    //Print the contents of buffer in ASCII
+;	lcdCommands.c:179: for (j = i; j < (i+16) && j <= 0x5F; j++)    //Print the contents of buffer in ASCII
+	mov	ar6,r7
 00107$:
+	mov	ar4,r6
+	mov	r5,#0x00
+	mov	a,#0x10
+	add	a,r4
+	mov	r4,a
+	clr	a
+	addc	a,r5
+	mov	r5,a
 	mov	ar2,r7
 	mov	r3,#0x00
-	mov	a,#0x10
-	add	a,r2
-	mov	r2,a
-	clr	a
-	addc	a,r3
-	mov	r3,a
 	clr	c
-	mov	a,r5
-	subb	a,r2
-	mov	a,r6
+	mov	a,r2
+	subb	a,r4
+	mov	a,r3
 	xrl	a,#0x80
-	mov	b,r3
+	mov	b,r5
 	xrl	b,#0x80
 	subb	a,b
 	jnc	00101$
-	clr	c
-	mov	a,r5
-	subb	a,#0x80
-	mov	a,r6
-	xrl	a,#0x80
-	subb	a,#0x80
-	jnc	00101$
-;	lcdCommands.c:181: printf("%2x ", x);
-	mov	ar2,r4
-	mov	r3,#0x00
+	mov	a,r7
+	add	a,#0xff - 0x5f
+	jc	00101$
+;	lcdCommands.c:181: lcdGeneral = 0x80 | j;
+	mov	dptr,#_lcdGeneral
+	mov	a,#0x80
+	orl	a,r2
+	movx	@dptr,a
+	mov	a,r3
+	inc	dptr
+	movx	@dptr,a
+;	lcdCommands.c:182: uint8_t x = readLCD();
 	push	ar7
 	push	ar6
+	lcall	_readLCD
+	mov	r5,dpl
+;	lcdCommands.c:183: printf("%2x ", x);
+	mov	r4,#0x00
 	push	ar5
 	push	ar4
-	push	ar2
-	push	ar3
 	mov	a,#___str_5
 	push	acc
 	mov	a,#(___str_5 >> 8)
@@ -1533,17 +1532,13 @@ _ramDump:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-	pop	ar4
-	pop	ar5
 	pop	ar6
 	pop	ar7
-;	lcdCommands.c:179: for (j = i; j < (i+16) && j < 128; j++)    //Print the contents of buffer in ASCII
-	inc	r5
-	cjne	r5,#0x00,00107$
-	inc	r6
+;	lcdCommands.c:179: for (j = i; j < (i+16) && j <= 0x5F; j++)    //Print the contents of buffer in ASCII
+	inc	r7
 	sjmp	00107$
 00101$:
-;	lcdCommands.c:183: printf_tiny("\n\r");
+;	lcdCommands.c:185: printf_tiny("\n\r");
 	mov	a,#___str_6
 	push	acc
 	mov	a,#(___str_6 >> 8)
@@ -1551,19 +1546,19 @@ _ramDump:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	lcdCommands.c:174: for (i = 0; i < 128; i += 16)      //Print 64 ASCII characters in each line
-	mov	dptr,#_ramDump_i_65536_100
+;	lcdCommands.c:176: for (i = 0; i <= 0x5F; i += 16)      //Print 64 ASCII characters in each line
+	mov	dptr,#_ramDump_i_65537_101
 	movx	a,@dptr
+	mov	r7,a
 	add	a,#0x10
 	movx	@dptr,a
 	movx	a,@dptr
-	mov	r7,a
-	cjne	r7,#0x80,00160$
-00160$:
-	jnc	00161$
+	mov  r7,a
+	add	a,#0xff - 0x5f
+	jc	00154$
 	ljmp	00109$
-00161$:
-;	lcdCommands.c:185: printf_tiny("\n\rCGRAM Contents\n\r");
+00154$:
+;	lcdCommands.c:187: printf_tiny("\n\rCGRAM Contents\n\r");
 	mov	a,#___str_7
 	push	acc
 	mov	a,#(___str_7 >> 8)
@@ -1571,41 +1566,40 @@ _ramDump:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	lcdCommands.c:186: for (i = 0; i < 64; i += 16)      //Print 64 ASCII characters in each line
-	mov	dptr,#_ramDump_i_65536_100
-	clr	a
-	movx	@dptr,a
-00115$:
-;	lcdCommands.c:188: lcdGeneral = 0x40 | i;
-	mov	dptr,#_ramDump_i_65536_100
-	movx	a,@dptr
-	mov	r7,a
-	mov	r5,a
+;	lcdCommands.c:188: for (i = 0; i <= 7; i ++)      //Print 64 ASCII characters in each line
+	mov	r7,#0x00
+00113$:
+;	lcdCommands.c:190: printf_tiny("\n\rCharacter %d\n\r",i);
+	mov	ar5,r7
 	mov	r6,#0x00
-	mov	dptr,#_lcdGeneral
-	mov	a,#0x40
-	orl	a,r5
-	movx	@dptr,a
-	mov	a,r6
-	inc	dptr
-	movx	@dptr,a
-;	lcdCommands.c:189: uint8_t x = readLCD();
 	push	ar7
-	push	ar6
 	push	ar5
-	lcall	_readLCD
-	mov	r4,dpl
-	pop	ar5
-	pop	ar6
-;	lcdCommands.c:190: printf("%2x: ",i);
+	push	ar6
+	mov	a,#___str_8
+	push	acc
+	mov	a,#(___str_8 >> 8)
+	push	acc
+	lcall	_printf_tiny
+	mov	a,sp
+	add	a,#0xfc
+	mov	sp,a
+	pop	ar7
+;	lcdCommands.c:191: for (j = 0; j <= 7; j++)    //Print the contents of buffer in ASCII
+	mov	ar6,r7
+	mov	r5,#0x00
+00111$:
+;	lcdCommands.c:193: printf("Row %2x: ", j);
+	mov	ar3,r5
+	mov	r4,#0x00
 	push	ar6
 	push	ar5
 	push	ar4
-	push	ar5
-	push	ar6
-	mov	a,#___str_4
+	push	ar3
+	push	ar3
+	push	ar4
+	mov	a,#___str_9
 	push	acc
-	mov	a,#(___str_4 >> 8)
+	mov	a,#(___str_9 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -1613,44 +1607,42 @@ _ramDump:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
+	pop	ar3
 	pop	ar4
 	pop	ar5
 	pop	ar6
-	pop	ar7
-;	lcdCommands.c:191: for (j = i; j < (i+16) && j < 64; j++)    //Print the contents of buffer in ASCII
-00113$:
-	mov	ar2,r7
-	mov	r3,#0x00
-	mov	a,#0x10
-	add	a,r2
-	mov	r2,a
+;	lcdCommands.c:194: lcdGeneral = 0x40 | j | (i << 3);
+	orl	ar3,#0x40
+	mov	ar1,r6
 	clr	a
-	addc	a,r3
-	mov	r3,a
-	clr	c
-	mov	a,r5
-	subb	a,r2
-	mov	a,r6
-	xrl	a,#0x80
-	mov	b,r3
-	xrl	b,#0x80
-	subb	a,b
-	jnc	00103$
-	clr	c
-	mov	a,r5
-	subb	a,#0x40
-	mov	a,r6
-	xrl	a,#0x80
-	subb	a,#0x80
-	jnc	00103$
-;	lcdCommands.c:193: printf("%2x ", x);
-	mov	ar2,r4
-	mov	r3,#0x00
-	push	ar7
+	rr	a
+	anl	a,#0xf8
+	xch	a,r1
+	swap	a
+	rr	a
+	xch	a,r1
+	xrl	a,r1
+	xch	a,r1
+	anl	a,#0xf8
+	xch	a,r1
+	xrl	a,r1
+	mov	r2,a
+	mov	dptr,#_lcdGeneral
+	mov	a,r1
+	orl	a,r3
+	movx	@dptr,a
+	mov	a,r2
+	orl	a,r4
+	inc	dptr
+	movx	@dptr,a
+;	lcdCommands.c:195: uint8_t x = readLCD();
 	push	ar6
 	push	ar5
+	lcall	_readLCD
+	mov	r4,dpl
+;	lcdCommands.c:196: printf("%2x ", x);
+	mov	r3,#0x00
 	push	ar4
-	push	ar2
 	push	ar3
 	mov	a,#___str_5
 	push	acc
@@ -1662,17 +1654,7 @@ _ramDump:
 	mov	a,sp
 	add	a,#0xfb
 	mov	sp,a
-	pop	ar4
-	pop	ar5
-	pop	ar6
-	pop	ar7
-;	lcdCommands.c:191: for (j = i; j < (i+16) && j < 64; j++)    //Print the contents of buffer in ASCII
-	inc	r5
-	cjne	r5,#0x00,00113$
-	inc	r6
-	sjmp	00113$
-00103$:
-;	lcdCommands.c:195: printf_tiny("\n\r");
+;	lcdCommands.c:197: printf_tiny("\n\r");
 	mov	a,#___str_6
 	push	acc
 	mov	a,#(___str_6 >> 8)
@@ -1680,108 +1662,89 @@ _ramDump:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	lcdCommands.c:186: for (i = 0; i < 64; i += 16)      //Print 64 ASCII characters in each line
-	mov	dptr,#_ramDump_i_65536_100
-	movx	a,@dptr
-	add	a,#0x10
-	movx	@dptr,a
-	movx	a,@dptr
-	mov	r7,a
-	cjne	r7,#0x40,00165$
-00165$:
-	jnc	00166$
-	ljmp	00115$
-00166$:
-;	lcdCommands.c:197: }
+	pop	ar5
+	pop	ar6
+;	lcdCommands.c:191: for (j = 0; j <= 7; j++)    //Print the contents of buffer in ASCII
+	inc	r5
+	mov	a,r5
+	add	a,#0xff - 0x07
+	jc	00155$
+	ljmp	00111$
+00155$:
+;	lcdCommands.c:199: printf_tiny("\n\r");
+	push	ar6
+	mov	a,#___str_6
+	push	acc
+	mov	a,#(___str_6 >> 8)
+	push	acc
+	lcall	_printf_tiny
+	dec	sp
+	dec	sp
+	pop	ar6
+;	lcdCommands.c:188: for (i = 0; i <= 7; i ++)      //Print 64 ASCII characters in each line
+	mov	a,r6
+	inc	a
+	mov  r7,a
+	add	a,#0xff - 0x07
+	jc	00156$
+	ljmp	00113$
+00156$:
+;	lcdCommands.c:201: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'gamePacman'
 ;------------------------------------------------------------
-;ch                        Allocated with name '_gamePacman_ch_65537_112'
-;i                         Allocated with name '_gamePacman_i_65537_112'
-;count                     Allocated with name '_gamePacman_count_65537_112'
-;checkEnter                Allocated with name '_gamePacman_checkEnter_196610_116'
-;checkEnter1               Allocated with name '_gamePacman_checkEnter1_196610_120'
+;abcd                      Allocated with name '_gamePacman_abcd_65537_113'
+;ch                        Allocated with name '_gamePacman_ch_65538_115'
+;i                         Allocated with name '_gamePacman_i_65538_115'
+;count                     Allocated with name '_gamePacman_count_65538_115'
+;checkEnter                Allocated with name '_gamePacman_checkEnter_196611_119'
+;checkEnter1               Allocated with name '_gamePacman_checkEnter1_196611_123'
 ;------------------------------------------------------------
-;	lcdCommands.c:199: void gamePacman()
+;	lcdCommands.c:203: void gamePacman()
 ;	-----------------------------------------
 ;	 function gamePacman
 ;	-----------------------------------------
 _gamePacman:
-;	lcdCommands.c:201: lcdClear();
+;	lcdCommands.c:205: lcdClear();
 	lcall	_lcdClear
-;	lcdCommands.c:203: int i = 1;
-	mov	dptr,#_gamePacman_i_65537_112
+;	lcdCommands.c:207: putsLCD("WELCOME 2 PACMANPRESS G TO START");
+	mov	dptr,#___str_10
+	mov	b,#0x80
+	lcall	_putsLCD
+;	lcdCommands.c:208: do{
+00101$:
+;	lcdCommands.c:210: abcd = getchar();
+	lcall	_getchar
+	mov	r6,dpl
+;	lcdCommands.c:211: putchar(abcd);
+	mov	ar5,r6
+	mov	r7,#0x00
+	mov	dpl,r5
+	mov	dph,r7
+	push	ar6
+	lcall	_putchar
+	pop	ar6
+;	lcdCommands.c:212: }while(abcd != 'g');
+	cjne	r6,#0x67,00101$
+;	lcdCommands.c:214: int i = 1;
+	mov	dptr,#_gamePacman_i_65538_115
 	mov	a,#0x01
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:204: int count = 0;
-	mov	dptr,#_gamePacman_count_65537_112
+;	lcdCommands.c:215: uint8_t count = 0;
+	mov	dptr,#_gamePacman_count_65538_115
 	movx	@dptr,a
-	inc	dptr
-	movx	@dptr,a
-;	lcdCommands.c:205: makePacmanRight();
+;	lcdCommands.c:216: lcdClear();
+	lcall	_lcdClear
+;	lcdCommands.c:217: makePacmanRight();
 	lcall	_makePacmanRight
-;	lcdCommands.c:206: makePacmanLeft();
+;	lcdCommands.c:218: makePacmanLeft();
 	lcall	_makePacmanLeft
-;	lcdCommands.c:207: goToAddr(lookUpTable[0][4]);
+;	lcdCommands.c:219: goToAddr(lookUpTable[0][4]);
 	mov	dptr,#(_lookUpTable + 0x0004)
-	clr	a
-	movc	a,@a+dptr
-	mov	dpl,a
-	lcall	_goToAddr
-;	lcdCommands.c:208: lcdPutCh('*');
-	mov	dpl,#0x2a
-	lcall	_lcdPutCh
-;	lcdCommands.c:209: goToAddr(lookUpTable[0][5]);
-	mov	dptr,#(_lookUpTable + 0x0005)
-	clr	a
-	movc	a,@a+dptr
-	mov	dpl,a
-	lcall	_goToAddr
-;	lcdCommands.c:210: lcdPutCh('*');
-	mov	dpl,#0x2a
-	lcall	_lcdPutCh
-;	lcdCommands.c:211: goToAddr(lookUpTable[0][8]);
-	mov	dptr,#(_lookUpTable + 0x0008)
-	clr	a
-	movc	a,@a+dptr
-	mov	dpl,a
-	lcall	_goToAddr
-;	lcdCommands.c:212: lcdPutCh('*');
-	mov	dpl,#0x2a
-	lcall	_lcdPutCh
-;	lcdCommands.c:213: goToAddr(lookUpTable[0][9]);
-	mov	dptr,#(_lookUpTable + 0x0009)
-	clr	a
-	movc	a,@a+dptr
-	mov	dpl,a
-	lcall	_goToAddr
-;	lcdCommands.c:214: lcdPutCh('*');
-	mov	dpl,#0x2a
-	lcall	_lcdPutCh
-;	lcdCommands.c:215: goToAddr(lookUpTable[0][12]);
-	mov	dptr,#(_lookUpTable + 0x000c)
-	clr	a
-	movc	a,@a+dptr
-	mov	dpl,a
-	lcall	_goToAddr
-;	lcdCommands.c:216: lcdPutCh('*');
-	mov	dpl,#0x2a
-	lcall	_lcdPutCh
-;	lcdCommands.c:217: goToAddr(lookUpTable[0][13]);
-	mov	dptr,#(_lookUpTable + 0x000d)
-	clr	a
-	movc	a,@a+dptr
-	mov	dpl,a
-	lcall	_goToAddr
-;	lcdCommands.c:218: lcdPutCh('*');
-	mov	dpl,#0x2a
-	lcall	_lcdPutCh
-;	lcdCommands.c:219: goToAddr(lookUpTable[0][14]);
-	mov	dptr,#(_lookUpTable + 0x000e)
 	clr	a
 	movc	a,@a+dptr
 	mov	dpl,a
@@ -1789,8 +1752,8 @@ _gamePacman:
 ;	lcdCommands.c:220: lcdPutCh('*');
 	mov	dpl,#0x2a
 	lcall	_lcdPutCh
-;	lcdCommands.c:221: goToAddr(lookUpTable[1][1]);
-	mov	dptr,#(_lookUpTable + 0x0011)
+;	lcdCommands.c:221: goToAddr(lookUpTable[0][5]);
+	mov	dptr,#(_lookUpTable + 0x0005)
 	clr	a
 	movc	a,@a+dptr
 	mov	dpl,a
@@ -1798,8 +1761,8 @@ _gamePacman:
 ;	lcdCommands.c:222: lcdPutCh('*');
 	mov	dpl,#0x2a
 	lcall	_lcdPutCh
-;	lcdCommands.c:223: goToAddr(lookUpTable[1][2]);
-	mov	dptr,#(_lookUpTable + 0x0012)
+;	lcdCommands.c:223: goToAddr(lookUpTable[0][8]);
+	mov	dptr,#(_lookUpTable + 0x0008)
 	clr	a
 	movc	a,@a+dptr
 	mov	dpl,a
@@ -1807,8 +1770,8 @@ _gamePacman:
 ;	lcdCommands.c:224: lcdPutCh('*');
 	mov	dpl,#0x2a
 	lcall	_lcdPutCh
-;	lcdCommands.c:225: goToAddr(lookUpTable[1][3]);
-	mov	dptr,#(_lookUpTable + 0x0013)
+;	lcdCommands.c:225: goToAddr(lookUpTable[0][12]);
+	mov	dptr,#(_lookUpTable + 0x000c)
 	clr	a
 	movc	a,@a+dptr
 	mov	dpl,a
@@ -1816,8 +1779,8 @@ _gamePacman:
 ;	lcdCommands.c:226: lcdPutCh('*');
 	mov	dpl,#0x2a
 	lcall	_lcdPutCh
-;	lcdCommands.c:227: goToAddr(lookUpTable[1][12]);
-	mov	dptr,#(_lookUpTable + 0x001c)
+;	lcdCommands.c:227: goToAddr(lookUpTable[0][13]);
+	mov	dptr,#(_lookUpTable + 0x000d)
 	clr	a
 	movc	a,@a+dptr
 	mov	dpl,a
@@ -1825,8 +1788,8 @@ _gamePacman:
 ;	lcdCommands.c:228: lcdPutCh('*');
 	mov	dpl,#0x2a
 	lcall	_lcdPutCh
-;	lcdCommands.c:229: goToAddr(lookUpTable[1][13]);
-	mov	dptr,#(_lookUpTable + 0x001d)
+;	lcdCommands.c:229: goToAddr(lookUpTable[0][14]);
+	mov	dptr,#(_lookUpTable + 0x000e)
 	clr	a
 	movc	a,@a+dptr
 	mov	dpl,a
@@ -1834,58 +1797,91 @@ _gamePacman:
 ;	lcdCommands.c:230: lcdPutCh('*');
 	mov	dpl,#0x2a
 	lcall	_lcdPutCh
-;	lcdCommands.c:231: printf_tiny("\n\rEnter w to go up, s to go down, a to go left and d to go right and q to quit\n\r");
-	mov	a,#___str_8
+;	lcdCommands.c:231: goToAddr(lookUpTable[1][2]);
+	mov	dptr,#(_lookUpTable + 0x0012)
+	clr	a
+	movc	a,@a+dptr
+	mov	dpl,a
+	lcall	_goToAddr
+;	lcdCommands.c:232: lcdPutCh('*');
+	mov	dpl,#0x2a
+	lcall	_lcdPutCh
+;	lcdCommands.c:233: goToAddr(lookUpTable[1][3]);
+	mov	dptr,#(_lookUpTable + 0x0013)
+	clr	a
+	movc	a,@a+dptr
+	mov	dpl,a
+	lcall	_goToAddr
+;	lcdCommands.c:234: lcdPutCh('*');
+	mov	dpl,#0x2a
+	lcall	_lcdPutCh
+;	lcdCommands.c:235: goToAddr(lookUpTable[1][12]);
+	mov	dptr,#(_lookUpTable + 0x001c)
+	clr	a
+	movc	a,@a+dptr
+	mov	dpl,a
+	lcall	_goToAddr
+;	lcdCommands.c:236: lcdPutCh('*');
+	mov	dpl,#0x2a
+	lcall	_lcdPutCh
+;	lcdCommands.c:237: printf_tiny("\n\rEnter w to go up, s to go down, a to go left and d to go right and q to quit\n\r");
+	mov	a,#___str_11
 	push	acc
-	mov	a,#(___str_8 >> 8)
+	mov	a,#(___str_11 >> 8)
 	push	acc
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	lcdCommands.c:232: do{
-00115$:
-;	lcdCommands.c:233: if(count == 12)
-	mov	dptr,#_gamePacman_count_65537_112
-	movx	a,@dptr
-	mov	r6,a
-	inc	dptr
+;	lcdCommands.c:238: do{
+00118$:
+;	lcdCommands.c:239: goToAddr(lookUpTable[3][0]);
+	mov	dptr,#(_lookUpTable + 0x0030)
+	clr	a
+	movc	a,@a+dptr
+	mov	dpl,a
+	lcall	_goToAddr
+;	lcdCommands.c:240: lcdPutCh(count + '0');
+	mov	dptr,#_gamePacman_count_65538_115
 	movx	a,@dptr
 	mov	r7,a
-	cjne	r6,#0x0c,00102$
-	cjne	r7,#0x00,00102$
-;	lcdCommands.c:235: lcdClear();
+	add	a,#0x30
+	mov	dpl,a
+	push	ar7
+	lcall	_lcdPutCh
+	pop	ar7
+;	lcdCommands.c:241: if(count == 9)
+	cjne	r7,#0x09,00105$
+;	lcdCommands.c:243: lcdClear();
 	lcall	_lcdClear
-;	lcdCommands.c:236: putsLCD("GAME OVER! PRESS p to restart");
-	mov	dptr,#___str_9
+;	lcdCommands.c:244: putsLCD("GAME OVER! PRESS p to restart");
+	mov	dptr,#___str_12
 	mov	b,#0x80
 	lcall	_putsLCD
-;	lcdCommands.c:237: printMenu();
-;	lcdCommands.c:238: break;
+;	lcdCommands.c:245: printMenu();
+;	lcdCommands.c:246: break;
 	ljmp	_printMenu
-00102$:
-;	lcdCommands.c:240: ch = getchar();
+00105$:
+;	lcdCommands.c:249: ch = getchar();
 	push	ar7
-	push	ar6
 	lcall	_getchar
-	mov	r4,dpl
-	mov	r5,dph
-	pop	ar6
+	mov	r5,dpl
+	mov	r6,dph
 	pop	ar7
-;	lcdCommands.c:241: if(ch == 'd')
-	cjne	r4,#0x64,00154$
-	sjmp	00155$
-00154$:
-	ljmp	00108$
-00155$:
-;	lcdCommands.c:243: goToAddr(lookUpTable[0][i-1]);
-	mov	dptr,#_gamePacman_i_65537_112
+;	lcdCommands.c:250: if(ch == 'd')
+	cjne	r5,#0x64,00167$
+	sjmp	00168$
+00167$:
+	ljmp	00111$
+00168$:
+;	lcdCommands.c:252: goToAddr(lookUpTable[0][i-1]);
+	mov	dptr,#_gamePacman_i_65538_115
 	movx	a,@dptr
-	mov	r3,a
+	mov	r4,a
 	inc	dptr
 	movx	a,@dptr
-	mov	r5,a
-	mov	ar2,r3
-	mov	a,r2
+	mov	r6,a
+	mov	ar3,r4
+	mov	a,r3
 	dec	a
 	mov	dptr,#_lookUpTable
 	movc	a,@a+dptr
@@ -1894,61 +1890,55 @@ _gamePacman:
 	push	ar6
 	push	ar5
 	push	ar4
-	push	ar3
 	lcall	_goToAddr
-;	lcdCommands.c:244: busyWait();
+;	lcdCommands.c:253: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:245: lcdPutCh(' ');
+;	lcdCommands.c:254: lcdPutCh(' ');
 	mov	dpl,#0x20
 	lcall	_lcdPutCh
-;	lcdCommands.c:246: busyWait();
+;	lcdCommands.c:255: busyWait();
 	lcall	_busyWait
-	pop	ar3
 	pop	ar4
 	pop	ar5
-;	lcdCommands.c:247: goToAddr(lookUpTable[0][i]);
-	mov	a,r3
+	pop	ar6
+;	lcdCommands.c:256: goToAddr(lookUpTable[0][i]);
+	mov	a,r4
 	add	a,#_lookUpTable
 	mov	dpl,a
-	mov	a,r5
+	mov	a,r6
 	addc	a,#(_lookUpTable >> 8)
 	mov	dph,a
 	clr	a
 	movc	a,@a+dptr
 	mov	dpl,a
-	push	ar4
+	push	ar5
 	lcall	_goToAddr
-;	lcdCommands.c:248: busyWait();
+;	lcdCommands.c:257: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:249: char checkEnter = readLCD();
+;	lcdCommands.c:258: char checkEnter = readLCD();
 	lcall	_readLCD
-	mov	r5,dpl
-	pop	ar4
-	pop	ar6
+	mov	r6,dpl
+	pop	ar5
 	pop	ar7
-;	lcdCommands.c:250: if(checkEnter == '*')
-	cjne	r5,#0x2a,00104$
-;	lcdCommands.c:252: count++;
-	mov	dptr,#_gamePacman_count_65537_112
-	mov	a,#0x01
-	add	a,r6
+;	lcdCommands.c:259: if(checkEnter == '*')
+	cjne	r6,#0x2a,00107$
+;	lcdCommands.c:261: count++;
+	mov	dptr,#_gamePacman_count_65538_115
+	mov	a,r7
+	inc	a
 	movx	@dptr,a
-	clr	a
-	addc	a,r7
-	inc	dptr
-	movx	@dptr,a
-;	lcdCommands.c:253: putchar(7);
+;	lcdCommands.c:262: putchar(7);
 	mov	dptr,#0x0007
-	push	ar4
+	push	ar5
 	lcall	_putchar
-	pop	ar4
-00104$:
-;	lcdCommands.c:255: busyWait();
-	push	ar4
+	pop	ar5
+00107$:
+;	lcdCommands.c:264: busyWait();
+	push	ar5
 	lcall	_busyWait
-	pop	ar4
-;	lcdCommands.c:256: lcdGeneral = 0x80 | (lookUpTable[0][i]);
-	mov	dptr,#_gamePacman_i_65537_112
+	pop	ar5
+;	lcdCommands.c:265: lcdGeneral = 0x80 | (lookUpTable[0][i]);
+	mov	dptr,#_gamePacman_i_65538_115
 	movx	a,@dptr
 	mov	r6,a
 	inc	dptr
@@ -1962,63 +1952,63 @@ _gamePacman:
 	mov	dph,a
 	clr	a
 	movc	a,@a+dptr
-	mov	r5,a
+	mov	r4,a
 	mov	r3,#0x00
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x80
-	orl	a,r5
+	orl	a,r4
 	movx	@dptr,a
 	mov	a,r3
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:257: busyWait();
+;	lcdCommands.c:266: busyWait();
 	push	ar7
 	push	ar6
-	push	ar4
+	push	ar5
 	lcall	_busyWait
-;	lcdCommands.c:258: writeCharacter = 0x00;
+;	lcdCommands.c:267: writeCharacter = 0x00;
 	mov	dptr,#_writeCharacter
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:259: busyWait();
+;	lcdCommands.c:268: busyWait();
 	lcall	_busyWait
-	pop	ar4
+	pop	ar5
 	pop	ar6
 	pop	ar7
-;	lcdCommands.c:260: if(i >= 47)
+;	lcdCommands.c:269: if(i >= 47)
 	clr	c
 	mov	a,r6
 	subb	a,#0x2f
 	mov	a,r7
 	xrl	a,#0x80
 	subb	a,#0x80
-	jc	00106$
-;	lcdCommands.c:262: goToAddr(lookUpTable[2][15]);
+	jc	00109$
+;	lcdCommands.c:271: goToAddr(lookUpTable[2][15]);
 	mov	dptr,#(_lookUpTable + 0x002f)
 	clr	a
 	movc	a,@a+dptr
 	mov	dpl,a
-	push	ar4
+	push	ar5
 	lcall	_goToAddr
-;	lcdCommands.c:263: busyWait();
+;	lcdCommands.c:272: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:264: lcdPutCh(' ');
+;	lcdCommands.c:273: lcdPutCh(' ');
 	mov	dpl,#0x20
 	lcall	_lcdPutCh
-;	lcdCommands.c:265: busyWait();
+;	lcdCommands.c:274: busyWait();
 	lcall	_busyWait
-	pop	ar4
-;	lcdCommands.c:266: i = 0;
-	mov	dptr,#_gamePacman_i_65537_112
+	pop	ar5
+;	lcdCommands.c:275: i = 0;
+	mov	dptr,#_gamePacman_i_65538_115
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
-00106$:
-;	lcdCommands.c:268: i++;
-	mov	dptr,#_gamePacman_i_65537_112
+00109$:
+;	lcdCommands.c:277: i++;
+	mov	dptr,#_gamePacman_i_65538_115
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
@@ -2026,9 +2016,9 @@ _gamePacman:
 	movx	a,@dptr
 	addc	a,#0x00
 	movx	@dptr,a
-00108$:
-;	lcdCommands.c:270: i--;
-	mov	dptr,#_gamePacman_i_65537_112
+00111$:
+;	lcdCommands.c:279: i--;
+	mov	dptr,#_gamePacman_i_65538_115
 	movx	a,@dptr
 	add	a,#0xff
 	mov	r6,a
@@ -2036,46 +2026,46 @@ _gamePacman:
 	movx	a,@dptr
 	addc	a,#0xff
 	mov	r7,a
-	mov	dptr,#_gamePacman_i_65537_112
+	mov	dptr,#_gamePacman_i_65538_115
 	mov	a,r6
 	movx	@dptr,a
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:272: if(ch == 'a')
-	cjne	r4,#0x61,00159$
-	sjmp	00160$
-00159$:
-	ljmp	00114$
-00160$:
-;	lcdCommands.c:274: goToAddr(lookUpTable[0][i+1]);
-	mov	dptr,#_gamePacman_i_65537_112
+;	lcdCommands.c:281: if(ch == 'a')
+	cjne	r5,#0x61,00172$
+	sjmp	00173$
+00172$:
+	ljmp	00117$
+00173$:
+;	lcdCommands.c:283: goToAddr(lookUpTable[0][i+1]);
+	mov	dptr,#_gamePacman_i_65538_115
 	movx	a,@dptr
 	mov	r6,a
 	inc	dptr
 	movx	a,@dptr
 	mov	r7,a
-	mov	ar5,r6
-	mov	a,r5
+	mov	ar4,r6
+	mov	a,r4
 	inc	a
 	mov	dptr,#_lookUpTable
 	movc	a,@a+dptr
 	mov	dpl,a
 	push	ar7
 	push	ar6
-	push	ar4
+	push	ar5
 	lcall	_goToAddr
-;	lcdCommands.c:275: busyWait();
+;	lcdCommands.c:284: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:276: lcdPutCh(' ');
+;	lcdCommands.c:285: lcdPutCh(' ');
 	mov	dpl,#0x20
 	lcall	_lcdPutCh
-;	lcdCommands.c:277: busyWait();
+;	lcdCommands.c:286: busyWait();
 	lcall	_busyWait
-	pop	ar4
+	pop	ar5
 	pop	ar6
 	pop	ar7
-;	lcdCommands.c:278: goToAddr(lookUpTable[0][i]);
+;	lcdCommands.c:287: goToAddr(lookUpTable[0][i]);
 	mov	a,r6
 	add	a,#_lookUpTable
 	mov	dpl,a
@@ -2085,37 +2075,33 @@ _gamePacman:
 	clr	a
 	movc	a,@a+dptr
 	mov	dpl,a
-	push	ar4
+	push	ar5
 	lcall	_goToAddr
-;	lcdCommands.c:279: busyWait();
+;	lcdCommands.c:288: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:280: char checkEnter1 = readLCD();
+;	lcdCommands.c:289: char checkEnter1 = readLCD();
 	lcall	_readLCD
 	mov	r7,dpl
-	pop	ar4
-;	lcdCommands.c:281: if(checkEnter1 == '*')
-	cjne	r7,#0x2a,00110$
-;	lcdCommands.c:283: count++;
-	mov	dptr,#_gamePacman_count_65537_112
+	pop	ar5
+;	lcdCommands.c:290: if(checkEnter1 == '*')
+	cjne	r7,#0x2a,00113$
+;	lcdCommands.c:292: count++;
+	mov	dptr,#_gamePacman_count_65538_115
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-	inc	dptr
-	movx	a,@dptr
-	addc	a,#0x00
-	movx	@dptr,a
-;	lcdCommands.c:284: putchar(7);
+;	lcdCommands.c:293: putchar(7);
 	mov	dptr,#0x0007
-	push	ar4
+	push	ar5
 	lcall	_putchar
-	pop	ar4
-00110$:
-;	lcdCommands.c:286: busyWait();
-	push	ar4
+	pop	ar5
+00113$:
+;	lcdCommands.c:295: busyWait();
+	push	ar5
 	lcall	_busyWait
-	pop	ar4
-;	lcdCommands.c:287: lcdGeneral = 0x80 | (lookUpTable[0][i]);
-	mov	dptr,#_gamePacman_i_65537_112
+	pop	ar5
+;	lcdCommands.c:296: lcdGeneral = 0x80 | (lookUpTable[0][i]);
+	mov	dptr,#_gamePacman_i_65538_115
 	movx	a,@dptr
 	mov	r6,a
 	inc	dptr
@@ -2129,33 +2115,33 @@ _gamePacman:
 	mov	dph,a
 	clr	a
 	movc	a,@a+dptr
-	mov	r5,a
+	mov	r4,a
 	mov	r3,#0x00
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x80
-	orl	a,r5
+	orl	a,r4
 	movx	@dptr,a
 	mov	a,r3
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:288: busyWait();
+;	lcdCommands.c:297: busyWait();
 	push	ar7
 	push	ar6
-	push	ar4
+	push	ar5
 	lcall	_busyWait
-;	lcdCommands.c:289: writeCharacter = 0x03;
+;	lcdCommands.c:298: writeCharacter = 0x03;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x03
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:290: busyWait();
+;	lcdCommands.c:299: busyWait();
 	lcall	_busyWait
-	pop	ar4
+	pop	ar5
 	pop	ar6
 	pop	ar7
-;	lcdCommands.c:291: if( i <= 0)
+;	lcdCommands.c:300: if( i <= 0)
 	clr	c
 	clr	a
 	subb	a,r6
@@ -2163,32 +2149,32 @@ _gamePacman:
 	mov	b,r7
 	xrl	b,#0x80
 	subb	a,b
-	jc	00112$
-;	lcdCommands.c:293: goToAddr(lookUpTable[0][0]);
+	jc	00115$
+;	lcdCommands.c:302: goToAddr(lookUpTable[0][0]);
 	mov	dptr,#_lookUpTable
 	clr	a
 	movc	a,@a+dptr
 	mov	dpl,a
-	push	ar4
+	push	ar5
 	lcall	_goToAddr
-;	lcdCommands.c:294: busyWait();
+;	lcdCommands.c:303: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:295: lcdPutCh(' ');
+;	lcdCommands.c:304: lcdPutCh(' ');
 	mov	dpl,#0x20
 	lcall	_lcdPutCh
-;	lcdCommands.c:296: busyWait();
+;	lcdCommands.c:305: busyWait();
 	lcall	_busyWait
-	pop	ar4
-;	lcdCommands.c:297: i = 47;
-	mov	dptr,#_gamePacman_i_65537_112
+	pop	ar5
+;	lcdCommands.c:306: i = 47;
+	mov	dptr,#_gamePacman_i_65538_115
 	mov	a,#0x2f
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-00112$:
-;	lcdCommands.c:299: i--;
-	mov	dptr,#_gamePacman_i_65537_112
+00115$:
+;	lcdCommands.c:308: i--;
+	mov	dptr,#_gamePacman_i_65538_115
 	movx	a,@dptr
 	add	a,#0xff
 	mov	r6,a
@@ -2196,15 +2182,15 @@ _gamePacman:
 	movx	a,@dptr
 	addc	a,#0xff
 	mov	r7,a
-	mov	dptr,#_gamePacman_i_65537_112
+	mov	dptr,#_gamePacman_i_65538_115
 	mov	a,r6
 	movx	@dptr,a
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-00114$:
-;	lcdCommands.c:301: i++;
-	mov	dptr,#_gamePacman_i_65537_112
+00117$:
+;	lcdCommands.c:310: i++;
+	mov	dptr,#_gamePacman_i_65538_115
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
@@ -2212,368 +2198,368 @@ _gamePacman:
 	movx	a,@dptr
 	addc	a,#0x00
 	movx	@dptr,a
-;	lcdCommands.c:302: }while(ch != 'q');
-	cjne	r4,#0x71,00164$
+;	lcdCommands.c:311: }while(ch != 'q');
+	cjne	r5,#0x71,00177$
 	ret
-00164$:
-	ljmp	00115$
-;	lcdCommands.c:303: }
+00177$:
+	ljmp	00118$
+;	lcdCommands.c:312: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'makePacmanRight'
 ;------------------------------------------------------------
-;	lcdCommands.c:305: void makePacmanRight()
+;	lcdCommands.c:314: void makePacmanRight()
 ;	-----------------------------------------
 ;	 function makePacmanRight
 ;	-----------------------------------------
 _makePacmanRight:
-;	lcdCommands.c:307: busyWait();
+;	lcdCommands.c:316: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:308: lcdGeneral = 0x40 | 0x00;
+;	lcdCommands.c:317: lcdGeneral = 0x40 | 0x00;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x40
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:309: busyWait();
+;	lcdCommands.c:318: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:310: writeCharacter = 0x06;
+;	lcdCommands.c:319: writeCharacter = 0x06;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x06
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:311: busyWait();
+;	lcdCommands.c:320: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:312: lcdGeneral = 0x40 | 0x01;
+;	lcdCommands.c:321: lcdGeneral = 0x40 | 0x01;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x41
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:313: busyWait();
+;	lcdCommands.c:322: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:314: writeCharacter = 0x09;
+;	lcdCommands.c:323: writeCharacter = 0x09;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x09
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:315: busyWait();
+;	lcdCommands.c:324: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:316: lcdGeneral = 0x40 | 0x02;
+;	lcdCommands.c:325: lcdGeneral = 0x40 | 0x02;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x42
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:317: busyWait();
+;	lcdCommands.c:326: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:318: writeCharacter = 0x12;
+;	lcdCommands.c:327: writeCharacter = 0x12;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x12
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:319: busyWait();
+;	lcdCommands.c:328: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:320: lcdGeneral = 0x40 | 0x03;
+;	lcdCommands.c:329: lcdGeneral = 0x40 | 0x03;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x43
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:321: busyWait();
+;	lcdCommands.c:330: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:322: writeCharacter = 0x14;
+;	lcdCommands.c:331: writeCharacter = 0x14;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x14
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:323: busyWait();
+;	lcdCommands.c:332: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:324: lcdGeneral = 0x40 | 0x04;
+;	lcdCommands.c:333: lcdGeneral = 0x40 | 0x04;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x44
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:325: busyWait();
+;	lcdCommands.c:334: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:326: writeCharacter = 0x14;
+;	lcdCommands.c:335: writeCharacter = 0x14;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x14
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:327: busyWait();
+;	lcdCommands.c:336: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:328: lcdGeneral = 0x40 | 0x05;
+;	lcdCommands.c:337: lcdGeneral = 0x40 | 0x05;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x45
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:329: busyWait();
+;	lcdCommands.c:338: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:330: writeCharacter = 0x12;
+;	lcdCommands.c:339: writeCharacter = 0x12;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x12
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:331: busyWait();
+;	lcdCommands.c:340: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:332: lcdGeneral = 0x40 | 0x06;
+;	lcdCommands.c:341: lcdGeneral = 0x40 | 0x06;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x46
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:333: busyWait();
+;	lcdCommands.c:342: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:334: writeCharacter = 0x09;
+;	lcdCommands.c:343: writeCharacter = 0x09;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x09
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:335: busyWait();
+;	lcdCommands.c:344: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:336: lcdGeneral = 0x40 | 0x07;
+;	lcdCommands.c:345: lcdGeneral = 0x40 | 0x07;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x47
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:337: busyWait();
+;	lcdCommands.c:346: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:338: writeCharacter = 0x06;
+;	lcdCommands.c:347: writeCharacter = 0x06;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x06
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:339: busyWait();
+;	lcdCommands.c:348: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:340: goToXY(3,1);
+;	lcdCommands.c:349: goToXY(3,1);
 	mov	dptr,#_goToXY_PARM_2
 	mov	a,#0x01
 	movx	@dptr,a
 	mov	dpl,#0x03
 	lcall	_goToXY
-;	lcdCommands.c:341: busyWait();
+;	lcdCommands.c:350: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:342: lcdGeneral = 0x80 | 0x00;
+;	lcdCommands.c:351: lcdGeneral = 0x80 | 0x00;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x80
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:343: busyWait();
+;	lcdCommands.c:352: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:344: writeCharacter = 0x00;
+;	lcdCommands.c:353: writeCharacter = 0x00;
 	mov	dptr,#_writeCharacter
 	clr	a
 	movx	@dptr,a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:345: }
+;	lcdCommands.c:354: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'makePacmanLeft'
 ;------------------------------------------------------------
-;	lcdCommands.c:346: void makePacmanLeft()
+;	lcdCommands.c:355: void makePacmanLeft()
 ;	-----------------------------------------
 ;	 function makePacmanLeft
 ;	-----------------------------------------
 _makePacmanLeft:
-;	lcdCommands.c:348: busyWait();
+;	lcdCommands.c:357: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:349: lcdGeneral = 0x40 | 0x18;
+;	lcdCommands.c:358: lcdGeneral = 0x40 | 0x18;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x58
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:350: busyWait();
+;	lcdCommands.c:359: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:351: writeCharacter = 0x0C;
+;	lcdCommands.c:360: writeCharacter = 0x0C;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x0c
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:352: busyWait();
+;	lcdCommands.c:361: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:353: lcdGeneral = 0x40 | 0x19;
+;	lcdCommands.c:362: lcdGeneral = 0x40 | 0x19;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x59
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:354: busyWait();
+;	lcdCommands.c:363: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:355: writeCharacter = 0x12;
+;	lcdCommands.c:364: writeCharacter = 0x12;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x12
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:356: busyWait();
+;	lcdCommands.c:365: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:357: lcdGeneral = 0x40 | 0x1A;
+;	lcdCommands.c:366: lcdGeneral = 0x40 | 0x1A;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x5a
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:358: busyWait();
+;	lcdCommands.c:367: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:359: writeCharacter = 0x09;
+;	lcdCommands.c:368: writeCharacter = 0x09;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x09
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:360: busyWait();
+;	lcdCommands.c:369: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:361: lcdGeneral = 0x40 | 0x1B;
+;	lcdCommands.c:370: lcdGeneral = 0x40 | 0x1B;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x5b
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:362: busyWait();
+;	lcdCommands.c:371: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:363: writeCharacter = 0x05;
+;	lcdCommands.c:372: writeCharacter = 0x05;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x05
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:364: busyWait();
+;	lcdCommands.c:373: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:365: lcdGeneral = 0x40 | 0x1C;
+;	lcdCommands.c:374: lcdGeneral = 0x40 | 0x1C;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x5c
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:366: busyWait();
+;	lcdCommands.c:375: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:367: writeCharacter = 0x05;
+;	lcdCommands.c:376: writeCharacter = 0x05;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x05
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:368: busyWait();
+;	lcdCommands.c:377: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:369: lcdGeneral = 0x40 | 0x1D;
+;	lcdCommands.c:378: lcdGeneral = 0x40 | 0x1D;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x5d
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:370: busyWait();
+;	lcdCommands.c:379: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:371: writeCharacter = 0x09;
+;	lcdCommands.c:380: writeCharacter = 0x09;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x09
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:372: busyWait();
+;	lcdCommands.c:381: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:373: lcdGeneral = 0x40 | 0x1E;
+;	lcdCommands.c:382: lcdGeneral = 0x40 | 0x1E;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x5e
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:374: busyWait();
+;	lcdCommands.c:383: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:375: writeCharacter = 0x12;
+;	lcdCommands.c:384: writeCharacter = 0x12;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x12
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:376: busyWait();
+;	lcdCommands.c:385: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:377: lcdGeneral = 0x40 | 0x1F;
+;	lcdCommands.c:386: lcdGeneral = 0x40 | 0x1F;
 	mov	dptr,#_lcdGeneral
 	mov	a,#0x5f
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:378: busyWait();
+;	lcdCommands.c:387: busyWait();
 	lcall	_busyWait
-;	lcdCommands.c:379: writeCharacter = 0x0C;
+;	lcdCommands.c:388: writeCharacter = 0x0C;
 	mov	dptr,#_writeCharacter
 	mov	a,#0x0c
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:380: busyWait();
-;	lcdCommands.c:384: }
+;	lcdCommands.c:389: busyWait();
+;	lcdCommands.c:393: }
 	ljmp	_busyWait
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'printBinary'
 ;------------------------------------------------------------
-;x                         Allocated with name '_printBinary_x_65536_125'
-;temp2                     Allocated with name '_printBinary_temp2_65536_126'
+;x                         Allocated with name '_printBinary_x_65536_128'
+;temp2                     Allocated with name '_printBinary_temp2_65536_129'
 ;------------------------------------------------------------
-;	lcdCommands.c:386: void printBinary(int x)
+;	lcdCommands.c:395: void printBinary(int x)
 ;	-----------------------------------------
 ;	 function printBinary
 ;	-----------------------------------------
 _printBinary:
 	mov	r7,dph
 	mov	a,dpl
-	mov	dptr,#_printBinary_x_65536_125
+	mov	dptr,#_printBinary_x_65536_128
 	movx	@dptr,a
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:389: while(x != 0)
+;	lcdCommands.c:398: while(x != 0)
 00101$:
-	mov	dptr,#_printBinary_x_65536_125
+	mov	dptr,#_printBinary_x_65536_128
 	movx	a,@dptr
 	mov	r6,a
 	inc	dptr
@@ -2581,14 +2567,14 @@ _printBinary:
 	mov	r7,a
 	orl	a,r6
 	jz	00104$
-;	lcdCommands.c:391: temp2 = x % 2;
+;	lcdCommands.c:400: temp2 = x % 2;
 	mov	dptr,#__modsint_PARM_2
 	mov	a,#0x02
 	movx	@dptr,a
 	clr	a
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:392: putchar(temp2);
+;	lcdCommands.c:401: putchar(temp2);
 	mov	dpl,r6
 	mov	dph,r7
 	push	ar7
@@ -2597,7 +2583,7 @@ _printBinary:
 	lcall	_putchar
 	pop	ar6
 	pop	ar7
-;	lcdCommands.c:393: x = x / 2;
+;	lcdCommands.c:402: x = x / 2;
 	mov	dptr,#__divsint_PARM_2
 	mov	a,#0x02
 	movx	@dptr,a
@@ -2609,25 +2595,25 @@ _printBinary:
 	lcall	__divsint
 	mov	a,dpl
 	mov	b,dph
-	mov	dptr,#_printBinary_x_65536_125
+	mov	dptr,#_printBinary_x_65536_128
 	movx	@dptr,a
 	mov	a,b
 	inc	dptr
 	movx	@dptr,a
 	sjmp	00101$
 00104$:
-;	lcdCommands.c:395: }
+;	lcdCommands.c:404: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'atoh'
 ;------------------------------------------------------------
-;ap                        Allocated with name '_atoh_ap_65536_128'
-;p                         Allocated with name '_atoh_p_65536_129'
-;digit                     Allocated with name '_atoh_digit_65536_129'
-;lcase                     Allocated with name '_atoh_lcase_65536_129'
-;n                         Allocated with name '_atoh_n_65537_130'
+;ap                        Allocated with name '_atoh_ap_65536_131'
+;p                         Allocated with name '_atoh_p_65536_132'
+;digit                     Allocated with name '_atoh_digit_65536_132'
+;lcase                     Allocated with name '_atoh_lcase_65536_132'
+;n                         Allocated with name '_atoh_n_65537_133'
 ;------------------------------------------------------------
-;	lcdCommands.c:397: unsigned char atoh(char *ap)
+;	lcdCommands.c:406: unsigned char atoh(char *ap)
 ;	-----------------------------------------
 ;	 function atoh
 ;	-----------------------------------------
@@ -2635,7 +2621,7 @@ _atoh:
 	mov	r7,b
 	mov	r6,dph
 	mov	a,dpl
-	mov	dptr,#_atoh_ap_65536_128
+	mov	dptr,#_atoh_ap_65536_131
 	movx	@dptr,a
 	mov	a,r6
 	inc	dptr
@@ -2643,8 +2629,8 @@ _atoh:
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:402: p = ap;
-	mov	dptr,#_atoh_ap_65536_128
+;	lcdCommands.c:411: p = ap;
+	mov	dptr,#_atoh_ap_65536_131
 	movx	a,@dptr
 	mov	r5,a
 	inc	dptr
@@ -2653,11 +2639,11 @@ _atoh:
 	inc	dptr
 	movx	a,@dptr
 	mov	r7,a
-;	lcdCommands.c:403: unsigned char n = 0;
-	mov	dptr,#_atoh_n_65537_130
+;	lcdCommands.c:412: unsigned char n = 0;
+	mov	dptr,#_atoh_n_65537_133
 	clr	a
 	movx	@dptr,a
-;	lcdCommands.c:404: while(*p == ' ' || *p == '	')
+;	lcdCommands.c:413: while(*p == ' ' || *p == '	')
 00102$:
 	mov	dpl,r5
 	mov	dph,r6
@@ -2669,13 +2655,13 @@ _atoh:
 00178$:
 	cjne	r4,#0x09,00141$
 00103$:
-;	lcdCommands.c:405: p++;
+;	lcdCommands.c:414: p++;
 	inc	r5
 	cjne	r5,#0x00,00102$
 	inc	r6
 	sjmp	00102$
 00141$:
-	mov	dptr,#_atoh_p_65536_129
+	mov	dptr,#_atoh_p_65536_132
 	mov	a,r5
 	movx	@dptr,a
 	mov	a,r6
@@ -2684,7 +2670,7 @@ _atoh:
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:407: if(*p == '0' && ((*(p+1) == 'x') || (*(p+1) == 'X')))
+;	lcdCommands.c:416: if(*p == '0' && ((*(p+1) == 'x') || (*(p+1) == 'X')))
 	cjne	r4,#0x30,00118$
 	mov	a,#0x01
 	add	a,r5
@@ -2703,8 +2689,8 @@ _atoh:
 00184$:
 	cjne	r4,#0x58,00118$
 00105$:
-;	lcdCommands.c:408: p+=2;
-	mov	dptr,#_atoh_p_65536_129
+;	lcdCommands.c:417: p+=2;
+	mov	dptr,#_atoh_p_65536_132
 	mov	a,#0x02
 	add	a,r5
 	movx	@dptr,a
@@ -2715,9 +2701,9 @@ _atoh:
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-;	lcdCommands.c:410: while ((digit = (*p >= '0' && *p <= '9')) ||
+;	lcdCommands.c:419: while ((digit = (*p >= '0' && *p <= '9')) ||
 00118$:
-	mov	dptr,#_atoh_p_65536_129
+	mov	dptr,#_atoh_p_65536_132
 	movx	a,@dptr
 	mov	r5,a
 	inc	dptr
@@ -2750,8 +2736,8 @@ _atoh:
 	mov	r6,a
 	mov	a,r7
 	jnz	00119$
-;	lcdCommands.c:411: (lcase = (*p >= 'a' && *p <= 'f')) ||
-	mov	dptr,#_atoh_p_65536_129
+;	lcdCommands.c:420: (lcase = (*p >= 'a' && *p <= 'f')) ||
+	mov	dptr,#_atoh_p_65536_132
 	movx	a,@dptr
 	mov	r3,a
 	inc	dptr
@@ -2782,7 +2768,7 @@ _atoh:
 	rlc	a
 	subb	a,acc
 	mov	r7,a
-	mov	dptr,#_atoh_lcase_65536_129
+	mov	dptr,#_atoh_lcase_65536_132
 	mov	a,r4
 	movx	@dptr,a
 	mov	a,r7
@@ -2791,8 +2777,8 @@ _atoh:
 	mov	a,r4
 	orl	a,r7
 	jnz	00119$
-;	lcdCommands.c:412: (*p >= 'A' && *p <= 'F')) {
-	mov	dptr,#_atoh_p_65536_129
+;	lcdCommands.c:421: (*p >= 'A' && *p <= 'F')) {
+	mov	dptr,#_atoh_p_65536_132
 	movx	a,@dptr
 	mov	r3,a
 	inc	dptr
@@ -2817,17 +2803,17 @@ _atoh:
 	ljmp	00120$
 00197$:
 00119$:
-;	lcdCommands.c:413: n *= 16;
-	mov	dptr,#_atoh_n_65537_130
+;	lcdCommands.c:422: n *= 16;
+	mov	dptr,#_atoh_n_65537_133
 	movx	a,@dptr
 	swap	a
 	anl	a,#0xf0
 	movx	@dptr,a
-;	lcdCommands.c:414: if (digit)	n += *p++ - '0';
+;	lcdCommands.c:423: if (digit)	n += *p++ - '0';
 	mov	a,r5
 	orl	a,r6
 	jz	00113$
-	mov	dptr,#_atoh_p_65536_129
+	mov	dptr,#_atoh_p_65536_132
 	movx	a,@dptr
 	mov	r5,a
 	inc	dptr
@@ -2841,7 +2827,7 @@ _atoh:
 	mov	b,r7
 	lcall	__gptrget
 	mov	r4,a
-	mov	dptr,#_atoh_p_65536_129
+	mov	dptr,#_atoh_p_65536_132
 	mov	a,#0x01
 	add	a,r5
 	movx	@dptr,a
@@ -2855,22 +2841,22 @@ _atoh:
 	mov	a,r4
 	add	a,#0xd0
 	mov	r4,a
-	mov	dptr,#_atoh_n_65537_130
+	mov	dptr,#_atoh_n_65537_133
 	movx	a,@dptr
 	mov	r7,a
 	add	a,r4
 	movx	@dptr,a
 	ljmp	00118$
 00113$:
-;	lcdCommands.c:415: else if (lcase)	n += 10 + (*p++ - 'a');
-	mov	dptr,#_atoh_lcase_65536_129
+;	lcdCommands.c:424: else if (lcase)	n += 10 + (*p++ - 'a');
+	mov	dptr,#_atoh_lcase_65536_132
 	movx	a,@dptr
 	mov	b,a
 	inc	dptr
 	movx	a,@dptr
 	orl	a,b
 	jz	00110$
-	mov	dptr,#_atoh_p_65536_129
+	mov	dptr,#_atoh_p_65536_132
 	movx	a,@dptr
 	mov	r5,a
 	inc	dptr
@@ -2884,7 +2870,7 @@ _atoh:
 	mov	b,r7
 	lcall	__gptrget
 	mov	r4,a
-	mov	dptr,#_atoh_p_65536_129
+	mov	dptr,#_atoh_p_65536_132
 	mov	a,#0x01
 	add	a,r5
 	movx	@dptr,a
@@ -2898,15 +2884,15 @@ _atoh:
 	mov	a,#0xa9
 	add	a,r4
 	mov	r4,a
-	mov	dptr,#_atoh_n_65537_130
+	mov	dptr,#_atoh_n_65537_133
 	movx	a,@dptr
 	mov	r7,a
 	add	a,r4
 	movx	@dptr,a
 	ljmp	00118$
 00110$:
-;	lcdCommands.c:416: else		n += 10 + (*p++ - 'A');
-	mov	dptr,#_atoh_p_65536_129
+;	lcdCommands.c:425: else		n += 10 + (*p++ - 'A');
+	mov	dptr,#_atoh_p_65536_132
 	movx	a,@dptr
 	mov	r5,a
 	inc	dptr
@@ -2920,7 +2906,7 @@ _atoh:
 	mov	b,r7
 	lcall	__gptrget
 	mov	r4,a
-	mov	dptr,#_atoh_p_65536_129
+	mov	dptr,#_atoh_p_65536_132
 	mov	a,#0x01
 	add	a,r5
 	movx	@dptr,a
@@ -2934,39 +2920,39 @@ _atoh:
 	mov	a,#0xc9
 	add	a,r4
 	mov	r4,a
-	mov	dptr,#_atoh_n_65537_130
+	mov	dptr,#_atoh_n_65537_133
 	movx	a,@dptr
 	mov	r7,a
 	add	a,r4
 	movx	@dptr,a
 	ljmp	00118$
 00120$:
-;	lcdCommands.c:418: return(n);
-	mov	dptr,#_atoh_n_65537_130
+;	lcdCommands.c:427: return(n);
+	mov	dptr,#_atoh_n_65537_133
 	movx	a,@dptr
-;	lcdCommands.c:419: }
+;	lcdCommands.c:428: }
 	mov	dpl,a
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'printMenu'
 ;------------------------------------------------------------
-;i                         Allocated with name '_printMenu_i_65536_132'
+;i                         Allocated with name '_printMenu_i_65536_135'
 ;------------------------------------------------------------
-;	lcdCommands.c:421: void printMenu()
+;	lcdCommands.c:430: void printMenu()
 ;	-----------------------------------------
 ;	 function printMenu
 ;	-----------------------------------------
 _printMenu:
-;	lcdCommands.c:424: printf("%s",uiLines);
+;	lcdCommands.c:433: printf("%s",uiLines);
 	mov	a,#_uiLines
 	push	acc
 	mov	a,#(_uiLines >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
-	mov	a,#___str_10
+	mov	a,#___str_13
 	push	acc
-	mov	a,#(___str_10 >> 8)
+	mov	a,#(___str_13 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -2974,7 +2960,7 @@ _printMenu:
 	mov	a,sp
 	add	a,#0xfa
 	mov	sp,a
-;	lcdCommands.c:425: printf("\n\r");
+;	lcdCommands.c:434: printf("\n\r");
 	mov	a,#___str_6
 	push	acc
 	mov	a,#(___str_6 >> 8)
@@ -2985,11 +2971,11 @@ _printMenu:
 	dec	sp
 	dec	sp
 	dec	sp
-;	lcdCommands.c:426: for ( i = 0; i < 10; i++)
+;	lcdCommands.c:435: for ( i = 0; i < 10; i++)
 	mov	r6,#0x00
 	mov	r7,#0x00
 00102$:
-;	lcdCommands.c:428: printf("%s",messages[i]);
+;	lcdCommands.c:437: printf("%s",messages[i]);
 	mov	dptr,#__mulint_PARM_2
 	mov	a,r6
 	movx	@dptr,a
@@ -3012,9 +2998,9 @@ _printMenu:
 	push	ar4
 	push	ar5
 	push	ar3
-	mov	a,#___str_10
+	mov	a,#___str_13
 	push	acc
-	mov	a,#(___str_10 >> 8)
+	mov	a,#(___str_13 >> 8)
 	push	acc
 	mov	a,r3
 	push	acc
@@ -3022,7 +3008,7 @@ _printMenu:
 	mov	a,sp
 	add	a,#0xfa
 	mov	sp,a
-;	lcdCommands.c:429: printf_tiny("\n\r");
+;	lcdCommands.c:438: printf_tiny("\n\r");
 	mov	a,#___str_6
 	push	acc
 	mov	a,#(___str_6 >> 8)
@@ -3032,7 +3018,7 @@ _printMenu:
 	dec	sp
 	pop	ar6
 	pop	ar7
-;	lcdCommands.c:426: for ( i = 0; i < 10; i++)
+;	lcdCommands.c:435: for ( i = 0; i < 10; i++)
 	inc	r6
 	cjne	r6,#0x00,00115$
 	inc	r7
@@ -3044,16 +3030,16 @@ _printMenu:
 	xrl	a,#0x80
 	subb	a,#0x80
 	jc	00102$
-;	lcdCommands.c:431: printf("%s",uiLines);
+;	lcdCommands.c:440: printf("%s",uiLines);
 	mov	a,#_uiLines
 	push	acc
 	mov	a,#(_uiLines >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
-	mov	a,#___str_10
+	mov	a,#___str_13
 	push	acc
-	mov	a,#(___str_10 >> 8)
+	mov	a,#(___str_13 >> 8)
 	push	acc
 	mov	a,#0x80
 	push	acc
@@ -3061,7 +3047,7 @@ _printMenu:
 	mov	a,sp
 	add	a,#0xfa
 	mov	sp,a
-;	lcdCommands.c:432: printf("\n\r");
+;	lcdCommands.c:441: printf("\n\r");
 	mov	a,#___str_6
 	push	acc
 	mov	a,#(___str_6 >> 8)
@@ -3072,7 +3058,7 @@ _printMenu:
 	dec	sp
 	dec	sp
 	dec	sp
-;	lcdCommands.c:434: }
+;	lcdCommands.c:443: }
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
@@ -3210,7 +3196,7 @@ _messages:
 	.db 0x00
 	.db 0x00
 	.db 0x00
-	.ascii " Enter s to clear screen"
+	.ascii " Enter c to clear screen"
 	.db 0x00
 	.db 0x00
 	.db 0x00
@@ -3413,6 +3399,25 @@ ___str_7:
 ___str_8:
 	.db 0x0a
 	.db 0x0d
+	.ascii "Character %d"
+	.db 0x0a
+	.db 0x0d
+	.db 0x00
+	.area CSEG    (CODE)
+	.area CONST   (CODE)
+___str_9:
+	.ascii "Row %2x: "
+	.db 0x00
+	.area CSEG    (CODE)
+	.area CONST   (CODE)
+___str_10:
+	.ascii "WELCOME 2 PACMANPRESS G TO START"
+	.db 0x00
+	.area CSEG    (CODE)
+	.area CONST   (CODE)
+___str_11:
+	.db 0x0a
+	.db 0x0d
 	.ascii "Enter w to go up, s to go down, a to go left and d to go rig"
 	.ascii "ht and q to quit"
 	.db 0x0a
@@ -3420,12 +3425,12 @@ ___str_8:
 	.db 0x00
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
-___str_9:
+___str_12:
 	.ascii "GAME OVER! PRESS p to restart"
 	.db 0x00
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
-___str_10:
+___str_13:
 	.ascii "%s"
 	.db 0x00
 	.area CSEG    (CODE)

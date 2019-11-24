@@ -634,19 +634,24 @@ _main:
 	mov	dptr,#_ch
 	mov	a,r6
 	movx	@dptr,a
-;	main.c:36: if(check == 1)
+;	main.c:36: putchar(ch);
+	mov	r7,#0x00
+	mov	dpl,r6
+	mov	dph,r7
+	lcall	_putchar
+;	main.c:37: if(check == 1)
 	mov	dptr,#_check
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x01,00102$
-;	main.c:38: check = 0;
+;	main.c:39: check = 0;
 	mov	dptr,#_check
 	clr	a
 	movx	@dptr,a
-;	main.c:39: printTimeStamp();
+;	main.c:40: printTimeStamp();
 	lcall	_printTimeStamp
 00102$:
-;	main.c:42: if(ch == 'w')
+;	main.c:43: if(ch == 'w')
 	mov	dptr,#_ch
 	movx	a,@dptr
 	mov	r7,a
@@ -655,7 +660,7 @@ _main:
 00190$:
 	ljmp	00108$
 00191$:
-;	main.c:46: memset(x,'\0',10 * sizeof(char));
+;	main.c:47: memset(x,'\0',10 * sizeof(char));
 	mov	dptr,#_memset_PARM_2
 	clr	a
 	movx	@dptr,a
@@ -668,7 +673,7 @@ _main:
 	mov	dptr,#_main_x_196609_75
 	mov	b,#0x00
 	lcall	_memset
-;	main.c:47: printf_tiny("\n\rEnter the row number from 0 to 2\n\r");
+;	main.c:48: printf_tiny("\n\rEnter the row number from 0 to 2\n\r");
 	mov	a,#___str_0
 	push	acc
 	mov	a,#(___str_0 >> 8)
@@ -676,10 +681,10 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:48: uint8_t row = getchar();
+;	main.c:49: uint8_t row = getchar();
 	lcall	_getchar
 	mov	r6,dpl
-;	main.c:49: putchar(row);
+;	main.c:50: putchar(row);
 	mov	ar5,r6
 	mov	r7,#0x00
 	mov	dpl,r5
@@ -687,14 +692,14 @@ _main:
 	push	ar6
 	lcall	_putchar
 	pop	ar6
-;	main.c:50: row = row - '0';
+;	main.c:51: row = row - '0';
 	mov	a,r6
 	add	a,#0xd0
-;	main.c:51: if(row > 2)
+;	main.c:52: if(row > 2)
 	mov	r7,a
 	add	a,#0xff - 0x02
 	jnc	00104$
-;	main.c:53: printf_tiny("\n\rEntered Row is incorrect\n\r");
+;	main.c:54: printf_tiny("\n\rEntered Row is incorrect\n\r");
 	mov	a,#___str_1
 	push	acc
 	mov	a,#(___str_1 >> 8)
@@ -702,12 +707,12 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:54: printMenu();
+;	main.c:55: printMenu();
 	lcall	_printMenu
-;	main.c:55: continue;
-	sjmp	00128$
+;	main.c:56: continue;
+	ljmp	00128$
 00104$:
-;	main.c:57: printf_tiny("\n\rEnter the column number from 0 to 15\n\r");
+;	main.c:58: printf_tiny("\n\rEnter the column number from 0 to 15\n\r");
 	push	ar7
 	mov	a,#___str_2
 	push	acc
@@ -716,21 +721,21 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:58: gets(x);
+;	main.c:59: gets(x);
 	mov	dptr,#_main_x_196609_75
 	mov	b,#0x00
 	lcall	_gets
-;	main.c:59: uint8_t column = atoi(x);
+;	main.c:60: uint8_t column = atoi(x);
 	mov	dptr,#_main_x_196609_75
 	mov	b,#0x00
 	lcall	_atoi
 	mov	r5,dpl
 	pop	ar7
-;	main.c:61: if(column > 15)
+;	main.c:62: if(column > 15)
 	mov	a,r5
 	add	a,#0xff - 0x0f
 	jnc	00106$
-;	main.c:63: printf_tiny("\n\rEntered Column is incorrect\n\r");
+;	main.c:64: printf_tiny("\n\rEntered Column is incorrect\n\r");
 	mov	a,#___str_3
 	push	acc
 	mov	a,#(___str_3 >> 8)
@@ -738,12 +743,12 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:64: printMenu();
+;	main.c:65: printMenu();
 	lcall	_printMenu
-;	main.c:65: continue;
+;	main.c:66: continue;
 	ljmp	00128$
 00106$:
-;	main.c:67: uint8_t ad = lookUpTable1[row][column];
+;	main.c:68: uint8_t ad = lookUpTable1[row][column];
 	mov	a,r7
 	mov	b,#0x10
 	mul	ab
@@ -760,7 +765,7 @@ _main:
 	mov	dph,a
 	clr	a
 	movc	a,@a+dptr
-;	main.c:68: printf("%d %d %d", row, column, ad);
+;	main.c:69: printf("%d %d %d", row, column, ad);
 	mov	r6,a
 	mov	r3,a
 	mov	r4,#0x00
@@ -785,13 +790,13 @@ _main:
 	add	a,#0xf7
 	mov	sp,a
 	pop	ar6
-;	main.c:69: goToAddr(ad);
+;	main.c:70: goToAddr(ad);
 	mov	dpl,r6
 	push	ar6
 	lcall	_goToAddr
-;	main.c:70: busyWait();
+;	main.c:71: busyWait();
 	lcall	_busyWait
-;	main.c:71: printf_tiny("\n\rEnter the character\n\r");
+;	main.c:72: printf_tiny("\n\rEnter the character\n\r");
 	mov	a,#___str_5
 	push	acc
 	mov	a,#(___str_5 >> 8)
@@ -799,10 +804,10 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:72: uint8_t inputWrite = getchar();
+;	main.c:73: uint8_t inputWrite = getchar();
 	lcall	_getchar
 	mov	r5,dpl
-;	main.c:73: putchar(inputWrite);
+;	main.c:74: putchar(inputWrite);
 	mov	ar4,r5
 	mov	r7,#0x00
 	mov	dpl,r4
@@ -811,88 +816,88 @@ _main:
 	lcall	_putchar
 	pop	ar5
 	pop	ar6
-;	main.c:74: goToAddr(ad);
+;	main.c:75: goToAddr(ad);
 	mov	dpl,r6
 	push	ar5
 	lcall	_goToAddr
 	pop	ar5
-;	main.c:75: lcdPutCh(inputWrite);
+;	main.c:76: lcdPutCh(inputWrite);
 	mov	dpl,r5
 	lcall	_lcdPutCh
 00108$:
-;	main.c:78: if (ch == 'm')
+;	main.c:79: if (ch == 'm')
 	mov	dptr,#_ch
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x6d,00110$
-;	main.c:80: printMenu();
+;	main.c:81: printMenu();
 	lcall	_printMenu
 00110$:
-;	main.c:83: if( ch == 'p')
+;	main.c:84: if( ch == 'p')
 	mov	dptr,#_ch
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x70,00112$
-;	main.c:84: gamePacman();
+;	main.c:85: gamePacman();
 	lcall	_gamePacman
 00112$:
-;	main.c:86: if(ch == 'x')
+;	main.c:87: if(ch == 'x')
 	mov	dptr,#_ch
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x78,00114$
-;	main.c:88: check = 0;
+;	main.c:89: check = 0;
 	mov	dptr,#_check
 	clr	a
 	movx	@dptr,a
-;	main.c:89: partSec = 0;
+;	main.c:90: partSec = 0;
 	mov	dptr,#_partSec
 	movx	@dptr,a
-;	main.c:90: sec = 0;
+;	main.c:91: sec = 0;
 	mov	dptr,#_sec
 	movx	@dptr,a
-;	main.c:91: min = 0;
+;	main.c:92: min = 0;
 	mov	dptr,#_min
 	movx	@dptr,a
-;	main.c:92: hour = 0;
+;	main.c:93: hour = 0;
 	mov	dptr,#_hour
 	movx	@dptr,a
-;	main.c:93: x2 = 0;
+;	main.c:94: x2 = 0;
 	mov	dptr,#_x2
 	movx	@dptr,a
 00114$:
-;	main.c:96: if(ch == 'y')
+;	main.c:97: if(ch == 'y')
 	mov	dptr,#_ch
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x79,00116$
-;	main.c:98: TR0 = 0;
+;	main.c:99: TR0 = 0;
 ;	assignBit
 	clr	_TR0
 00116$:
-;	main.c:101: if(ch == 'z')
+;	main.c:102: if(ch == 'z')
 	mov	dptr,#_ch
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x7a,00118$
-;	main.c:103: TR0 = 1;
+;	main.c:104: TR0 = 1;
 ;	assignBit
 	setb	_TR0
 00118$:
-;	main.c:106: if(ch == 'c')
+;	main.c:107: if(ch == 'c')
 	mov	dptr,#_ch
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x63,00120$
-;	main.c:108: lcdClear();
+;	main.c:109: lcdClear();
 	lcall	_lcdClear
 00120$:
-;	main.c:111: if(ch == 's')
+;	main.c:112: if(ch == 's')
 	mov	dptr,#_ch
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x73,00122$
-;	main.c:114: printf_tiny("\n\rEnter the string\n\r");
+;	main.c:115: printf_tiny("\n\rEnter the string\n\r");
 	mov	a,#___str_6
 	push	acc
 	mov	a,#(___str_6 >> 8)
@@ -900,24 +905,24 @@ _main:
 	lcall	_printf_tiny
 	dec	sp
 	dec	sp
-;	main.c:115: gets(stringRead);
+;	main.c:116: gets(stringRead);
 	mov	dptr,#_main_stringRead_196609_87
 	mov	b,#0x00
 	lcall	_gets
-;	main.c:117: putsLCD(stringRead);
+;	main.c:118: putsLCD(stringRead);
 	mov	dptr,#_main_stringRead_196609_87
 	mov	b,#0x00
 	lcall	_putsLCD
 00122$:
-;	main.c:120: if(ch == 'd')
+;	main.c:121: if(ch == 'd')
 	mov	dptr,#_ch
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x64,00124$
-;	main.c:122: ramDump();
+;	main.c:123: ramDump();
 	lcall	_ramDump
 00124$:
-;	main.c:125: if(ch == 'g')
+;	main.c:126: if(ch == 'g')
 	mov	dptr,#_ch
 	movx	a,@dptr
 	mov	r7,a
@@ -926,14 +931,14 @@ _main:
 00210$:
 	ljmp	00128$
 00211$:
-;	main.c:127: customCharacter();
+;	main.c:128: customCharacter();
 	lcall	_customCharacter
-;	main.c:131: }
+;	main.c:132: }
 	ljmp	00128$
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'timer0_isr'
 ;------------------------------------------------------------
-;	main.c:133: void timer0_isr() __interrupt (1)
+;	main.c:134: void timer0_isr() __interrupt (1)
 ;	-----------------------------------------
 ;	 function timer0_isr
 ;	-----------------------------------------
@@ -944,89 +949,89 @@ _timer0_isr:
 	push	ar7
 	push	psw
 	mov	psw,#0x00
-;	main.c:135: TH0 = 0x4B;
+;	main.c:136: TH0 = 0x4B;
 	mov	_TH0,#0x4b
-;	main.c:136: TL0 = 0xFC;
+;	main.c:137: TL0 = 0xFC;
 	mov	_TL0,#0xfc
-;	main.c:137: x2++;
+;	main.c:138: x2++;
 	mov	dptr,#_x2
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-;	main.c:138: if(x2 == 2)
+;	main.c:139: if(x2 == 2)
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x02,00111$
-;	main.c:140: if(partSec > 9)
+;	main.c:141: if(partSec > 9)
 	mov	dptr,#_partSec
 	movx	a,@dptr
 	mov  r7,a
 	add	a,#0xff - 0x09
 	jnc	00108$
-;	main.c:142: sec++;
+;	main.c:143: sec++;
 	mov	dptr,#_sec
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-;	main.c:143: if( sec > 59)
+;	main.c:144: if( sec > 59)
 	movx	a,@dptr
 	mov  r7,a
 	add	a,#0xff - 0x3b
 	jnc	00106$
-;	main.c:145: min++;
+;	main.c:146: min++;
 	mov	dptr,#_min
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-;	main.c:146: if( min == 59)
+;	main.c:147: if( min == 59)
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x3b,00104$
-;	main.c:148: hour++;
+;	main.c:149: hour++;
 	mov	dptr,#_hour
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-;	main.c:149: if(hour > 23)
+;	main.c:150: if(hour > 23)
 	movx	a,@dptr
 	mov  r7,a
 	add	a,#0xff - 0x17
 	jnc	00102$
-;	main.c:151: hour = 0;
+;	main.c:152: hour = 0;
 	mov	dptr,#_hour
 	clr	a
 	movx	@dptr,a
 00102$:
-;	main.c:153: min = 0;
+;	main.c:154: min = 0;
 	mov	dptr,#_min
 	clr	a
 	movx	@dptr,a
 00104$:
-;	main.c:155: sec = 0;
+;	main.c:156: sec = 0;
 	mov	dptr,#_sec
 	clr	a
 	movx	@dptr,a
 00106$:
-;	main.c:157: partSec = 0;
+;	main.c:158: partSec = 0;
 	mov	dptr,#_partSec
 	clr	a
 	movx	@dptr,a
 00108$:
-;	main.c:159: partSec++;
+;	main.c:160: partSec++;
 	mov	dptr,#_partSec
 	movx	a,@dptr
 	add	a,#0x01
 	movx	@dptr,a
-;	main.c:160: x2 = 0;
+;	main.c:161: x2 = 0;
 	mov	dptr,#_x2
 	clr	a
 	movx	@dptr,a
-;	main.c:161: check = 1;
+;	main.c:162: check = 1;
 	mov	dptr,#_check
 	inc	a
 	movx	@dptr,a
 00111$:
-;	main.c:163: }
+;	main.c:164: }
 	pop	psw
 	pop	ar7
 	pop	dph
@@ -1039,7 +1044,7 @@ _timer0_isr:
 ;------------------------------------------------------------
 ;c                         Allocated with name '_putchar_c_65536_96'
 ;------------------------------------------------------------
-;	main.c:166: int putchar (int c)
+;	main.c:167: int putchar (int c)
 ;	-----------------------------------------
 ;	 function putchar
 ;	-----------------------------------------
@@ -1051,93 +1056,93 @@ _putchar:
 	mov	a,r7
 	inc	dptr
 	movx	@dptr,a
-;	main.c:168: while ((SCON & 0x02) == 0)    // wait for TX ready, spin on TI
+;	main.c:169: while ((SCON & 0x02) == 0)    // wait for TX ready, spin on TI
 00103$:
 	mov	a,_SCON
 	jb	acc.1,00105$
-;	main.c:170: if(check == 1)
+;	main.c:171: if(check == 1)
 	mov	dptr,#_check
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x01,00103$
-;	main.c:172: check = 0;
+;	main.c:173: check = 0;
 	mov	dptr,#_check
 	clr	a
 	movx	@dptr,a
-;	main.c:173: printTimeStamp();
+;	main.c:174: printTimeStamp();
 	lcall	_printTimeStamp
 	sjmp	00103$
 00105$:
-;	main.c:176: SBUF = c;  	// load serial port with transmit value
+;	main.c:177: SBUF = c;  	// load serial port with transmit value
 	mov	dptr,#_putchar_c_65536_96
 	movx	a,@dptr
 	mov	r6,a
 	inc	dptr
 	movx	a,@dptr
 	mov	_SBUF,r6
-;	main.c:177: TI = 0;  	// clear TI flag
+;	main.c:178: TI = 0;  	// clear TI flag
 ;	assignBit
 	clr	_TI
-;	main.c:178: return 0;
+;	main.c:179: return 0;
 	mov	dptr,#0x0000
-;	main.c:179: }
+;	main.c:180: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'getchar'
 ;------------------------------------------------------------
-;	main.c:181: int getchar ()
+;	main.c:182: int getchar ()
 ;	-----------------------------------------
 ;	 function getchar
 ;	-----------------------------------------
 _getchar:
-;	main.c:183: while ((SCON & 0x01) == 0)  // wait for character to be received, spin on RI
+;	main.c:184: while ((SCON & 0x01) == 0)  // wait for character to be received, spin on RI
 00103$:
 	mov	a,_SCON
 	jb	acc.0,00105$
-;	main.c:185: if(check == 1)
+;	main.c:186: if(check == 1)
 	mov	dptr,#_check
 	movx	a,@dptr
 	mov	r7,a
 	cjne	r7,#0x01,00103$
-;	main.c:187: check = 0;
+;	main.c:188: check = 0;
 	mov	dptr,#_check
 	clr	a
 	movx	@dptr,a
-;	main.c:188: printTimeStamp();
+;	main.c:189: printTimeStamp();
 	lcall	_printTimeStamp
 	sjmp	00103$
 00105$:
-;	main.c:191: RI = 0;			// clear RI flag
+;	main.c:192: RI = 0;			// clear RI flag
 ;	assignBit
 	clr	_RI
-;	main.c:192: return SBUF;  	// return character from SBUF
+;	main.c:193: return SBUF;  	// return character from SBUF
 	mov	r6,_SBUF
 	mov	r7,#0x00
 	mov	dpl,r6
 	mov	dph,r7
-;	main.c:193: }
+;	main.c:194: }
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'printTimeStamp'
 ;------------------------------------------------------------
-;	main.c:195: void printTimeStamp()
+;	main.c:196: void printTimeStamp()
 ;	-----------------------------------------
 ;	 function printTimeStamp
 ;	-----------------------------------------
 _printTimeStamp:
-;	main.c:197: goToAddr(0x57);
+;	main.c:198: goToAddr(0x57);
 	mov	dpl,#0x57
 	lcall	_goToAddr
-;	main.c:198: lcdPutCh(hour + '0');
+;	main.c:199: lcdPutCh(hour + '0');
 	mov	dptr,#_hour
 	movx	a,@dptr
 	add	a,#0x30
 	mov	dpl,a
 	lcall	_lcdPutCh
-;	main.c:199: lcdPutCh(':');
+;	main.c:200: lcdPutCh(':');
 	mov	dpl,#0x3a
 	lcall	_lcdPutCh
-;	main.c:200: lcdPutCh(min / 10 + '0');
+;	main.c:201: lcdPutCh(min / 10 + '0');
 	mov	dptr,#_min
 	movx	a,@dptr
 	mov	r7,a
@@ -1156,7 +1161,7 @@ _printTimeStamp:
 	add	a,r6
 	mov	dpl,a
 	lcall	_lcdPutCh
-;	main.c:201: lcdPutCh(min % 10 + '0');
+;	main.c:202: lcdPutCh(min % 10 + '0');
 	mov	dptr,#_min
 	movx	a,@dptr
 	mov	r7,a
@@ -1175,10 +1180,10 @@ _printTimeStamp:
 	add	a,r6
 	mov	dpl,a
 	lcall	_lcdPutCh
-;	main.c:202: lcdPutCh(':');
+;	main.c:203: lcdPutCh(':');
 	mov	dpl,#0x3a
 	lcall	_lcdPutCh
-;	main.c:203: lcdPutCh(sec / 10 + '0');
+;	main.c:204: lcdPutCh(sec / 10 + '0');
 	mov	dptr,#_sec
 	movx	a,@dptr
 	mov	r7,a
@@ -1197,7 +1202,7 @@ _printTimeStamp:
 	add	a,r6
 	mov	dpl,a
 	lcall	_lcdPutCh
-;	main.c:204: lcdPutCh(sec % 10 + '0');
+;	main.c:205: lcdPutCh(sec % 10 + '0');
 	mov	dptr,#_sec
 	movx	a,@dptr
 	mov	r7,a
@@ -1216,15 +1221,15 @@ _printTimeStamp:
 	add	a,r6
 	mov	dpl,a
 	lcall	_lcdPutCh
-;	main.c:205: lcdPutCh('.');
+;	main.c:206: lcdPutCh('.');
 	mov	dpl,#0x2e
 	lcall	_lcdPutCh
-;	main.c:206: lcdPutCh(partSec + '0');
+;	main.c:207: lcdPutCh(partSec + '0');
 	mov	dptr,#_partSec
 	movx	a,@dptr
 	add	a,#0x30
 	mov	dpl,a
-;	main.c:207: }
+;	main.c:208: }
 	ljmp	_lcdPutCh
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

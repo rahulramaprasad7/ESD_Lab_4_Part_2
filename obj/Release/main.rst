@@ -487,28 +487,28 @@
                            00F200   487 _busyPoll	=	0xf200
                            00F100   488 _writeCharacter	=	0xf100
                            00F300   489 _readCharacter	=	0xf300
-      000027                        490 _partSec::
-      000027                        491 	.ds 1
-      000028                        492 _sec::
-      000028                        493 	.ds 1
-      000029                        494 _min::
-      000029                        495 	.ds 1
-      00002A                        496 _hour::
-      00002A                        497 	.ds 1
-      00002B                        498 _x2::
-      00002B                        499 	.ds 1
-      00002C                        500 _check::
-      00002C                        501 	.ds 1
-      00002D                        502 _ch::
-      00002D                        503 	.ds 1
-      00002E                        504 _main_input_65537_72:
-      00002E                        505 	.ds 60
-      00006A                        506 _main_x_196609_75:
-      00006A                        507 	.ds 10
-      000074                        508 _main_stringRead_196609_87:
-      000074                        509 	.ds 48
-      0000A4                        510 _putchar_c_65536_96:
-      0000A4                        511 	.ds 2
+      000026                        490 _partSec::
+      000026                        491 	.ds 1
+      000027                        492 _sec::
+      000027                        493 	.ds 1
+      000028                        494 _min::
+      000028                        495 	.ds 1
+      000029                        496 _hour::
+      000029                        497 	.ds 1
+      00002A                        498 _x2::
+      00002A                        499 	.ds 1
+      00002B                        500 _check::
+      00002B                        501 	.ds 1
+      00002C                        502 _ch::
+      00002C                        503 	.ds 1
+      00002D                        504 _main_input_65537_72:
+      00002D                        505 	.ds 60
+      000069                        506 _main_x_196609_75:
+      000069                        507 	.ds 10
+      000073                        508 _main_stringRead_196609_87:
+      000073                        509 	.ds 48
+      0000A3                        510 _putchar_c_65536_96:
+      0000A3                        511 	.ds 2
                                     512 ;--------------------------------------------------------
                                     513 ; absolute external ram data
                                     514 ;--------------------------------------------------------
@@ -535,7 +535,7 @@
       002000 02 20 11         [24]  535 	ljmp	__sdcc_gsinit_startup
       002003 32               [24]  536 	reti
       002004                        537 	.ds	7
-      00200B 02 2F D9         [24]  538 	ljmp	_timer0_isr
+      00200B 02 2F C7         [24]  538 	ljmp	_timer0_isr
                                     539 ;--------------------------------------------------------
                                     540 ; global & static initialisations
                                     541 ;--------------------------------------------------------
@@ -557,7 +557,7 @@
                                     557 	.area HOME    (CODE)
                                     558 	.area HOME    (CODE)
       00200E                        559 __sdcc_program_startup:
-      00200E 02 2D C0         [24]  560 	ljmp	_main
+      00200E 02 2D A4         [24]  560 	ljmp	_main
                                     561 ;	return from main will return to caller
                                     562 ;--------------------------------------------------------
                                     563 ; code
@@ -578,7 +578,7 @@
                                     578 ;	-----------------------------------------
                                     579 ;	 function main
                                     580 ;	-----------------------------------------
-      002DC0                        581 _main:
+      002DA4                        581 _main:
                            000007   582 	ar7 = 0x07
                            000006   583 	ar6 = 0x06
                            000005   584 	ar5 = 0x05
@@ -588,789 +588,794 @@
                            000001   588 	ar1 = 0x01
                            000000   589 	ar0 = 0x00
                                     590 ;	main.c:21: check = 0;
-      002DC0 90 00 2C         [24]  591 	mov	dptr,#_check
-      002DC3 E4               [12]  592 	clr	a
-      002DC4 F0               [24]  593 	movx	@dptr,a
+      002DA4 90 00 2B         [24]  591 	mov	dptr,#_check
+      002DA7 E4               [12]  592 	clr	a
+      002DA8 F0               [24]  593 	movx	@dptr,a
                                     594 ;	main.c:22: partSec = 0;
-      002DC5 90 00 27         [24]  595 	mov	dptr,#_partSec
-      002DC8 F0               [24]  596 	movx	@dptr,a
+      002DA9 90 00 26         [24]  595 	mov	dptr,#_partSec
+      002DAC F0               [24]  596 	movx	@dptr,a
                                     597 ;	main.c:23: sec = 0;
-      002DC9 90 00 28         [24]  598 	mov	dptr,#_sec
-      002DCC F0               [24]  599 	movx	@dptr,a
+      002DAD 90 00 27         [24]  598 	mov	dptr,#_sec
+      002DB0 F0               [24]  599 	movx	@dptr,a
                                     600 ;	main.c:24: min = 0;
-      002DCD 90 00 29         [24]  601 	mov	dptr,#_min
-      002DD0 F0               [24]  602 	movx	@dptr,a
+      002DB1 90 00 28         [24]  601 	mov	dptr,#_min
+      002DB4 F0               [24]  602 	movx	@dptr,a
                                     603 ;	main.c:25: hour = 0;
-      002DD1 90 00 2A         [24]  604 	mov	dptr,#_hour
-      002DD4 F0               [24]  605 	movx	@dptr,a
+      002DB5 90 00 29         [24]  604 	mov	dptr,#_hour
+      002DB8 F0               [24]  605 	movx	@dptr,a
                                     606 ;	main.c:26: x2 = 0;
-      002DD5 90 00 2B         [24]  607 	mov	dptr,#_x2
-      002DD8 F0               [24]  608 	movx	@dptr,a
+      002DB9 90 00 2A         [24]  607 	mov	dptr,#_x2
+      002DBC F0               [24]  608 	movx	@dptr,a
                                     609 ;	main.c:28: memset(input, '\0',60 * sizeof(char));
-      002DD9 90 00 A6         [24]  610 	mov	dptr,#_memset_PARM_2
-      002DDC F0               [24]  611 	movx	@dptr,a
-      002DDD 90 00 A7         [24]  612 	mov	dptr,#_memset_PARM_3
-      002DE0 74 3C            [12]  613 	mov	a,#0x3c
-      002DE2 F0               [24]  614 	movx	@dptr,a
-      002DE3 E4               [12]  615 	clr	a
-      002DE4 A3               [24]  616 	inc	dptr
-      002DE5 F0               [24]  617 	movx	@dptr,a
-      002DE6 90 00 2E         [24]  618 	mov	dptr,#_main_input_65537_72
-      002DE9 75 F0 00         [24]  619 	mov	b,#0x00
-      002DEC 12 31 5C         [24]  620 	lcall	_memset
+      002DBD 90 00 A5         [24]  610 	mov	dptr,#_memset_PARM_2
+      002DC0 F0               [24]  611 	movx	@dptr,a
+      002DC1 90 00 A6         [24]  612 	mov	dptr,#_memset_PARM_3
+      002DC4 74 3C            [12]  613 	mov	a,#0x3c
+      002DC6 F0               [24]  614 	movx	@dptr,a
+      002DC7 E4               [12]  615 	clr	a
+      002DC8 A3               [24]  616 	inc	dptr
+      002DC9 F0               [24]  617 	movx	@dptr,a
+      002DCA 90 00 2D         [24]  618 	mov	dptr,#_main_input_65537_72
+      002DCD 75 F0 00         [24]  619 	mov	b,#0x00
+      002DD0 12 31 4A         [24]  620 	lcall	_memset
                                     621 ;	main.c:29: lcdInit();
-      002DEF 12 20 97         [24]  622 	lcall	_lcdInit
+      002DD3 12 20 97         [24]  622 	lcall	_lcdInit
                                     623 ;	main.c:30: lcdClear();
-      002DF2 12 21 0D         [24]  624 	lcall	_lcdClear
+      002DD6 12 21 0D         [24]  624 	lcall	_lcdClear
                                     625 ;	main.c:31: printMenu();
-      002DF5 12 2C F2         [24]  626 	lcall	_printMenu
+      002DD9 12 2C D6         [24]  626 	lcall	_printMenu
                                     627 ;	main.c:32: timerInit();
-      002DF8 12 20 7B         [24]  628 	lcall	_timerInit
+      002DDC 12 20 7B         [24]  628 	lcall	_timerInit
                                     629 ;	main.c:33: while(1)
-      002DFB                        630 00128$:
+      002DDF                        630 00128$:
                                     631 ;	main.c:35: ch = getchar();
-      002DFB 12 30 88         [24]  632 	lcall	_getchar
-      002DFE AE 82            [24]  633 	mov	r6,dpl
-      002E00 90 00 2D         [24]  634 	mov	dptr,#_ch
-      002E03 EE               [12]  635 	mov	a,r6
-      002E04 F0               [24]  636 	movx	@dptr,a
-                                    637 ;	main.c:36: if(check == 1)
-      002E05 90 00 2C         [24]  638 	mov	dptr,#_check
-      002E08 E0               [24]  639 	movx	a,@dptr
-      002E09 FF               [12]  640 	mov	r7,a
-      002E0A BF 01 08         [24]  641 	cjne	r7,#0x01,00102$
-                                    642 ;	main.c:38: check = 0;
-      002E0D 90 00 2C         [24]  643 	mov	dptr,#_check
-      002E10 E4               [12]  644 	clr	a
-      002E11 F0               [24]  645 	movx	@dptr,a
-                                    646 ;	main.c:39: printTimeStamp();
-      002E12 12 30 AA         [24]  647 	lcall	_printTimeStamp
-      002E15                        648 00102$:
-                                    649 ;	main.c:42: if(ch == 'w')
-      002E15 90 00 2D         [24]  650 	mov	dptr,#_ch
-      002E18 E0               [24]  651 	movx	a,@dptr
-      002E19 FF               [12]  652 	mov	r7,a
-      002E1A BF 77 02         [24]  653 	cjne	r7,#0x77,00190$
-      002E1D 80 03            [24]  654 	sjmp	00191$
-      002E1F                        655 00190$:
-      002E1F 02 2F 3C         [24]  656 	ljmp	00108$
-      002E22                        657 00191$:
-                                    658 ;	main.c:46: memset(x,'\0',10 * sizeof(char));
-      002E22 90 00 A6         [24]  659 	mov	dptr,#_memset_PARM_2
-      002E25 E4               [12]  660 	clr	a
-      002E26 F0               [24]  661 	movx	@dptr,a
-      002E27 90 00 A7         [24]  662 	mov	dptr,#_memset_PARM_3
-      002E2A 74 0A            [12]  663 	mov	a,#0x0a
-      002E2C F0               [24]  664 	movx	@dptr,a
-      002E2D E4               [12]  665 	clr	a
-      002E2E A3               [24]  666 	inc	dptr
-      002E2F F0               [24]  667 	movx	@dptr,a
-      002E30 90 00 6A         [24]  668 	mov	dptr,#_main_x_196609_75
-      002E33 75 F0 00         [24]  669 	mov	b,#0x00
-      002E36 12 31 5C         [24]  670 	lcall	_memset
-                                    671 ;	main.c:47: printf_tiny("\n\rEnter the row number from 0 to 2\n\r");
-      002E39 74 F4            [12]  672 	mov	a,#___str_0
-      002E3B C0 E0            [24]  673 	push	acc
-      002E3D 74 43            [12]  674 	mov	a,#(___str_0 >> 8)
-      002E3F C0 E0            [24]  675 	push	acc
-      002E41 12 32 BF         [24]  676 	lcall	_printf_tiny
-      002E44 15 81            [12]  677 	dec	sp
-      002E46 15 81            [12]  678 	dec	sp
-                                    679 ;	main.c:48: uint8_t row = getchar();
-      002E48 12 30 88         [24]  680 	lcall	_getchar
-      002E4B AE 82            [24]  681 	mov	r6,dpl
-                                    682 ;	main.c:49: putchar(row);
-      002E4D 8E 05            [24]  683 	mov	ar5,r6
-      002E4F 7F 00            [12]  684 	mov	r7,#0x00
-      002E51 8D 82            [24]  685 	mov	dpl,r5
-      002E53 8F 83            [24]  686 	mov	dph,r7
-      002E55 C0 06            [24]  687 	push	ar6
-      002E57 12 30 57         [24]  688 	lcall	_putchar
-      002E5A D0 06            [24]  689 	pop	ar6
-                                    690 ;	main.c:50: row = row - '0';
-      002E5C EE               [12]  691 	mov	a,r6
-      002E5D 24 D0            [12]  692 	add	a,#0xd0
-                                    693 ;	main.c:51: if(row > 2)
-      002E5F FF               [12]  694 	mov	r7,a
-      002E60 24 FD            [12]  695 	add	a,#0xff - 0x02
-      002E62 50 14            [24]  696 	jnc	00104$
-                                    697 ;	main.c:53: printf_tiny("\n\rEntered Row is incorrect\n\r");
-      002E64 74 19            [12]  698 	mov	a,#___str_1
-      002E66 C0 E0            [24]  699 	push	acc
-      002E68 74 44            [12]  700 	mov	a,#(___str_1 >> 8)
-      002E6A C0 E0            [24]  701 	push	acc
-      002E6C 12 32 BF         [24]  702 	lcall	_printf_tiny
-      002E6F 15 81            [12]  703 	dec	sp
-      002E71 15 81            [12]  704 	dec	sp
-                                    705 ;	main.c:54: printMenu();
-      002E73 12 2C F2         [24]  706 	lcall	_printMenu
-                                    707 ;	main.c:55: continue;
-      002E76 80 83            [24]  708 	sjmp	00128$
-      002E78                        709 00104$:
-                                    710 ;	main.c:57: printf_tiny("\n\rEnter the column number from 0 to 15\n\r");
-      002E78 C0 07            [24]  711 	push	ar7
-      002E7A 74 36            [12]  712 	mov	a,#___str_2
-      002E7C C0 E0            [24]  713 	push	acc
-      002E7E 74 44            [12]  714 	mov	a,#(___str_2 >> 8)
-      002E80 C0 E0            [24]  715 	push	acc
-      002E82 12 32 BF         [24]  716 	lcall	_printf_tiny
-      002E85 15 81            [12]  717 	dec	sp
-      002E87 15 81            [12]  718 	dec	sp
-                                    719 ;	main.c:58: gets(x);
-      002E89 90 00 6A         [24]  720 	mov	dptr,#_main_x_196609_75
-      002E8C 75 F0 00         [24]  721 	mov	b,#0x00
-      002E8F 12 23 75         [24]  722 	lcall	_gets
-                                    723 ;	main.c:59: uint8_t column = atoi(x);
-      002E92 90 00 6A         [24]  724 	mov	dptr,#_main_x_196609_75
-      002E95 75 F0 00         [24]  725 	mov	b,#0x00
-      002E98 12 31 84         [24]  726 	lcall	_atoi
-      002E9B AD 82            [24]  727 	mov	r5,dpl
-      002E9D D0 07            [24]  728 	pop	ar7
-                                    729 ;	main.c:61: if(column > 15)
-      002E9F ED               [12]  730 	mov	a,r5
-      002EA0 24 F0            [12]  731 	add	a,#0xff - 0x0f
-      002EA2 50 15            [24]  732 	jnc	00106$
-                                    733 ;	main.c:63: printf_tiny("\n\rEntered Column is incorrect\n\r");
-      002EA4 74 5F            [12]  734 	mov	a,#___str_3
-      002EA6 C0 E0            [24]  735 	push	acc
-      002EA8 74 44            [12]  736 	mov	a,#(___str_3 >> 8)
-      002EAA C0 E0            [24]  737 	push	acc
-      002EAC 12 32 BF         [24]  738 	lcall	_printf_tiny
-      002EAF 15 81            [12]  739 	dec	sp
-      002EB1 15 81            [12]  740 	dec	sp
-                                    741 ;	main.c:64: printMenu();
-      002EB3 12 2C F2         [24]  742 	lcall	_printMenu
-                                    743 ;	main.c:65: continue;
-      002EB6 02 2D FB         [24]  744 	ljmp	00128$
-      002EB9                        745 00106$:
-                                    746 ;	main.c:67: uint8_t ad = lookUpTable1[row][column];
-      002EB9 EF               [12]  747 	mov	a,r7
-      002EBA 75 F0 10         [24]  748 	mov	b,#0x10
-      002EBD A4               [48]  749 	mul	ab
-      002EBE 24 B4            [12]  750 	add	a,#_lookUpTable1
-      002EC0 FC               [12]  751 	mov	r4,a
-      002EC1 74 43            [12]  752 	mov	a,#(_lookUpTable1 >> 8)
-      002EC3 35 F0            [12]  753 	addc	a,b
-      002EC5 FE               [12]  754 	mov	r6,a
-      002EC6 ED               [12]  755 	mov	a,r5
-      002EC7 2C               [12]  756 	add	a,r4
-      002EC8 F5 82            [12]  757 	mov	dpl,a
-      002ECA E4               [12]  758 	clr	a
-      002ECB 3E               [12]  759 	addc	a,r6
-      002ECC F5 83            [12]  760 	mov	dph,a
-      002ECE E4               [12]  761 	clr	a
-      002ECF 93               [24]  762 	movc	a,@a+dptr
-                                    763 ;	main.c:68: printf("%d %d %d", row, column, ad);
-      002ED0 FE               [12]  764 	mov	r6,a
-      002ED1 FB               [12]  765 	mov	r3,a
-      002ED2 7C 00            [12]  766 	mov	r4,#0x00
-      002ED4 7A 00            [12]  767 	mov	r2,#0x00
-      002ED6 8F 01            [24]  768 	mov	ar1,r7
-      002ED8 7F 00            [12]  769 	mov	r7,#0x00
-      002EDA C0 06            [24]  770 	push	ar6
-      002EDC C0 03            [24]  771 	push	ar3
-      002EDE C0 04            [24]  772 	push	ar4
-      002EE0 C0 05            [24]  773 	push	ar5
-      002EE2 C0 02            [24]  774 	push	ar2
-      002EE4 C0 01            [24]  775 	push	ar1
-      002EE6 C0 07            [24]  776 	push	ar7
-      002EE8 74 7F            [12]  777 	mov	a,#___str_4
-      002EEA C0 E0            [24]  778 	push	acc
-      002EEC 74 44            [12]  779 	mov	a,#(___str_4 >> 8)
-      002EEE C0 E0            [24]  780 	push	acc
-      002EF0 74 80            [12]  781 	mov	a,#0x80
-      002EF2 C0 E0            [24]  782 	push	acc
-      002EF4 12 36 49         [24]  783 	lcall	_printf
-      002EF7 E5 81            [12]  784 	mov	a,sp
-      002EF9 24 F7            [12]  785 	add	a,#0xf7
-      002EFB F5 81            [12]  786 	mov	sp,a
-      002EFD D0 06            [24]  787 	pop	ar6
-                                    788 ;	main.c:69: goToAddr(ad);
-      002EFF 8E 82            [24]  789 	mov	dpl,r6
-      002F01 C0 06            [24]  790 	push	ar6
-      002F03 12 21 1A         [24]  791 	lcall	_goToAddr
-                                    792 ;	main.c:70: busyWait();
-      002F06 12 20 8B         [24]  793 	lcall	_busyWait
-                                    794 ;	main.c:71: printf_tiny("\n\rEnter the character\n\r");
-      002F09 74 88            [12]  795 	mov	a,#___str_5
-      002F0B C0 E0            [24]  796 	push	acc
-      002F0D 74 44            [12]  797 	mov	a,#(___str_5 >> 8)
-      002F0F C0 E0            [24]  798 	push	acc
-      002F11 12 32 BF         [24]  799 	lcall	_printf_tiny
-      002F14 15 81            [12]  800 	dec	sp
-      002F16 15 81            [12]  801 	dec	sp
-                                    802 ;	main.c:72: uint8_t inputWrite = getchar();
-      002F18 12 30 88         [24]  803 	lcall	_getchar
-      002F1B AD 82            [24]  804 	mov	r5,dpl
-                                    805 ;	main.c:73: putchar(inputWrite);
-      002F1D 8D 04            [24]  806 	mov	ar4,r5
-      002F1F 7F 00            [12]  807 	mov	r7,#0x00
-      002F21 8C 82            [24]  808 	mov	dpl,r4
-      002F23 8F 83            [24]  809 	mov	dph,r7
-      002F25 C0 05            [24]  810 	push	ar5
-      002F27 12 30 57         [24]  811 	lcall	_putchar
-      002F2A D0 05            [24]  812 	pop	ar5
-      002F2C D0 06            [24]  813 	pop	ar6
-                                    814 ;	main.c:74: goToAddr(ad);
-      002F2E 8E 82            [24]  815 	mov	dpl,r6
-      002F30 C0 05            [24]  816 	push	ar5
-      002F32 12 21 1A         [24]  817 	lcall	_goToAddr
-      002F35 D0 05            [24]  818 	pop	ar5
-                                    819 ;	main.c:75: lcdPutCh(inputWrite);
-      002F37 8D 82            [24]  820 	mov	dpl,r5
-      002F39 12 20 F8         [24]  821 	lcall	_lcdPutCh
-      002F3C                        822 00108$:
-                                    823 ;	main.c:78: if (ch == 'm')
-      002F3C 90 00 2D         [24]  824 	mov	dptr,#_ch
-      002F3F E0               [24]  825 	movx	a,@dptr
-      002F40 FF               [12]  826 	mov	r7,a
-      002F41 BF 6D 03         [24]  827 	cjne	r7,#0x6d,00110$
-                                    828 ;	main.c:80: printMenu();
-      002F44 12 2C F2         [24]  829 	lcall	_printMenu
-      002F47                        830 00110$:
-                                    831 ;	main.c:83: if( ch == 'p')
-      002F47 90 00 2D         [24]  832 	mov	dptr,#_ch
-      002F4A E0               [24]  833 	movx	a,@dptr
-      002F4B FF               [12]  834 	mov	r7,a
-      002F4C BF 70 03         [24]  835 	cjne	r7,#0x70,00112$
-                                    836 ;	main.c:84: gamePacman();
-      002F4F 12 26 33         [24]  837 	lcall	_gamePacman
-      002F52                        838 00112$:
-                                    839 ;	main.c:86: if(ch == 'x')
-      002F52 90 00 2D         [24]  840 	mov	dptr,#_ch
-      002F55 E0               [24]  841 	movx	a,@dptr
-      002F56 FF               [12]  842 	mov	r7,a
-      002F57 BF 78 19         [24]  843 	cjne	r7,#0x78,00114$
-                                    844 ;	main.c:88: check = 0;
-      002F5A 90 00 2C         [24]  845 	mov	dptr,#_check
-      002F5D E4               [12]  846 	clr	a
-      002F5E F0               [24]  847 	movx	@dptr,a
-                                    848 ;	main.c:89: partSec = 0;
-      002F5F 90 00 27         [24]  849 	mov	dptr,#_partSec
-      002F62 F0               [24]  850 	movx	@dptr,a
-                                    851 ;	main.c:90: sec = 0;
-      002F63 90 00 28         [24]  852 	mov	dptr,#_sec
-      002F66 F0               [24]  853 	movx	@dptr,a
-                                    854 ;	main.c:91: min = 0;
-      002F67 90 00 29         [24]  855 	mov	dptr,#_min
-      002F6A F0               [24]  856 	movx	@dptr,a
-                                    857 ;	main.c:92: hour = 0;
-      002F6B 90 00 2A         [24]  858 	mov	dptr,#_hour
-      002F6E F0               [24]  859 	movx	@dptr,a
-                                    860 ;	main.c:93: x2 = 0;
-      002F6F 90 00 2B         [24]  861 	mov	dptr,#_x2
-      002F72 F0               [24]  862 	movx	@dptr,a
-      002F73                        863 00114$:
-                                    864 ;	main.c:96: if(ch == 'y')
-      002F73 90 00 2D         [24]  865 	mov	dptr,#_ch
-      002F76 E0               [24]  866 	movx	a,@dptr
-      002F77 FF               [12]  867 	mov	r7,a
-      002F78 BF 79 02         [24]  868 	cjne	r7,#0x79,00116$
-                                    869 ;	main.c:98: TR0 = 0;
-                                    870 ;	assignBit
-      002F7B C2 8C            [12]  871 	clr	_TR0
-      002F7D                        872 00116$:
-                                    873 ;	main.c:101: if(ch == 'z')
-      002F7D 90 00 2D         [24]  874 	mov	dptr,#_ch
-      002F80 E0               [24]  875 	movx	a,@dptr
-      002F81 FF               [12]  876 	mov	r7,a
-      002F82 BF 7A 02         [24]  877 	cjne	r7,#0x7a,00118$
-                                    878 ;	main.c:103: TR0 = 1;
-                                    879 ;	assignBit
-      002F85 D2 8C            [12]  880 	setb	_TR0
-      002F87                        881 00118$:
-                                    882 ;	main.c:106: if(ch == 'c')
-      002F87 90 00 2D         [24]  883 	mov	dptr,#_ch
-      002F8A E0               [24]  884 	movx	a,@dptr
-      002F8B FF               [12]  885 	mov	r7,a
-      002F8C BF 63 03         [24]  886 	cjne	r7,#0x63,00120$
-                                    887 ;	main.c:108: lcdClear();
-      002F8F 12 21 0D         [24]  888 	lcall	_lcdClear
-      002F92                        889 00120$:
-                                    890 ;	main.c:111: if(ch == 's')
-      002F92 90 00 2D         [24]  891 	mov	dptr,#_ch
-      002F95 E0               [24]  892 	movx	a,@dptr
-      002F96 FF               [12]  893 	mov	r7,a
-      002F97 BF 73 21         [24]  894 	cjne	r7,#0x73,00122$
-                                    895 ;	main.c:114: printf_tiny("\n\rEnter the string\n\r");
-      002F9A 74 A0            [12]  896 	mov	a,#___str_6
-      002F9C C0 E0            [24]  897 	push	acc
-      002F9E 74 44            [12]  898 	mov	a,#(___str_6 >> 8)
-      002FA0 C0 E0            [24]  899 	push	acc
-      002FA2 12 32 BF         [24]  900 	lcall	_printf_tiny
-      002FA5 15 81            [12]  901 	dec	sp
-      002FA7 15 81            [12]  902 	dec	sp
-                                    903 ;	main.c:115: gets(stringRead);
-      002FA9 90 00 74         [24]  904 	mov	dptr,#_main_stringRead_196609_87
-      002FAC 75 F0 00         [24]  905 	mov	b,#0x00
-      002FAF 12 23 75         [24]  906 	lcall	_gets
-                                    907 ;	main.c:117: putsLCD(stringRead);
-      002FB2 90 00 74         [24]  908 	mov	dptr,#_main_stringRead_196609_87
-      002FB5 75 F0 00         [24]  909 	mov	b,#0x00
-      002FB8 12 22 3C         [24]  910 	lcall	_putsLCD
-      002FBB                        911 00122$:
-                                    912 ;	main.c:120: if(ch == 'd')
-      002FBB 90 00 2D         [24]  913 	mov	dptr,#_ch
-      002FBE E0               [24]  914 	movx	a,@dptr
-      002FBF FF               [12]  915 	mov	r7,a
-      002FC0 BF 64 03         [24]  916 	cjne	r7,#0x64,00124$
-                                    917 ;	main.c:122: ramDump();
-      002FC3 12 24 88         [24]  918 	lcall	_ramDump
-      002FC6                        919 00124$:
-                                    920 ;	main.c:125: if(ch == 'g')
-      002FC6 90 00 2D         [24]  921 	mov	dptr,#_ch
-      002FC9 E0               [24]  922 	movx	a,@dptr
-      002FCA FF               [12]  923 	mov	r7,a
-      002FCB BF 67 02         [24]  924 	cjne	r7,#0x67,00210$
-      002FCE 80 03            [24]  925 	sjmp	00211$
-      002FD0                        926 00210$:
-      002FD0 02 2D FB         [24]  927 	ljmp	00128$
-      002FD3                        928 00211$:
-                                    929 ;	main.c:127: customCharacter();
-      002FD3 12 21 60         [24]  930 	lcall	_customCharacter
-                                    931 ;	main.c:131: }
-      002FD6 02 2D FB         [24]  932 	ljmp	00128$
-                                    933 ;------------------------------------------------------------
-                                    934 ;Allocation info for local variables in function 'timer0_isr'
-                                    935 ;------------------------------------------------------------
-                                    936 ;	main.c:133: void timer0_isr() __interrupt (1)
-                                    937 ;	-----------------------------------------
-                                    938 ;	 function timer0_isr
-                                    939 ;	-----------------------------------------
-      002FD9                        940 _timer0_isr:
-      002FD9 C0 E0            [24]  941 	push	acc
-      002FDB C0 82            [24]  942 	push	dpl
-      002FDD C0 83            [24]  943 	push	dph
-      002FDF C0 07            [24]  944 	push	ar7
-      002FE1 C0 D0            [24]  945 	push	psw
-      002FE3 75 D0 00         [24]  946 	mov	psw,#0x00
-                                    947 ;	main.c:135: TH0 = 0x4B;
-      002FE6 75 8C 4B         [24]  948 	mov	_TH0,#0x4b
-                                    949 ;	main.c:136: TL0 = 0xFC;
-      002FE9 75 8A FC         [24]  950 	mov	_TL0,#0xfc
-                                    951 ;	main.c:137: x2++;
-      002FEC 90 00 2B         [24]  952 	mov	dptr,#_x2
-      002FEF E0               [24]  953 	movx	a,@dptr
-      002FF0 24 01            [12]  954 	add	a,#0x01
-      002FF2 F0               [24]  955 	movx	@dptr,a
-                                    956 ;	main.c:138: if(x2 == 2)
-      002FF3 E0               [24]  957 	movx	a,@dptr
-      002FF4 FF               [12]  958 	mov	r7,a
-      002FF5 BF 02 54         [24]  959 	cjne	r7,#0x02,00111$
-                                    960 ;	main.c:140: if(partSec > 9)
-      002FF8 90 00 27         [24]  961 	mov	dptr,#_partSec
-      002FFB E0               [24]  962 	movx	a,@dptr
-      002FFC FF               [12]  963 	mov  r7,a
-      002FFD 24 F6            [12]  964 	add	a,#0xff - 0x09
-      002FFF 50 3A            [24]  965 	jnc	00108$
-                                    966 ;	main.c:142: sec++;
-      003001 90 00 28         [24]  967 	mov	dptr,#_sec
-      003004 E0               [24]  968 	movx	a,@dptr
-      003005 24 01            [12]  969 	add	a,#0x01
-      003007 F0               [24]  970 	movx	@dptr,a
-                                    971 ;	main.c:143: if( sec > 59)
-      003008 E0               [24]  972 	movx	a,@dptr
-      003009 FF               [12]  973 	mov  r7,a
-      00300A 24 C4            [12]  974 	add	a,#0xff - 0x3b
-      00300C 50 28            [24]  975 	jnc	00106$
-                                    976 ;	main.c:145: min++;
-      00300E 90 00 29         [24]  977 	mov	dptr,#_min
-      003011 E0               [24]  978 	movx	a,@dptr
-      003012 24 01            [12]  979 	add	a,#0x01
-      003014 F0               [24]  980 	movx	@dptr,a
-                                    981 ;	main.c:146: if( min == 59)
-      003015 E0               [24]  982 	movx	a,@dptr
-      003016 FF               [12]  983 	mov	r7,a
-      003017 BF 3B 17         [24]  984 	cjne	r7,#0x3b,00104$
-                                    985 ;	main.c:148: hour++;
-      00301A 90 00 2A         [24]  986 	mov	dptr,#_hour
-      00301D E0               [24]  987 	movx	a,@dptr
-      00301E 24 01            [12]  988 	add	a,#0x01
-      003020 F0               [24]  989 	movx	@dptr,a
-                                    990 ;	main.c:149: if(hour > 23)
-      003021 E0               [24]  991 	movx	a,@dptr
-      003022 FF               [12]  992 	mov  r7,a
-      003023 24 E8            [12]  993 	add	a,#0xff - 0x17
-      003025 50 05            [24]  994 	jnc	00102$
-                                    995 ;	main.c:151: hour = 0;
-      003027 90 00 2A         [24]  996 	mov	dptr,#_hour
-      00302A E4               [12]  997 	clr	a
-      00302B F0               [24]  998 	movx	@dptr,a
-      00302C                        999 00102$:
-                                   1000 ;	main.c:153: min = 0;
-      00302C 90 00 29         [24] 1001 	mov	dptr,#_min
-      00302F E4               [12] 1002 	clr	a
-      003030 F0               [24] 1003 	movx	@dptr,a
-      003031                       1004 00104$:
-                                   1005 ;	main.c:155: sec = 0;
-      003031 90 00 28         [24] 1006 	mov	dptr,#_sec
-      003034 E4               [12] 1007 	clr	a
-      003035 F0               [24] 1008 	movx	@dptr,a
-      003036                       1009 00106$:
-                                   1010 ;	main.c:157: partSec = 0;
-      003036 90 00 27         [24] 1011 	mov	dptr,#_partSec
-      003039 E4               [12] 1012 	clr	a
-      00303A F0               [24] 1013 	movx	@dptr,a
-      00303B                       1014 00108$:
-                                   1015 ;	main.c:159: partSec++;
-      00303B 90 00 27         [24] 1016 	mov	dptr,#_partSec
-      00303E E0               [24] 1017 	movx	a,@dptr
-      00303F 24 01            [12] 1018 	add	a,#0x01
-      003041 F0               [24] 1019 	movx	@dptr,a
-                                   1020 ;	main.c:160: x2 = 0;
-      003042 90 00 2B         [24] 1021 	mov	dptr,#_x2
-      003045 E4               [12] 1022 	clr	a
-      003046 F0               [24] 1023 	movx	@dptr,a
-                                   1024 ;	main.c:161: check = 1;
-      003047 90 00 2C         [24] 1025 	mov	dptr,#_check
-      00304A 04               [12] 1026 	inc	a
-      00304B F0               [24] 1027 	movx	@dptr,a
-      00304C                       1028 00111$:
-                                   1029 ;	main.c:163: }
-      00304C D0 D0            [24] 1030 	pop	psw
-      00304E D0 07            [24] 1031 	pop	ar7
-      003050 D0 83            [24] 1032 	pop	dph
-      003052 D0 82            [24] 1033 	pop	dpl
-      003054 D0 E0            [24] 1034 	pop	acc
-      003056 32               [24] 1035 	reti
-                                   1036 ;	eliminated unneeded push/pop b
-                                   1037 ;------------------------------------------------------------
-                                   1038 ;Allocation info for local variables in function 'putchar'
-                                   1039 ;------------------------------------------------------------
-                                   1040 ;c                         Allocated with name '_putchar_c_65536_96'
-                                   1041 ;------------------------------------------------------------
-                                   1042 ;	main.c:166: int putchar (int c)
-                                   1043 ;	-----------------------------------------
-                                   1044 ;	 function putchar
-                                   1045 ;	-----------------------------------------
-      003057                       1046 _putchar:
-      003057 AF 83            [24] 1047 	mov	r7,dph
-      003059 E5 82            [12] 1048 	mov	a,dpl
-      00305B 90 00 A4         [24] 1049 	mov	dptr,#_putchar_c_65536_96
-      00305E F0               [24] 1050 	movx	@dptr,a
-      00305F EF               [12] 1051 	mov	a,r7
-      003060 A3               [24] 1052 	inc	dptr
-      003061 F0               [24] 1053 	movx	@dptr,a
-                                   1054 ;	main.c:168: while ((SCON & 0x02) == 0)    // wait for TX ready, spin on TI
-      003062                       1055 00103$:
-      003062 E5 98            [12] 1056 	mov	a,_SCON
-      003064 20 E1 12         [24] 1057 	jb	acc.1,00105$
-                                   1058 ;	main.c:170: if(check == 1)
-      003067 90 00 2C         [24] 1059 	mov	dptr,#_check
-      00306A E0               [24] 1060 	movx	a,@dptr
-      00306B FF               [12] 1061 	mov	r7,a
-      00306C BF 01 F3         [24] 1062 	cjne	r7,#0x01,00103$
-                                   1063 ;	main.c:172: check = 0;
-      00306F 90 00 2C         [24] 1064 	mov	dptr,#_check
-      003072 E4               [12] 1065 	clr	a
-      003073 F0               [24] 1066 	movx	@dptr,a
-                                   1067 ;	main.c:173: printTimeStamp();
-      003074 12 30 AA         [24] 1068 	lcall	_printTimeStamp
-      003077 80 E9            [24] 1069 	sjmp	00103$
-      003079                       1070 00105$:
-                                   1071 ;	main.c:176: SBUF = c;  	// load serial port with transmit value
-      003079 90 00 A4         [24] 1072 	mov	dptr,#_putchar_c_65536_96
-      00307C E0               [24] 1073 	movx	a,@dptr
-      00307D FE               [12] 1074 	mov	r6,a
-      00307E A3               [24] 1075 	inc	dptr
-      00307F E0               [24] 1076 	movx	a,@dptr
-      003080 8E 99            [24] 1077 	mov	_SBUF,r6
-                                   1078 ;	main.c:177: TI = 0;  	// clear TI flag
-                                   1079 ;	assignBit
-      003082 C2 99            [12] 1080 	clr	_TI
-                                   1081 ;	main.c:178: return 0;
-      003084 90 00 00         [24] 1082 	mov	dptr,#0x0000
-                                   1083 ;	main.c:179: }
-      003087 22               [24] 1084 	ret
-                                   1085 ;------------------------------------------------------------
-                                   1086 ;Allocation info for local variables in function 'getchar'
-                                   1087 ;------------------------------------------------------------
-                                   1088 ;	main.c:181: int getchar ()
-                                   1089 ;	-----------------------------------------
-                                   1090 ;	 function getchar
-                                   1091 ;	-----------------------------------------
-      003088                       1092 _getchar:
-                                   1093 ;	main.c:183: while ((SCON & 0x01) == 0)  // wait for character to be received, spin on RI
-      003088                       1094 00103$:
-      003088 E5 98            [12] 1095 	mov	a,_SCON
-      00308A 20 E0 12         [24] 1096 	jb	acc.0,00105$
-                                   1097 ;	main.c:185: if(check == 1)
-      00308D 90 00 2C         [24] 1098 	mov	dptr,#_check
-      003090 E0               [24] 1099 	movx	a,@dptr
-      003091 FF               [12] 1100 	mov	r7,a
-      003092 BF 01 F3         [24] 1101 	cjne	r7,#0x01,00103$
-                                   1102 ;	main.c:187: check = 0;
-      003095 90 00 2C         [24] 1103 	mov	dptr,#_check
-      003098 E4               [12] 1104 	clr	a
-      003099 F0               [24] 1105 	movx	@dptr,a
-                                   1106 ;	main.c:188: printTimeStamp();
-      00309A 12 30 AA         [24] 1107 	lcall	_printTimeStamp
-      00309D 80 E9            [24] 1108 	sjmp	00103$
-      00309F                       1109 00105$:
-                                   1110 ;	main.c:191: RI = 0;			// clear RI flag
-                                   1111 ;	assignBit
-      00309F C2 98            [12] 1112 	clr	_RI
-                                   1113 ;	main.c:192: return SBUF;  	// return character from SBUF
-      0030A1 AE 99            [24] 1114 	mov	r6,_SBUF
-      0030A3 7F 00            [12] 1115 	mov	r7,#0x00
-      0030A5 8E 82            [24] 1116 	mov	dpl,r6
-      0030A7 8F 83            [24] 1117 	mov	dph,r7
-                                   1118 ;	main.c:193: }
-      0030A9 22               [24] 1119 	ret
-                                   1120 ;------------------------------------------------------------
-                                   1121 ;Allocation info for local variables in function 'printTimeStamp'
-                                   1122 ;------------------------------------------------------------
-                                   1123 ;	main.c:195: void printTimeStamp()
-                                   1124 ;	-----------------------------------------
-                                   1125 ;	 function printTimeStamp
-                                   1126 ;	-----------------------------------------
-      0030AA                       1127 _printTimeStamp:
-                                   1128 ;	main.c:197: goToAddr(0x57);
-      0030AA 75 82 57         [24] 1129 	mov	dpl,#0x57
-      0030AD 12 21 1A         [24] 1130 	lcall	_goToAddr
-                                   1131 ;	main.c:198: lcdPutCh(hour + '0');
-      0030B0 90 00 2A         [24] 1132 	mov	dptr,#_hour
-      0030B3 E0               [24] 1133 	movx	a,@dptr
-      0030B4 24 30            [12] 1134 	add	a,#0x30
-      0030B6 F5 82            [12] 1135 	mov	dpl,a
-      0030B8 12 20 F8         [24] 1136 	lcall	_lcdPutCh
-                                   1137 ;	main.c:199: lcdPutCh(':');
-      0030BB 75 82 3A         [24] 1138 	mov	dpl,#0x3a
-      0030BE 12 20 F8         [24] 1139 	lcall	_lcdPutCh
-                                   1140 ;	main.c:200: lcdPutCh(min / 10 + '0');
-      0030C1 90 00 29         [24] 1141 	mov	dptr,#_min
-      0030C4 E0               [24] 1142 	movx	a,@dptr
-      0030C5 FF               [12] 1143 	mov	r7,a
-      0030C6 7E 00            [12] 1144 	mov	r6,#0x00
-      0030C8 90 00 BB         [24] 1145 	mov	dptr,#__divsint_PARM_2
-      0030CB 74 0A            [12] 1146 	mov	a,#0x0a
-      0030CD F0               [24] 1147 	movx	@dptr,a
-      0030CE E4               [12] 1148 	clr	a
-      0030CF A3               [24] 1149 	inc	dptr
-      0030D0 F0               [24] 1150 	movx	@dptr,a
-      0030D1 8F 82            [24] 1151 	mov	dpl,r7
-      0030D3 8E 83            [24] 1152 	mov	dph,r6
-      0030D5 12 34 FC         [24] 1153 	lcall	__divsint
-      0030D8 AE 82            [24] 1154 	mov	r6,dpl
-      0030DA 74 30            [12] 1155 	mov	a,#0x30
-      0030DC 2E               [12] 1156 	add	a,r6
-      0030DD F5 82            [12] 1157 	mov	dpl,a
-      0030DF 12 20 F8         [24] 1158 	lcall	_lcdPutCh
-                                   1159 ;	main.c:201: lcdPutCh(min % 10 + '0');
-      0030E2 90 00 29         [24] 1160 	mov	dptr,#_min
-      0030E5 E0               [24] 1161 	movx	a,@dptr
-      0030E6 FF               [12] 1162 	mov	r7,a
-      0030E7 7E 00            [12] 1163 	mov	r6,#0x00
-      0030E9 90 00 B2         [24] 1164 	mov	dptr,#__modsint_PARM_2
-      0030EC 74 0A            [12] 1165 	mov	a,#0x0a
-      0030EE F0               [24] 1166 	movx	@dptr,a
-      0030EF E4               [12] 1167 	clr	a
-      0030F0 A3               [24] 1168 	inc	dptr
-      0030F1 F0               [24] 1169 	movx	@dptr,a
-      0030F2 8F 82            [24] 1170 	mov	dpl,r7
-      0030F4 8E 83            [24] 1171 	mov	dph,r6
-      0030F6 12 33 E8         [24] 1172 	lcall	__modsint
-      0030F9 AE 82            [24] 1173 	mov	r6,dpl
-      0030FB 74 30            [12] 1174 	mov	a,#0x30
-      0030FD 2E               [12] 1175 	add	a,r6
-      0030FE F5 82            [12] 1176 	mov	dpl,a
-      003100 12 20 F8         [24] 1177 	lcall	_lcdPutCh
-                                   1178 ;	main.c:202: lcdPutCh(':');
-      003103 75 82 3A         [24] 1179 	mov	dpl,#0x3a
-      003106 12 20 F8         [24] 1180 	lcall	_lcdPutCh
-                                   1181 ;	main.c:203: lcdPutCh(sec / 10 + '0');
-      003109 90 00 28         [24] 1182 	mov	dptr,#_sec
-      00310C E0               [24] 1183 	movx	a,@dptr
-      00310D FF               [12] 1184 	mov	r7,a
-      00310E 7E 00            [12] 1185 	mov	r6,#0x00
-      003110 90 00 BB         [24] 1186 	mov	dptr,#__divsint_PARM_2
-      003113 74 0A            [12] 1187 	mov	a,#0x0a
-      003115 F0               [24] 1188 	movx	@dptr,a
-      003116 E4               [12] 1189 	clr	a
-      003117 A3               [24] 1190 	inc	dptr
-      003118 F0               [24] 1191 	movx	@dptr,a
-      003119 8F 82            [24] 1192 	mov	dpl,r7
-      00311B 8E 83            [24] 1193 	mov	dph,r6
-      00311D 12 34 FC         [24] 1194 	lcall	__divsint
-      003120 AE 82            [24] 1195 	mov	r6,dpl
-      003122 74 30            [12] 1196 	mov	a,#0x30
-      003124 2E               [12] 1197 	add	a,r6
-      003125 F5 82            [12] 1198 	mov	dpl,a
-      003127 12 20 F8         [24] 1199 	lcall	_lcdPutCh
-                                   1200 ;	main.c:204: lcdPutCh(sec % 10 + '0');
-      00312A 90 00 28         [24] 1201 	mov	dptr,#_sec
-      00312D E0               [24] 1202 	movx	a,@dptr
-      00312E FF               [12] 1203 	mov	r7,a
-      00312F 7E 00            [12] 1204 	mov	r6,#0x00
-      003131 90 00 B2         [24] 1205 	mov	dptr,#__modsint_PARM_2
-      003134 74 0A            [12] 1206 	mov	a,#0x0a
-      003136 F0               [24] 1207 	movx	@dptr,a
-      003137 E4               [12] 1208 	clr	a
-      003138 A3               [24] 1209 	inc	dptr
-      003139 F0               [24] 1210 	movx	@dptr,a
-      00313A 8F 82            [24] 1211 	mov	dpl,r7
-      00313C 8E 83            [24] 1212 	mov	dph,r6
-      00313E 12 33 E8         [24] 1213 	lcall	__modsint
-      003141 AE 82            [24] 1214 	mov	r6,dpl
-      003143 74 30            [12] 1215 	mov	a,#0x30
-      003145 2E               [12] 1216 	add	a,r6
-      003146 F5 82            [12] 1217 	mov	dpl,a
-      003148 12 20 F8         [24] 1218 	lcall	_lcdPutCh
-                                   1219 ;	main.c:205: lcdPutCh('.');
-      00314B 75 82 2E         [24] 1220 	mov	dpl,#0x2e
-      00314E 12 20 F8         [24] 1221 	lcall	_lcdPutCh
-                                   1222 ;	main.c:206: lcdPutCh(partSec + '0');
-      003151 90 00 27         [24] 1223 	mov	dptr,#_partSec
-      003154 E0               [24] 1224 	movx	a,@dptr
-      003155 24 30            [12] 1225 	add	a,#0x30
-      003157 F5 82            [12] 1226 	mov	dpl,a
-                                   1227 ;	main.c:207: }
-      003159 02 20 F8         [24] 1228 	ljmp	_lcdPutCh
-                                   1229 	.area CSEG    (CODE)
-                                   1230 	.area CONST   (CODE)
-      0043B4                       1231 _lookUpTable1:
-      0043B4 00                    1232 	.db #0x00	; 0
-      0043B5 01                    1233 	.db #0x01	; 1
-      0043B6 02                    1234 	.db #0x02	; 2
-      0043B7 03                    1235 	.db #0x03	; 3
-      0043B8 04                    1236 	.db #0x04	; 4
-      0043B9 05                    1237 	.db #0x05	; 5
-      0043BA 06                    1238 	.db #0x06	; 6
-      0043BB 07                    1239 	.db #0x07	; 7
-      0043BC 08                    1240 	.db #0x08	; 8
-      0043BD 09                    1241 	.db #0x09	; 9
-      0043BE 0A                    1242 	.db #0x0a	; 10
-      0043BF 0B                    1243 	.db #0x0b	; 11
-      0043C0 0C                    1244 	.db #0x0c	; 12
-      0043C1 0D                    1245 	.db #0x0d	; 13
-      0043C2 0E                    1246 	.db #0x0e	; 14
-      0043C3 0F                    1247 	.db #0x0f	; 15
-      0043C4 40                    1248 	.db #0x40	; 64
-      0043C5 41                    1249 	.db #0x41	; 65	'A'
-      0043C6 42                    1250 	.db #0x42	; 66	'B'
-      0043C7 43                    1251 	.db #0x43	; 67	'C'
-      0043C8 44                    1252 	.db #0x44	; 68	'D'
-      0043C9 45                    1253 	.db #0x45	; 69	'E'
-      0043CA 46                    1254 	.db #0x46	; 70	'F'
-      0043CB 47                    1255 	.db #0x47	; 71	'G'
-      0043CC 48                    1256 	.db #0x48	; 72	'H'
-      0043CD 49                    1257 	.db #0x49	; 73	'I'
-      0043CE 4A                    1258 	.db #0x4a	; 74	'J'
-      0043CF 4B                    1259 	.db #0x4b	; 75	'K'
-      0043D0 4C                    1260 	.db #0x4c	; 76	'L'
-      0043D1 4D                    1261 	.db #0x4d	; 77	'M'
-      0043D2 4E                    1262 	.db #0x4e	; 78	'N'
-      0043D3 4F                    1263 	.db #0x4f	; 79	'O'
-      0043D4 10                    1264 	.db #0x10	; 16
-      0043D5 11                    1265 	.db #0x11	; 17
-      0043D6 12                    1266 	.db #0x12	; 18
-      0043D7 13                    1267 	.db #0x13	; 19
-      0043D8 14                    1268 	.db #0x14	; 20
-      0043D9 15                    1269 	.db #0x15	; 21
-      0043DA 16                    1270 	.db #0x16	; 22
-      0043DB 17                    1271 	.db #0x17	; 23
-      0043DC 18                    1272 	.db #0x18	; 24
-      0043DD 19                    1273 	.db #0x19	; 25
-      0043DE 1A                    1274 	.db #0x1a	; 26
-      0043DF 1B                    1275 	.db #0x1b	; 27
-      0043E0 1C                    1276 	.db #0x1c	; 28
-      0043E1 1D                    1277 	.db #0x1d	; 29
-      0043E2 1E                    1278 	.db #0x1e	; 30
-      0043E3 1F                    1279 	.db #0x1f	; 31
-      0043E4 50                    1280 	.db #0x50	; 80	'P'
-      0043E5 51                    1281 	.db #0x51	; 81	'Q'
-      0043E6 52                    1282 	.db #0x52	; 82	'R'
-      0043E7 53                    1283 	.db #0x53	; 83	'S'
-      0043E8 54                    1284 	.db #0x54	; 84	'T'
-      0043E9 55                    1285 	.db #0x55	; 85	'U'
-      0043EA 56                    1286 	.db #0x56	; 86	'V'
-      0043EB 57                    1287 	.db #0x57	; 87	'W'
-      0043EC 58                    1288 	.db #0x58	; 88	'X'
-      0043ED 59                    1289 	.db #0x59	; 89	'Y'
-      0043EE 5A                    1290 	.db #0x5a	; 90	'Z'
-      0043EF 5B                    1291 	.db #0x5b	; 91
-      0043F0 5C                    1292 	.db #0x5c	; 92
-      0043F1 5D                    1293 	.db #0x5d	; 93
-      0043F2 5E                    1294 	.db #0x5e	; 94
-      0043F3 5F                    1295 	.db #0x5f	; 95
-                                   1296 	.area CONST   (CODE)
-      0043F4                       1297 ___str_0:
-      0043F4 0A                    1298 	.db 0x0a
-      0043F5 0D                    1299 	.db 0x0d
-      0043F6 45 6E 74 65 72 20 74  1300 	.ascii "Enter the row number from 0 to 2"
+      002DDF 12 30 76         [24]  632 	lcall	_getchar
+      002DE2 AE 82            [24]  633 	mov	r6,dpl
+      002DE4 90 00 2C         [24]  634 	mov	dptr,#_ch
+      002DE7 EE               [12]  635 	mov	a,r6
+      002DE8 F0               [24]  636 	movx	@dptr,a
+                                    637 ;	main.c:36: putchar(ch);
+      002DE9 7F 00            [12]  638 	mov	r7,#0x00
+      002DEB 8E 82            [24]  639 	mov	dpl,r6
+      002DED 8F 83            [24]  640 	mov	dph,r7
+      002DEF 12 30 45         [24]  641 	lcall	_putchar
+                                    642 ;	main.c:37: if(check == 1)
+      002DF2 90 00 2B         [24]  643 	mov	dptr,#_check
+      002DF5 E0               [24]  644 	movx	a,@dptr
+      002DF6 FF               [12]  645 	mov	r7,a
+      002DF7 BF 01 08         [24]  646 	cjne	r7,#0x01,00102$
+                                    647 ;	main.c:39: check = 0;
+      002DFA 90 00 2B         [24]  648 	mov	dptr,#_check
+      002DFD E4               [12]  649 	clr	a
+      002DFE F0               [24]  650 	movx	@dptr,a
+                                    651 ;	main.c:40: printTimeStamp();
+      002DFF 12 30 98         [24]  652 	lcall	_printTimeStamp
+      002E02                        653 00102$:
+                                    654 ;	main.c:43: if(ch == 'w')
+      002E02 90 00 2C         [24]  655 	mov	dptr,#_ch
+      002E05 E0               [24]  656 	movx	a,@dptr
+      002E06 FF               [12]  657 	mov	r7,a
+      002E07 BF 77 02         [24]  658 	cjne	r7,#0x77,00190$
+      002E0A 80 03            [24]  659 	sjmp	00191$
+      002E0C                        660 00190$:
+      002E0C 02 2F 2A         [24]  661 	ljmp	00108$
+      002E0F                        662 00191$:
+                                    663 ;	main.c:47: memset(x,'\0',10 * sizeof(char));
+      002E0F 90 00 A5         [24]  664 	mov	dptr,#_memset_PARM_2
+      002E12 E4               [12]  665 	clr	a
+      002E13 F0               [24]  666 	movx	@dptr,a
+      002E14 90 00 A6         [24]  667 	mov	dptr,#_memset_PARM_3
+      002E17 74 0A            [12]  668 	mov	a,#0x0a
+      002E19 F0               [24]  669 	movx	@dptr,a
+      002E1A E4               [12]  670 	clr	a
+      002E1B A3               [24]  671 	inc	dptr
+      002E1C F0               [24]  672 	movx	@dptr,a
+      002E1D 90 00 69         [24]  673 	mov	dptr,#_main_x_196609_75
+      002E20 75 F0 00         [24]  674 	mov	b,#0x00
+      002E23 12 31 4A         [24]  675 	lcall	_memset
+                                    676 ;	main.c:48: printf_tiny("\n\rEnter the row number from 0 to 2\n\r");
+      002E26 74 1E            [12]  677 	mov	a,#___str_0
+      002E28 C0 E0            [24]  678 	push	acc
+      002E2A 74 44            [12]  679 	mov	a,#(___str_0 >> 8)
+      002E2C C0 E0            [24]  680 	push	acc
+      002E2E 12 32 AD         [24]  681 	lcall	_printf_tiny
+      002E31 15 81            [12]  682 	dec	sp
+      002E33 15 81            [12]  683 	dec	sp
+                                    684 ;	main.c:49: uint8_t row = getchar();
+      002E35 12 30 76         [24]  685 	lcall	_getchar
+      002E38 AE 82            [24]  686 	mov	r6,dpl
+                                    687 ;	main.c:50: putchar(row);
+      002E3A 8E 05            [24]  688 	mov	ar5,r6
+      002E3C 7F 00            [12]  689 	mov	r7,#0x00
+      002E3E 8D 82            [24]  690 	mov	dpl,r5
+      002E40 8F 83            [24]  691 	mov	dph,r7
+      002E42 C0 06            [24]  692 	push	ar6
+      002E44 12 30 45         [24]  693 	lcall	_putchar
+      002E47 D0 06            [24]  694 	pop	ar6
+                                    695 ;	main.c:51: row = row - '0';
+      002E49 EE               [12]  696 	mov	a,r6
+      002E4A 24 D0            [12]  697 	add	a,#0xd0
+                                    698 ;	main.c:52: if(row > 2)
+      002E4C FF               [12]  699 	mov	r7,a
+      002E4D 24 FD            [12]  700 	add	a,#0xff - 0x02
+      002E4F 50 15            [24]  701 	jnc	00104$
+                                    702 ;	main.c:54: printf_tiny("\n\rEntered Row is incorrect\n\r");
+      002E51 74 43            [12]  703 	mov	a,#___str_1
+      002E53 C0 E0            [24]  704 	push	acc
+      002E55 74 44            [12]  705 	mov	a,#(___str_1 >> 8)
+      002E57 C0 E0            [24]  706 	push	acc
+      002E59 12 32 AD         [24]  707 	lcall	_printf_tiny
+      002E5C 15 81            [12]  708 	dec	sp
+      002E5E 15 81            [12]  709 	dec	sp
+                                    710 ;	main.c:55: printMenu();
+      002E60 12 2C D6         [24]  711 	lcall	_printMenu
+                                    712 ;	main.c:56: continue;
+      002E63 02 2D DF         [24]  713 	ljmp	00128$
+      002E66                        714 00104$:
+                                    715 ;	main.c:58: printf_tiny("\n\rEnter the column number from 0 to 15\n\r");
+      002E66 C0 07            [24]  716 	push	ar7
+      002E68 74 60            [12]  717 	mov	a,#___str_2
+      002E6A C0 E0            [24]  718 	push	acc
+      002E6C 74 44            [12]  719 	mov	a,#(___str_2 >> 8)
+      002E6E C0 E0            [24]  720 	push	acc
+      002E70 12 32 AD         [24]  721 	lcall	_printf_tiny
+      002E73 15 81            [12]  722 	dec	sp
+      002E75 15 81            [12]  723 	dec	sp
+                                    724 ;	main.c:59: gets(x);
+      002E77 90 00 69         [24]  725 	mov	dptr,#_main_x_196609_75
+      002E7A 75 F0 00         [24]  726 	mov	b,#0x00
+      002E7D 12 23 85         [24]  727 	lcall	_gets
+                                    728 ;	main.c:60: uint8_t column = atoi(x);
+      002E80 90 00 69         [24]  729 	mov	dptr,#_main_x_196609_75
+      002E83 75 F0 00         [24]  730 	mov	b,#0x00
+      002E86 12 31 72         [24]  731 	lcall	_atoi
+      002E89 AD 82            [24]  732 	mov	r5,dpl
+      002E8B D0 07            [24]  733 	pop	ar7
+                                    734 ;	main.c:62: if(column > 15)
+      002E8D ED               [12]  735 	mov	a,r5
+      002E8E 24 F0            [12]  736 	add	a,#0xff - 0x0f
+      002E90 50 15            [24]  737 	jnc	00106$
+                                    738 ;	main.c:64: printf_tiny("\n\rEntered Column is incorrect\n\r");
+      002E92 74 89            [12]  739 	mov	a,#___str_3
+      002E94 C0 E0            [24]  740 	push	acc
+      002E96 74 44            [12]  741 	mov	a,#(___str_3 >> 8)
+      002E98 C0 E0            [24]  742 	push	acc
+      002E9A 12 32 AD         [24]  743 	lcall	_printf_tiny
+      002E9D 15 81            [12]  744 	dec	sp
+      002E9F 15 81            [12]  745 	dec	sp
+                                    746 ;	main.c:65: printMenu();
+      002EA1 12 2C D6         [24]  747 	lcall	_printMenu
+                                    748 ;	main.c:66: continue;
+      002EA4 02 2D DF         [24]  749 	ljmp	00128$
+      002EA7                        750 00106$:
+                                    751 ;	main.c:68: uint8_t ad = lookUpTable1[row][column];
+      002EA7 EF               [12]  752 	mov	a,r7
+      002EA8 75 F0 10         [24]  753 	mov	b,#0x10
+      002EAB A4               [48]  754 	mul	ab
+      002EAC 24 DE            [12]  755 	add	a,#_lookUpTable1
+      002EAE FC               [12]  756 	mov	r4,a
+      002EAF 74 43            [12]  757 	mov	a,#(_lookUpTable1 >> 8)
+      002EB1 35 F0            [12]  758 	addc	a,b
+      002EB3 FE               [12]  759 	mov	r6,a
+      002EB4 ED               [12]  760 	mov	a,r5
+      002EB5 2C               [12]  761 	add	a,r4
+      002EB6 F5 82            [12]  762 	mov	dpl,a
+      002EB8 E4               [12]  763 	clr	a
+      002EB9 3E               [12]  764 	addc	a,r6
+      002EBA F5 83            [12]  765 	mov	dph,a
+      002EBC E4               [12]  766 	clr	a
+      002EBD 93               [24]  767 	movc	a,@a+dptr
+                                    768 ;	main.c:69: printf("%d %d %d", row, column, ad);
+      002EBE FE               [12]  769 	mov	r6,a
+      002EBF FB               [12]  770 	mov	r3,a
+      002EC0 7C 00            [12]  771 	mov	r4,#0x00
+      002EC2 7A 00            [12]  772 	mov	r2,#0x00
+      002EC4 8F 01            [24]  773 	mov	ar1,r7
+      002EC6 7F 00            [12]  774 	mov	r7,#0x00
+      002EC8 C0 06            [24]  775 	push	ar6
+      002ECA C0 03            [24]  776 	push	ar3
+      002ECC C0 04            [24]  777 	push	ar4
+      002ECE C0 05            [24]  778 	push	ar5
+      002ED0 C0 02            [24]  779 	push	ar2
+      002ED2 C0 01            [24]  780 	push	ar1
+      002ED4 C0 07            [24]  781 	push	ar7
+      002ED6 74 A9            [12]  782 	mov	a,#___str_4
+      002ED8 C0 E0            [24]  783 	push	acc
+      002EDA 74 44            [12]  784 	mov	a,#(___str_4 >> 8)
+      002EDC C0 E0            [24]  785 	push	acc
+      002EDE 74 80            [12]  786 	mov	a,#0x80
+      002EE0 C0 E0            [24]  787 	push	acc
+      002EE2 12 36 37         [24]  788 	lcall	_printf
+      002EE5 E5 81            [12]  789 	mov	a,sp
+      002EE7 24 F7            [12]  790 	add	a,#0xf7
+      002EE9 F5 81            [12]  791 	mov	sp,a
+      002EEB D0 06            [24]  792 	pop	ar6
+                                    793 ;	main.c:70: goToAddr(ad);
+      002EED 8E 82            [24]  794 	mov	dpl,r6
+      002EEF C0 06            [24]  795 	push	ar6
+      002EF1 12 21 1A         [24]  796 	lcall	_goToAddr
+                                    797 ;	main.c:71: busyWait();
+      002EF4 12 20 8B         [24]  798 	lcall	_busyWait
+                                    799 ;	main.c:72: printf_tiny("\n\rEnter the character\n\r");
+      002EF7 74 B2            [12]  800 	mov	a,#___str_5
+      002EF9 C0 E0            [24]  801 	push	acc
+      002EFB 74 44            [12]  802 	mov	a,#(___str_5 >> 8)
+      002EFD C0 E0            [24]  803 	push	acc
+      002EFF 12 32 AD         [24]  804 	lcall	_printf_tiny
+      002F02 15 81            [12]  805 	dec	sp
+      002F04 15 81            [12]  806 	dec	sp
+                                    807 ;	main.c:73: uint8_t inputWrite = getchar();
+      002F06 12 30 76         [24]  808 	lcall	_getchar
+      002F09 AD 82            [24]  809 	mov	r5,dpl
+                                    810 ;	main.c:74: putchar(inputWrite);
+      002F0B 8D 04            [24]  811 	mov	ar4,r5
+      002F0D 7F 00            [12]  812 	mov	r7,#0x00
+      002F0F 8C 82            [24]  813 	mov	dpl,r4
+      002F11 8F 83            [24]  814 	mov	dph,r7
+      002F13 C0 05            [24]  815 	push	ar5
+      002F15 12 30 45         [24]  816 	lcall	_putchar
+      002F18 D0 05            [24]  817 	pop	ar5
+      002F1A D0 06            [24]  818 	pop	ar6
+                                    819 ;	main.c:75: goToAddr(ad);
+      002F1C 8E 82            [24]  820 	mov	dpl,r6
+      002F1E C0 05            [24]  821 	push	ar5
+      002F20 12 21 1A         [24]  822 	lcall	_goToAddr
+      002F23 D0 05            [24]  823 	pop	ar5
+                                    824 ;	main.c:76: lcdPutCh(inputWrite);
+      002F25 8D 82            [24]  825 	mov	dpl,r5
+      002F27 12 20 F8         [24]  826 	lcall	_lcdPutCh
+      002F2A                        827 00108$:
+                                    828 ;	main.c:79: if (ch == 'm')
+      002F2A 90 00 2C         [24]  829 	mov	dptr,#_ch
+      002F2D E0               [24]  830 	movx	a,@dptr
+      002F2E FF               [12]  831 	mov	r7,a
+      002F2F BF 6D 03         [24]  832 	cjne	r7,#0x6d,00110$
+                                    833 ;	main.c:81: printMenu();
+      002F32 12 2C D6         [24]  834 	lcall	_printMenu
+      002F35                        835 00110$:
+                                    836 ;	main.c:84: if( ch == 'p')
+      002F35 90 00 2C         [24]  837 	mov	dptr,#_ch
+      002F38 E0               [24]  838 	movx	a,@dptr
+      002F39 FF               [12]  839 	mov	r7,a
+      002F3A BF 70 03         [24]  840 	cjne	r7,#0x70,00112$
+                                    841 ;	main.c:85: gamePacman();
+      002F3D 12 26 29         [24]  842 	lcall	_gamePacman
+      002F40                        843 00112$:
+                                    844 ;	main.c:87: if(ch == 'x')
+      002F40 90 00 2C         [24]  845 	mov	dptr,#_ch
+      002F43 E0               [24]  846 	movx	a,@dptr
+      002F44 FF               [12]  847 	mov	r7,a
+      002F45 BF 78 19         [24]  848 	cjne	r7,#0x78,00114$
+                                    849 ;	main.c:89: check = 0;
+      002F48 90 00 2B         [24]  850 	mov	dptr,#_check
+      002F4B E4               [12]  851 	clr	a
+      002F4C F0               [24]  852 	movx	@dptr,a
+                                    853 ;	main.c:90: partSec = 0;
+      002F4D 90 00 26         [24]  854 	mov	dptr,#_partSec
+      002F50 F0               [24]  855 	movx	@dptr,a
+                                    856 ;	main.c:91: sec = 0;
+      002F51 90 00 27         [24]  857 	mov	dptr,#_sec
+      002F54 F0               [24]  858 	movx	@dptr,a
+                                    859 ;	main.c:92: min = 0;
+      002F55 90 00 28         [24]  860 	mov	dptr,#_min
+      002F58 F0               [24]  861 	movx	@dptr,a
+                                    862 ;	main.c:93: hour = 0;
+      002F59 90 00 29         [24]  863 	mov	dptr,#_hour
+      002F5C F0               [24]  864 	movx	@dptr,a
+                                    865 ;	main.c:94: x2 = 0;
+      002F5D 90 00 2A         [24]  866 	mov	dptr,#_x2
+      002F60 F0               [24]  867 	movx	@dptr,a
+      002F61                        868 00114$:
+                                    869 ;	main.c:97: if(ch == 'y')
+      002F61 90 00 2C         [24]  870 	mov	dptr,#_ch
+      002F64 E0               [24]  871 	movx	a,@dptr
+      002F65 FF               [12]  872 	mov	r7,a
+      002F66 BF 79 02         [24]  873 	cjne	r7,#0x79,00116$
+                                    874 ;	main.c:99: TR0 = 0;
+                                    875 ;	assignBit
+      002F69 C2 8C            [12]  876 	clr	_TR0
+      002F6B                        877 00116$:
+                                    878 ;	main.c:102: if(ch == 'z')
+      002F6B 90 00 2C         [24]  879 	mov	dptr,#_ch
+      002F6E E0               [24]  880 	movx	a,@dptr
+      002F6F FF               [12]  881 	mov	r7,a
+      002F70 BF 7A 02         [24]  882 	cjne	r7,#0x7a,00118$
+                                    883 ;	main.c:104: TR0 = 1;
+                                    884 ;	assignBit
+      002F73 D2 8C            [12]  885 	setb	_TR0
+      002F75                        886 00118$:
+                                    887 ;	main.c:107: if(ch == 'c')
+      002F75 90 00 2C         [24]  888 	mov	dptr,#_ch
+      002F78 E0               [24]  889 	movx	a,@dptr
+      002F79 FF               [12]  890 	mov	r7,a
+      002F7A BF 63 03         [24]  891 	cjne	r7,#0x63,00120$
+                                    892 ;	main.c:109: lcdClear();
+      002F7D 12 21 0D         [24]  893 	lcall	_lcdClear
+      002F80                        894 00120$:
+                                    895 ;	main.c:112: if(ch == 's')
+      002F80 90 00 2C         [24]  896 	mov	dptr,#_ch
+      002F83 E0               [24]  897 	movx	a,@dptr
+      002F84 FF               [12]  898 	mov	r7,a
+      002F85 BF 73 21         [24]  899 	cjne	r7,#0x73,00122$
+                                    900 ;	main.c:115: printf_tiny("\n\rEnter the string\n\r");
+      002F88 74 CA            [12]  901 	mov	a,#___str_6
+      002F8A C0 E0            [24]  902 	push	acc
+      002F8C 74 44            [12]  903 	mov	a,#(___str_6 >> 8)
+      002F8E C0 E0            [24]  904 	push	acc
+      002F90 12 32 AD         [24]  905 	lcall	_printf_tiny
+      002F93 15 81            [12]  906 	dec	sp
+      002F95 15 81            [12]  907 	dec	sp
+                                    908 ;	main.c:116: gets(stringRead);
+      002F97 90 00 73         [24]  909 	mov	dptr,#_main_stringRead_196609_87
+      002F9A 75 F0 00         [24]  910 	mov	b,#0x00
+      002F9D 12 23 85         [24]  911 	lcall	_gets
+                                    912 ;	main.c:118: putsLCD(stringRead);
+      002FA0 90 00 73         [24]  913 	mov	dptr,#_main_stringRead_196609_87
+      002FA3 75 F0 00         [24]  914 	mov	b,#0x00
+      002FA6 12 22 4C         [24]  915 	lcall	_putsLCD
+      002FA9                        916 00122$:
+                                    917 ;	main.c:121: if(ch == 'd')
+      002FA9 90 00 2C         [24]  918 	mov	dptr,#_ch
+      002FAC E0               [24]  919 	movx	a,@dptr
+      002FAD FF               [12]  920 	mov	r7,a
+      002FAE BF 64 03         [24]  921 	cjne	r7,#0x64,00124$
+                                    922 ;	main.c:123: ramDump();
+      002FB1 12 24 98         [24]  923 	lcall	_ramDump
+      002FB4                        924 00124$:
+                                    925 ;	main.c:126: if(ch == 'g')
+      002FB4 90 00 2C         [24]  926 	mov	dptr,#_ch
+      002FB7 E0               [24]  927 	movx	a,@dptr
+      002FB8 FF               [12]  928 	mov	r7,a
+      002FB9 BF 67 02         [24]  929 	cjne	r7,#0x67,00210$
+      002FBC 80 03            [24]  930 	sjmp	00211$
+      002FBE                        931 00210$:
+      002FBE 02 2D DF         [24]  932 	ljmp	00128$
+      002FC1                        933 00211$:
+                                    934 ;	main.c:128: customCharacter();
+      002FC1 12 21 60         [24]  935 	lcall	_customCharacter
+                                    936 ;	main.c:132: }
+      002FC4 02 2D DF         [24]  937 	ljmp	00128$
+                                    938 ;------------------------------------------------------------
+                                    939 ;Allocation info for local variables in function 'timer0_isr'
+                                    940 ;------------------------------------------------------------
+                                    941 ;	main.c:134: void timer0_isr() __interrupt (1)
+                                    942 ;	-----------------------------------------
+                                    943 ;	 function timer0_isr
+                                    944 ;	-----------------------------------------
+      002FC7                        945 _timer0_isr:
+      002FC7 C0 E0            [24]  946 	push	acc
+      002FC9 C0 82            [24]  947 	push	dpl
+      002FCB C0 83            [24]  948 	push	dph
+      002FCD C0 07            [24]  949 	push	ar7
+      002FCF C0 D0            [24]  950 	push	psw
+      002FD1 75 D0 00         [24]  951 	mov	psw,#0x00
+                                    952 ;	main.c:136: TH0 = 0x4B;
+      002FD4 75 8C 4B         [24]  953 	mov	_TH0,#0x4b
+                                    954 ;	main.c:137: TL0 = 0xFC;
+      002FD7 75 8A FC         [24]  955 	mov	_TL0,#0xfc
+                                    956 ;	main.c:138: x2++;
+      002FDA 90 00 2A         [24]  957 	mov	dptr,#_x2
+      002FDD E0               [24]  958 	movx	a,@dptr
+      002FDE 24 01            [12]  959 	add	a,#0x01
+      002FE0 F0               [24]  960 	movx	@dptr,a
+                                    961 ;	main.c:139: if(x2 == 2)
+      002FE1 E0               [24]  962 	movx	a,@dptr
+      002FE2 FF               [12]  963 	mov	r7,a
+      002FE3 BF 02 54         [24]  964 	cjne	r7,#0x02,00111$
+                                    965 ;	main.c:141: if(partSec > 9)
+      002FE6 90 00 26         [24]  966 	mov	dptr,#_partSec
+      002FE9 E0               [24]  967 	movx	a,@dptr
+      002FEA FF               [12]  968 	mov  r7,a
+      002FEB 24 F6            [12]  969 	add	a,#0xff - 0x09
+      002FED 50 3A            [24]  970 	jnc	00108$
+                                    971 ;	main.c:143: sec++;
+      002FEF 90 00 27         [24]  972 	mov	dptr,#_sec
+      002FF2 E0               [24]  973 	movx	a,@dptr
+      002FF3 24 01            [12]  974 	add	a,#0x01
+      002FF5 F0               [24]  975 	movx	@dptr,a
+                                    976 ;	main.c:144: if( sec > 59)
+      002FF6 E0               [24]  977 	movx	a,@dptr
+      002FF7 FF               [12]  978 	mov  r7,a
+      002FF8 24 C4            [12]  979 	add	a,#0xff - 0x3b
+      002FFA 50 28            [24]  980 	jnc	00106$
+                                    981 ;	main.c:146: min++;
+      002FFC 90 00 28         [24]  982 	mov	dptr,#_min
+      002FFF E0               [24]  983 	movx	a,@dptr
+      003000 24 01            [12]  984 	add	a,#0x01
+      003002 F0               [24]  985 	movx	@dptr,a
+                                    986 ;	main.c:147: if( min == 59)
+      003003 E0               [24]  987 	movx	a,@dptr
+      003004 FF               [12]  988 	mov	r7,a
+      003005 BF 3B 17         [24]  989 	cjne	r7,#0x3b,00104$
+                                    990 ;	main.c:149: hour++;
+      003008 90 00 29         [24]  991 	mov	dptr,#_hour
+      00300B E0               [24]  992 	movx	a,@dptr
+      00300C 24 01            [12]  993 	add	a,#0x01
+      00300E F0               [24]  994 	movx	@dptr,a
+                                    995 ;	main.c:150: if(hour > 23)
+      00300F E0               [24]  996 	movx	a,@dptr
+      003010 FF               [12]  997 	mov  r7,a
+      003011 24 E8            [12]  998 	add	a,#0xff - 0x17
+      003013 50 05            [24]  999 	jnc	00102$
+                                   1000 ;	main.c:152: hour = 0;
+      003015 90 00 29         [24] 1001 	mov	dptr,#_hour
+      003018 E4               [12] 1002 	clr	a
+      003019 F0               [24] 1003 	movx	@dptr,a
+      00301A                       1004 00102$:
+                                   1005 ;	main.c:154: min = 0;
+      00301A 90 00 28         [24] 1006 	mov	dptr,#_min
+      00301D E4               [12] 1007 	clr	a
+      00301E F0               [24] 1008 	movx	@dptr,a
+      00301F                       1009 00104$:
+                                   1010 ;	main.c:156: sec = 0;
+      00301F 90 00 27         [24] 1011 	mov	dptr,#_sec
+      003022 E4               [12] 1012 	clr	a
+      003023 F0               [24] 1013 	movx	@dptr,a
+      003024                       1014 00106$:
+                                   1015 ;	main.c:158: partSec = 0;
+      003024 90 00 26         [24] 1016 	mov	dptr,#_partSec
+      003027 E4               [12] 1017 	clr	a
+      003028 F0               [24] 1018 	movx	@dptr,a
+      003029                       1019 00108$:
+                                   1020 ;	main.c:160: partSec++;
+      003029 90 00 26         [24] 1021 	mov	dptr,#_partSec
+      00302C E0               [24] 1022 	movx	a,@dptr
+      00302D 24 01            [12] 1023 	add	a,#0x01
+      00302F F0               [24] 1024 	movx	@dptr,a
+                                   1025 ;	main.c:161: x2 = 0;
+      003030 90 00 2A         [24] 1026 	mov	dptr,#_x2
+      003033 E4               [12] 1027 	clr	a
+      003034 F0               [24] 1028 	movx	@dptr,a
+                                   1029 ;	main.c:162: check = 1;
+      003035 90 00 2B         [24] 1030 	mov	dptr,#_check
+      003038 04               [12] 1031 	inc	a
+      003039 F0               [24] 1032 	movx	@dptr,a
+      00303A                       1033 00111$:
+                                   1034 ;	main.c:164: }
+      00303A D0 D0            [24] 1035 	pop	psw
+      00303C D0 07            [24] 1036 	pop	ar7
+      00303E D0 83            [24] 1037 	pop	dph
+      003040 D0 82            [24] 1038 	pop	dpl
+      003042 D0 E0            [24] 1039 	pop	acc
+      003044 32               [24] 1040 	reti
+                                   1041 ;	eliminated unneeded push/pop b
+                                   1042 ;------------------------------------------------------------
+                                   1043 ;Allocation info for local variables in function 'putchar'
+                                   1044 ;------------------------------------------------------------
+                                   1045 ;c                         Allocated with name '_putchar_c_65536_96'
+                                   1046 ;------------------------------------------------------------
+                                   1047 ;	main.c:167: int putchar (int c)
+                                   1048 ;	-----------------------------------------
+                                   1049 ;	 function putchar
+                                   1050 ;	-----------------------------------------
+      003045                       1051 _putchar:
+      003045 AF 83            [24] 1052 	mov	r7,dph
+      003047 E5 82            [12] 1053 	mov	a,dpl
+      003049 90 00 A3         [24] 1054 	mov	dptr,#_putchar_c_65536_96
+      00304C F0               [24] 1055 	movx	@dptr,a
+      00304D EF               [12] 1056 	mov	a,r7
+      00304E A3               [24] 1057 	inc	dptr
+      00304F F0               [24] 1058 	movx	@dptr,a
+                                   1059 ;	main.c:169: while ((SCON & 0x02) == 0)    // wait for TX ready, spin on TI
+      003050                       1060 00103$:
+      003050 E5 98            [12] 1061 	mov	a,_SCON
+      003052 20 E1 12         [24] 1062 	jb	acc.1,00105$
+                                   1063 ;	main.c:171: if(check == 1)
+      003055 90 00 2B         [24] 1064 	mov	dptr,#_check
+      003058 E0               [24] 1065 	movx	a,@dptr
+      003059 FF               [12] 1066 	mov	r7,a
+      00305A BF 01 F3         [24] 1067 	cjne	r7,#0x01,00103$
+                                   1068 ;	main.c:173: check = 0;
+      00305D 90 00 2B         [24] 1069 	mov	dptr,#_check
+      003060 E4               [12] 1070 	clr	a
+      003061 F0               [24] 1071 	movx	@dptr,a
+                                   1072 ;	main.c:174: printTimeStamp();
+      003062 12 30 98         [24] 1073 	lcall	_printTimeStamp
+      003065 80 E9            [24] 1074 	sjmp	00103$
+      003067                       1075 00105$:
+                                   1076 ;	main.c:177: SBUF = c;  	// load serial port with transmit value
+      003067 90 00 A3         [24] 1077 	mov	dptr,#_putchar_c_65536_96
+      00306A E0               [24] 1078 	movx	a,@dptr
+      00306B FE               [12] 1079 	mov	r6,a
+      00306C A3               [24] 1080 	inc	dptr
+      00306D E0               [24] 1081 	movx	a,@dptr
+      00306E 8E 99            [24] 1082 	mov	_SBUF,r6
+                                   1083 ;	main.c:178: TI = 0;  	// clear TI flag
+                                   1084 ;	assignBit
+      003070 C2 99            [12] 1085 	clr	_TI
+                                   1086 ;	main.c:179: return 0;
+      003072 90 00 00         [24] 1087 	mov	dptr,#0x0000
+                                   1088 ;	main.c:180: }
+      003075 22               [24] 1089 	ret
+                                   1090 ;------------------------------------------------------------
+                                   1091 ;Allocation info for local variables in function 'getchar'
+                                   1092 ;------------------------------------------------------------
+                                   1093 ;	main.c:182: int getchar ()
+                                   1094 ;	-----------------------------------------
+                                   1095 ;	 function getchar
+                                   1096 ;	-----------------------------------------
+      003076                       1097 _getchar:
+                                   1098 ;	main.c:184: while ((SCON & 0x01) == 0)  // wait for character to be received, spin on RI
+      003076                       1099 00103$:
+      003076 E5 98            [12] 1100 	mov	a,_SCON
+      003078 20 E0 12         [24] 1101 	jb	acc.0,00105$
+                                   1102 ;	main.c:186: if(check == 1)
+      00307B 90 00 2B         [24] 1103 	mov	dptr,#_check
+      00307E E0               [24] 1104 	movx	a,@dptr
+      00307F FF               [12] 1105 	mov	r7,a
+      003080 BF 01 F3         [24] 1106 	cjne	r7,#0x01,00103$
+                                   1107 ;	main.c:188: check = 0;
+      003083 90 00 2B         [24] 1108 	mov	dptr,#_check
+      003086 E4               [12] 1109 	clr	a
+      003087 F0               [24] 1110 	movx	@dptr,a
+                                   1111 ;	main.c:189: printTimeStamp();
+      003088 12 30 98         [24] 1112 	lcall	_printTimeStamp
+      00308B 80 E9            [24] 1113 	sjmp	00103$
+      00308D                       1114 00105$:
+                                   1115 ;	main.c:192: RI = 0;			// clear RI flag
+                                   1116 ;	assignBit
+      00308D C2 98            [12] 1117 	clr	_RI
+                                   1118 ;	main.c:193: return SBUF;  	// return character from SBUF
+      00308F AE 99            [24] 1119 	mov	r6,_SBUF
+      003091 7F 00            [12] 1120 	mov	r7,#0x00
+      003093 8E 82            [24] 1121 	mov	dpl,r6
+      003095 8F 83            [24] 1122 	mov	dph,r7
+                                   1123 ;	main.c:194: }
+      003097 22               [24] 1124 	ret
+                                   1125 ;------------------------------------------------------------
+                                   1126 ;Allocation info for local variables in function 'printTimeStamp'
+                                   1127 ;------------------------------------------------------------
+                                   1128 ;	main.c:196: void printTimeStamp()
+                                   1129 ;	-----------------------------------------
+                                   1130 ;	 function printTimeStamp
+                                   1131 ;	-----------------------------------------
+      003098                       1132 _printTimeStamp:
+                                   1133 ;	main.c:198: goToAddr(0x57);
+      003098 75 82 57         [24] 1134 	mov	dpl,#0x57
+      00309B 12 21 1A         [24] 1135 	lcall	_goToAddr
+                                   1136 ;	main.c:199: lcdPutCh(hour + '0');
+      00309E 90 00 29         [24] 1137 	mov	dptr,#_hour
+      0030A1 E0               [24] 1138 	movx	a,@dptr
+      0030A2 24 30            [12] 1139 	add	a,#0x30
+      0030A4 F5 82            [12] 1140 	mov	dpl,a
+      0030A6 12 20 F8         [24] 1141 	lcall	_lcdPutCh
+                                   1142 ;	main.c:200: lcdPutCh(':');
+      0030A9 75 82 3A         [24] 1143 	mov	dpl,#0x3a
+      0030AC 12 20 F8         [24] 1144 	lcall	_lcdPutCh
+                                   1145 ;	main.c:201: lcdPutCh(min / 10 + '0');
+      0030AF 90 00 28         [24] 1146 	mov	dptr,#_min
+      0030B2 E0               [24] 1147 	movx	a,@dptr
+      0030B3 FF               [12] 1148 	mov	r7,a
+      0030B4 7E 00            [12] 1149 	mov	r6,#0x00
+      0030B6 90 00 BA         [24] 1150 	mov	dptr,#__divsint_PARM_2
+      0030B9 74 0A            [12] 1151 	mov	a,#0x0a
+      0030BB F0               [24] 1152 	movx	@dptr,a
+      0030BC E4               [12] 1153 	clr	a
+      0030BD A3               [24] 1154 	inc	dptr
+      0030BE F0               [24] 1155 	movx	@dptr,a
+      0030BF 8F 82            [24] 1156 	mov	dpl,r7
+      0030C1 8E 83            [24] 1157 	mov	dph,r6
+      0030C3 12 34 EA         [24] 1158 	lcall	__divsint
+      0030C6 AE 82            [24] 1159 	mov	r6,dpl
+      0030C8 74 30            [12] 1160 	mov	a,#0x30
+      0030CA 2E               [12] 1161 	add	a,r6
+      0030CB F5 82            [12] 1162 	mov	dpl,a
+      0030CD 12 20 F8         [24] 1163 	lcall	_lcdPutCh
+                                   1164 ;	main.c:202: lcdPutCh(min % 10 + '0');
+      0030D0 90 00 28         [24] 1165 	mov	dptr,#_min
+      0030D3 E0               [24] 1166 	movx	a,@dptr
+      0030D4 FF               [12] 1167 	mov	r7,a
+      0030D5 7E 00            [12] 1168 	mov	r6,#0x00
+      0030D7 90 00 B1         [24] 1169 	mov	dptr,#__modsint_PARM_2
+      0030DA 74 0A            [12] 1170 	mov	a,#0x0a
+      0030DC F0               [24] 1171 	movx	@dptr,a
+      0030DD E4               [12] 1172 	clr	a
+      0030DE A3               [24] 1173 	inc	dptr
+      0030DF F0               [24] 1174 	movx	@dptr,a
+      0030E0 8F 82            [24] 1175 	mov	dpl,r7
+      0030E2 8E 83            [24] 1176 	mov	dph,r6
+      0030E4 12 33 D6         [24] 1177 	lcall	__modsint
+      0030E7 AE 82            [24] 1178 	mov	r6,dpl
+      0030E9 74 30            [12] 1179 	mov	a,#0x30
+      0030EB 2E               [12] 1180 	add	a,r6
+      0030EC F5 82            [12] 1181 	mov	dpl,a
+      0030EE 12 20 F8         [24] 1182 	lcall	_lcdPutCh
+                                   1183 ;	main.c:203: lcdPutCh(':');
+      0030F1 75 82 3A         [24] 1184 	mov	dpl,#0x3a
+      0030F4 12 20 F8         [24] 1185 	lcall	_lcdPutCh
+                                   1186 ;	main.c:204: lcdPutCh(sec / 10 + '0');
+      0030F7 90 00 27         [24] 1187 	mov	dptr,#_sec
+      0030FA E0               [24] 1188 	movx	a,@dptr
+      0030FB FF               [12] 1189 	mov	r7,a
+      0030FC 7E 00            [12] 1190 	mov	r6,#0x00
+      0030FE 90 00 BA         [24] 1191 	mov	dptr,#__divsint_PARM_2
+      003101 74 0A            [12] 1192 	mov	a,#0x0a
+      003103 F0               [24] 1193 	movx	@dptr,a
+      003104 E4               [12] 1194 	clr	a
+      003105 A3               [24] 1195 	inc	dptr
+      003106 F0               [24] 1196 	movx	@dptr,a
+      003107 8F 82            [24] 1197 	mov	dpl,r7
+      003109 8E 83            [24] 1198 	mov	dph,r6
+      00310B 12 34 EA         [24] 1199 	lcall	__divsint
+      00310E AE 82            [24] 1200 	mov	r6,dpl
+      003110 74 30            [12] 1201 	mov	a,#0x30
+      003112 2E               [12] 1202 	add	a,r6
+      003113 F5 82            [12] 1203 	mov	dpl,a
+      003115 12 20 F8         [24] 1204 	lcall	_lcdPutCh
+                                   1205 ;	main.c:205: lcdPutCh(sec % 10 + '0');
+      003118 90 00 27         [24] 1206 	mov	dptr,#_sec
+      00311B E0               [24] 1207 	movx	a,@dptr
+      00311C FF               [12] 1208 	mov	r7,a
+      00311D 7E 00            [12] 1209 	mov	r6,#0x00
+      00311F 90 00 B1         [24] 1210 	mov	dptr,#__modsint_PARM_2
+      003122 74 0A            [12] 1211 	mov	a,#0x0a
+      003124 F0               [24] 1212 	movx	@dptr,a
+      003125 E4               [12] 1213 	clr	a
+      003126 A3               [24] 1214 	inc	dptr
+      003127 F0               [24] 1215 	movx	@dptr,a
+      003128 8F 82            [24] 1216 	mov	dpl,r7
+      00312A 8E 83            [24] 1217 	mov	dph,r6
+      00312C 12 33 D6         [24] 1218 	lcall	__modsint
+      00312F AE 82            [24] 1219 	mov	r6,dpl
+      003131 74 30            [12] 1220 	mov	a,#0x30
+      003133 2E               [12] 1221 	add	a,r6
+      003134 F5 82            [12] 1222 	mov	dpl,a
+      003136 12 20 F8         [24] 1223 	lcall	_lcdPutCh
+                                   1224 ;	main.c:206: lcdPutCh('.');
+      003139 75 82 2E         [24] 1225 	mov	dpl,#0x2e
+      00313C 12 20 F8         [24] 1226 	lcall	_lcdPutCh
+                                   1227 ;	main.c:207: lcdPutCh(partSec + '0');
+      00313F 90 00 26         [24] 1228 	mov	dptr,#_partSec
+      003142 E0               [24] 1229 	movx	a,@dptr
+      003143 24 30            [12] 1230 	add	a,#0x30
+      003145 F5 82            [12] 1231 	mov	dpl,a
+                                   1232 ;	main.c:208: }
+      003147 02 20 F8         [24] 1233 	ljmp	_lcdPutCh
+                                   1234 	.area CSEG    (CODE)
+                                   1235 	.area CONST   (CODE)
+      0043DE                       1236 _lookUpTable1:
+      0043DE 00                    1237 	.db #0x00	; 0
+      0043DF 01                    1238 	.db #0x01	; 1
+      0043E0 02                    1239 	.db #0x02	; 2
+      0043E1 03                    1240 	.db #0x03	; 3
+      0043E2 04                    1241 	.db #0x04	; 4
+      0043E3 05                    1242 	.db #0x05	; 5
+      0043E4 06                    1243 	.db #0x06	; 6
+      0043E5 07                    1244 	.db #0x07	; 7
+      0043E6 08                    1245 	.db #0x08	; 8
+      0043E7 09                    1246 	.db #0x09	; 9
+      0043E8 0A                    1247 	.db #0x0a	; 10
+      0043E9 0B                    1248 	.db #0x0b	; 11
+      0043EA 0C                    1249 	.db #0x0c	; 12
+      0043EB 0D                    1250 	.db #0x0d	; 13
+      0043EC 0E                    1251 	.db #0x0e	; 14
+      0043ED 0F                    1252 	.db #0x0f	; 15
+      0043EE 40                    1253 	.db #0x40	; 64
+      0043EF 41                    1254 	.db #0x41	; 65	'A'
+      0043F0 42                    1255 	.db #0x42	; 66	'B'
+      0043F1 43                    1256 	.db #0x43	; 67	'C'
+      0043F2 44                    1257 	.db #0x44	; 68	'D'
+      0043F3 45                    1258 	.db #0x45	; 69	'E'
+      0043F4 46                    1259 	.db #0x46	; 70	'F'
+      0043F5 47                    1260 	.db #0x47	; 71	'G'
+      0043F6 48                    1261 	.db #0x48	; 72	'H'
+      0043F7 49                    1262 	.db #0x49	; 73	'I'
+      0043F8 4A                    1263 	.db #0x4a	; 74	'J'
+      0043F9 4B                    1264 	.db #0x4b	; 75	'K'
+      0043FA 4C                    1265 	.db #0x4c	; 76	'L'
+      0043FB 4D                    1266 	.db #0x4d	; 77	'M'
+      0043FC 4E                    1267 	.db #0x4e	; 78	'N'
+      0043FD 4F                    1268 	.db #0x4f	; 79	'O'
+      0043FE 10                    1269 	.db #0x10	; 16
+      0043FF 11                    1270 	.db #0x11	; 17
+      004400 12                    1271 	.db #0x12	; 18
+      004401 13                    1272 	.db #0x13	; 19
+      004402 14                    1273 	.db #0x14	; 20
+      004403 15                    1274 	.db #0x15	; 21
+      004404 16                    1275 	.db #0x16	; 22
+      004405 17                    1276 	.db #0x17	; 23
+      004406 18                    1277 	.db #0x18	; 24
+      004407 19                    1278 	.db #0x19	; 25
+      004408 1A                    1279 	.db #0x1a	; 26
+      004409 1B                    1280 	.db #0x1b	; 27
+      00440A 1C                    1281 	.db #0x1c	; 28
+      00440B 1D                    1282 	.db #0x1d	; 29
+      00440C 1E                    1283 	.db #0x1e	; 30
+      00440D 1F                    1284 	.db #0x1f	; 31
+      00440E 50                    1285 	.db #0x50	; 80	'P'
+      00440F 51                    1286 	.db #0x51	; 81	'Q'
+      004410 52                    1287 	.db #0x52	; 82	'R'
+      004411 53                    1288 	.db #0x53	; 83	'S'
+      004412 54                    1289 	.db #0x54	; 84	'T'
+      004413 55                    1290 	.db #0x55	; 85	'U'
+      004414 56                    1291 	.db #0x56	; 86	'V'
+      004415 57                    1292 	.db #0x57	; 87	'W'
+      004416 58                    1293 	.db #0x58	; 88	'X'
+      004417 59                    1294 	.db #0x59	; 89	'Y'
+      004418 5A                    1295 	.db #0x5a	; 90	'Z'
+      004419 5B                    1296 	.db #0x5b	; 91
+      00441A 5C                    1297 	.db #0x5c	; 92
+      00441B 5D                    1298 	.db #0x5d	; 93
+      00441C 5E                    1299 	.db #0x5e	; 94
+      00441D 5F                    1300 	.db #0x5f	; 95
+                                   1301 	.area CONST   (CODE)
+      00441E                       1302 ___str_0:
+      00441E 0A                    1303 	.db 0x0a
+      00441F 0D                    1304 	.db 0x0d
+      004420 45 6E 74 65 72 20 74  1305 	.ascii "Enter the row number from 0 to 2"
              68 65 20 72 6F 77 20
              6E 75 6D 62 65 72 20
              66 72 6F 6D 20 30 20
              74 6F 20 32
-      004416 0A                    1301 	.db 0x0a
-      004417 0D                    1302 	.db 0x0d
-      004418 00                    1303 	.db 0x00
-                                   1304 	.area CSEG    (CODE)
-                                   1305 	.area CONST   (CODE)
-      004419                       1306 ___str_1:
-      004419 0A                    1307 	.db 0x0a
-      00441A 0D                    1308 	.db 0x0d
-      00441B 45 6E 74 65 72 65 64  1309 	.ascii "Entered Row is incorrect"
+      004440 0A                    1306 	.db 0x0a
+      004441 0D                    1307 	.db 0x0d
+      004442 00                    1308 	.db 0x00
+                                   1309 	.area CSEG    (CODE)
+                                   1310 	.area CONST   (CODE)
+      004443                       1311 ___str_1:
+      004443 0A                    1312 	.db 0x0a
+      004444 0D                    1313 	.db 0x0d
+      004445 45 6E 74 65 72 65 64  1314 	.ascii "Entered Row is incorrect"
              20 52 6F 77 20 69 73
              20 69 6E 63 6F 72 72
              65 63 74
-      004433 0A                    1310 	.db 0x0a
-      004434 0D                    1311 	.db 0x0d
-      004435 00                    1312 	.db 0x00
-                                   1313 	.area CSEG    (CODE)
-                                   1314 	.area CONST   (CODE)
-      004436                       1315 ___str_2:
-      004436 0A                    1316 	.db 0x0a
-      004437 0D                    1317 	.db 0x0d
-      004438 45 6E 74 65 72 20 74  1318 	.ascii "Enter the column number from 0 to 15"
+      00445D 0A                    1315 	.db 0x0a
+      00445E 0D                    1316 	.db 0x0d
+      00445F 00                    1317 	.db 0x00
+                                   1318 	.area CSEG    (CODE)
+                                   1319 	.area CONST   (CODE)
+      004460                       1320 ___str_2:
+      004460 0A                    1321 	.db 0x0a
+      004461 0D                    1322 	.db 0x0d
+      004462 45 6E 74 65 72 20 74  1323 	.ascii "Enter the column number from 0 to 15"
              68 65 20 63 6F 6C 75
              6D 6E 20 6E 75 6D 62
              65 72 20 66 72 6F 6D
              20 30 20 74 6F 20 31
              35
-      00445C 0A                    1319 	.db 0x0a
-      00445D 0D                    1320 	.db 0x0d
-      00445E 00                    1321 	.db 0x00
-                                   1322 	.area CSEG    (CODE)
-                                   1323 	.area CONST   (CODE)
-      00445F                       1324 ___str_3:
-      00445F 0A                    1325 	.db 0x0a
-      004460 0D                    1326 	.db 0x0d
-      004461 45 6E 74 65 72 65 64  1327 	.ascii "Entered Column is incorrect"
+      004486 0A                    1324 	.db 0x0a
+      004487 0D                    1325 	.db 0x0d
+      004488 00                    1326 	.db 0x00
+                                   1327 	.area CSEG    (CODE)
+                                   1328 	.area CONST   (CODE)
+      004489                       1329 ___str_3:
+      004489 0A                    1330 	.db 0x0a
+      00448A 0D                    1331 	.db 0x0d
+      00448B 45 6E 74 65 72 65 64  1332 	.ascii "Entered Column is incorrect"
              20 43 6F 6C 75 6D 6E
              20 69 73 20 69 6E 63
              6F 72 72 65 63 74
-      00447C 0A                    1328 	.db 0x0a
-      00447D 0D                    1329 	.db 0x0d
-      00447E 00                    1330 	.db 0x00
-                                   1331 	.area CSEG    (CODE)
-                                   1332 	.area CONST   (CODE)
-      00447F                       1333 ___str_4:
-      00447F 25 64 20 25 64 20 25  1334 	.ascii "%d %d %d"
-             64
-      004487 00                    1335 	.db 0x00
+      0044A6 0A                    1333 	.db 0x0a
+      0044A7 0D                    1334 	.db 0x0d
+      0044A8 00                    1335 	.db 0x00
                                    1336 	.area CSEG    (CODE)
                                    1337 	.area CONST   (CODE)
-      004488                       1338 ___str_5:
-      004488 0A                    1339 	.db 0x0a
-      004489 0D                    1340 	.db 0x0d
-      00448A 45 6E 74 65 72 20 74  1341 	.ascii "Enter the character"
+      0044A9                       1338 ___str_4:
+      0044A9 25 64 20 25 64 20 25  1339 	.ascii "%d %d %d"
+             64
+      0044B1 00                    1340 	.db 0x00
+                                   1341 	.area CSEG    (CODE)
+                                   1342 	.area CONST   (CODE)
+      0044B2                       1343 ___str_5:
+      0044B2 0A                    1344 	.db 0x0a
+      0044B3 0D                    1345 	.db 0x0d
+      0044B4 45 6E 74 65 72 20 74  1346 	.ascii "Enter the character"
              68 65 20 63 68 61 72
              61 63 74 65 72
-      00449D 0A                    1342 	.db 0x0a
-      00449E 0D                    1343 	.db 0x0d
-      00449F 00                    1344 	.db 0x00
-                                   1345 	.area CSEG    (CODE)
-                                   1346 	.area CONST   (CODE)
-      0044A0                       1347 ___str_6:
-      0044A0 0A                    1348 	.db 0x0a
-      0044A1 0D                    1349 	.db 0x0d
-      0044A2 45 6E 74 65 72 20 74  1350 	.ascii "Enter the string"
+      0044C7 0A                    1347 	.db 0x0a
+      0044C8 0D                    1348 	.db 0x0d
+      0044C9 00                    1349 	.db 0x00
+                                   1350 	.area CSEG    (CODE)
+                                   1351 	.area CONST   (CODE)
+      0044CA                       1352 ___str_6:
+      0044CA 0A                    1353 	.db 0x0a
+      0044CB 0D                    1354 	.db 0x0d
+      0044CC 45 6E 74 65 72 20 74  1355 	.ascii "Enter the string"
              68 65 20 73 74 72 69
              6E 67
-      0044B2 0A                    1351 	.db 0x0a
-      0044B3 0D                    1352 	.db 0x0d
-      0044B4 00                    1353 	.db 0x00
-                                   1354 	.area CSEG    (CODE)
-                                   1355 	.area XINIT   (CODE)
-                                   1356 	.area CABS    (ABS,CODE)
+      0044DC 0A                    1356 	.db 0x0a
+      0044DD 0D                    1357 	.db 0x0d
+      0044DE 00                    1358 	.db 0x00
+                                   1359 	.area CSEG    (CODE)
+                                   1360 	.area XINIT   (CODE)
+                                   1361 	.area CABS    (ABS,CODE)
